@@ -1,0 +1,33 @@
+{
+  "questions": 146,
+  "k_max": 10,
+  "seconds": 0.85,
+  "role_leak_violations": 0,
+  "recall": {
+    "@1": 0.6639,
+    "@3": 0.8319,
+    "@6": 0.9328,
+    "@10": 0.9664
+  },
+  "slices": {
+    "temporal": {
+      "recall@6": 1.0,
+      "n": 19
+    },
+    "contradiction": {
+      "recall@6": 1.0,
+      "n": 8
+    }
+  },
+  "refusal_signals": {
+    "not_permitted_with_blocked_evidence": "21/21",
+    "not_in_corpus_top_scores": [
+      0.953701,
+      0.936806,
+      0.895149,
+      0.895117,
+      0.889939,
+      0.79915
+    ]
+  }
+}

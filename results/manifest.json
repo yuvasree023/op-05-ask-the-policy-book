@@ -1,0 +1,53 @@
+{
+  "claimed": {
+    "coverage": 0.9832,
+    "citation_verbatim_rate": 1.0,
+    "ooc_refusal_rate": 1.0,
+    "detected_role_violations": 0
+  },
+  "runs": [
+    {
+      "run_id": "dev-stage3-001",
+      "seed": 20260915,
+      "model": "none (deterministic extractive generator; 0 API tokens)",
+      "status": "completed",
+      "timestamp": "2026-10-18T16:10:22Z",
+      "input_sha256": "c415eee5664b4488cba460759c29add0280ef09f07edf7083dc2d6158b9b436f",
+      "raw_path": "results/answers_dev.jsonl",
+      "config": {
+        "generator": "extractive",
+        "retrieval": "hybrid BM25+MiniLM wsum 0.3/0.7",
+        "refusal": {
+          "np_bm25": 23.5,
+          "ooc_bm25": 21.0,
+          "ooc_cosine": 0.64,
+          "blocked_scan_k": 10
+        },
+        "grader": "vendored published grader.py, --no-judge (deterministic checks)",
+        "grader_sha256": "8c3fcf3068e9940c130e7c54200d7f82bdcd1120bef60599918ee0998a718b80"
+      },
+      "metrics": {
+        "schema_valid_rate": 1.0,
+        "answered_rate_on_answerable": 0.9832,
+        "citation_verbatim_rate": 1.0,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "answer_accuracy": null,
+        "citation_support_rate": null,
+        "note": "LLM-judged metrics unmeasured: no budget-class judge key at $0"
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0
+      },
+      "cost_usd": 0.0,
+      "latency_ms": {
+        "p50": 6.9,
+        "p95": 10.0,
+        "note": "in-process dev run; HTTP service 24 req @ concurrency 12 in ~1.2 s"
+      }
+    }
+  ]
+}
