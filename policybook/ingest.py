@@ -1,4 +1,4 @@
-"""Stage 1 entry point: corpus dir -> validate -> chunk -> embed -> vector DB.
+"""Stage 1 entry point: corpus dir -> validate -> chunk -> embed -> cached store.
 
 Usage:
     python -m policybook.ingest --corpus-dir /path/to/corpus [--index-dir .index]
@@ -18,7 +18,7 @@ from pathlib import Path
 
 from .chunk import chunk_section
 from .corpus import CorpusError, read_corpus
-from .db import VectorStore
+from .db import PassageStore
 from .embed import MODEL_NAME, MiniLMEncoder
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -29,7 +29,7 @@ def run(argv=None) -> int:
     p.add_argument("--corpus-dir", default=None,
                    help="corpus directory (default: $CORPUS_DIR or ./data/corpus)")
     p.add_argument("--index-dir", default=None,
-                   help="vector DB directory (default: $INDEX_DIR or ./.index)")
+                   help="index cache directory (default: $INDEX_DIR or ./.index)")
     p.add_argument("--model-dir", default=str(REPO_ROOT / "models" / "all-MiniLM-L6-v2"))
     p.add_argument("--report", default=str(REPO_ROOT / "results" / "ingest_report.json"))
     p.add_argument("--force", action="store_true", help="rebuild even if corpus unchanged")
@@ -47,7 +47,7 @@ def run(argv=None) -> int:
         print(f"ingest: corpus error: {e}", file=sys.stderr)
         return 2
 
-    store = VectorStore(index_dir)
+    store = PassageStore(index_dir)
     report = {
         "corpus_dir": str(Path(corpus_dir).resolve()),
         "index_dir": str(Path(index_dir).resolve()),
@@ -78,7 +78,7 @@ def run(argv=None) -> int:
     store.rebuild(chunks, embeddings, corpus, MODEL_NAME)
     index_s = time.perf_counter() - t2
 
-    assert store.count() == len(chunks), "vector DB count mismatch after rebuild"
+    assert store.count() == len(chunks), "store count mismatch after rebuild"
 
     report.update({
         "skipped": False,

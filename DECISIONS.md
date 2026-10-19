@@ -141,3 +141,83 @@ Durable choices, newest last. Each entry: what, and why.
     (sha256 recorded in tools/op05_grader/PROVENANCE.md), so the dev
     self-check runs the exact deterministic checks the reviewer recomputes,
     offline. The rubric judge is optional and off without a key.
+
+## 2026-10-19 — Stage 4b: architecture change to the user's written spec
+
+The user supplied a 7-step approach and made it the strict specification
+("Strictly follow the above approach ... if anything is wrong or need any
+change then let me know"). What changed, and what deliberately did not:
+
+17. **Reciprocal rank fusion replaces weighted-sum fusion.** RRF (k=60,
+    Cormack et al. 2009) over the same two channels (BM25 + all-MiniLM-L6-v2
+    cosine). Rank fusion removes the tuned 0.3/0.7 weights entirely - one
+    less dev-tuned parameter to overfit. v1 (weighted sum) dev numbers stay
+    in EXPERIMENT_LOG.md labeled v1/superseded; they are never carried
+    forward as current.
+18. **No vector database.** Chroma is removed (dependency, store, and
+    docker-adjacent lifecycle). The index is one npz+json pair
+    (.index/passages.npz + passages.json) holding chunk ids, texts, role/
+    effective_date/supersedes metadata and 384-dim embeddings, keyed by the
+    corpus hash: a swapped corpus rebuilds, an unchanged one skips. 396
+    chunks score brute-force in numpy in <1 s for the whole 146-question
+    dev set, so an ANN index bought nothing. Measured footprint: .index
+    1.5 MB (was ~4 MB under Chroma); installed footprint drops by the
+    chromadb+posthog wheels (measured in the final rebuild report).
+19. **Role split after scoring = before scoring, observably.** The spec
+    says "score all passages, then split by role". The retriever computes
+    channel scores over all chunks (they are all in memory), then gates by
+    role+as_of before anything reaches the LLM, and additionally scores the
+    denied pool to produce the blocked-evidence signal that drives the
+    generic not_permitted. Filtering before ranking is a performance
+    equivalent, not a behavior change: allowed-pool ranks are identical,
+    denied text never leaves the store. The spec's observable contract -
+    only allowed passages reach the LLM; above-role matches yield a generic
+    refusal with no doc name, quote or paraphrase - is intact and tested.
+20. **Quote verification without snapping.** Every citation quote must be a
+    verbatim substring of the cited passage after normalization; failures
+    retry generation once, then the citation is dropped or the answer
+    refused. We do NOT snap a bad quote to a nearby sentence: substring
+    match proves copying, not support, and a snapped quote can attach
+    evidence that does not support the answer (user-flagged concern). The
+    deterministic citation + 12-token overlap post-check runs on every LLM
+    answer as the spec requires.
+21. **Substitute dev judge, labeled.** The pinned judge
+    (gpt-4.1-mini-2025-04-14) has no $0 route on her accounts, so dev
+    judged metrics use gemini-3.5-flash (different snapshot from the
+    3.5-flash-lite generator) and are labeled substitute-judge measurements.
+    They are evidence about answer quality, not official pinned-judge
+    performance; that gap stays open in the manifest.
+
+## 22. Whole-request deadline instead of per-operation timeouts (2026-10-20)
+urllib's `timeout` caps each blocking socket op, not a request: a peer that
+trickles bytes slower than the per-op timeout holds a "live" connection
+open indefinitely. Generation now runs under one wall-clock budget per
+attempt (connect + headers + body) and one total deadline across the 503
+backoff chain (~6.5 min worst case at the default 90s). Exceeding it
+raises TransientUnavailable, which the existing retry/fallback policy
+handles honestly. Alternative considered: switching transport to curl
+--max-time; rejected earlier because piping through an external binary
+broke the local stub-server tests (no urllib-compatible seam).
+
+## 23. Row-level checkpointing in batch answer runs (2026-10-20)
+answer_eval used to write answers only at the end: a hung or killed
+90-minute run left zero evidence. Every completed row is now appended to
+<out>.checkpoint.jsonl immediately; the quota-abort path still writes its
+separate labeled .partial.jsonl.
+
+## 24. Per-row generation provenance (2026-10-20)
+The v2 run summary counted 28 extractive fallbacks but the jsonl did not
+say WHICH rows fell back, so "LLM results" silently mixed 89 model answers
+with 28 extractive ones. Output rows now carry "generator" and
+"extractive_fallback". A run-level aggregate is not provenance.
+
+## 25. Substitute-judge operation of the vendored grader (2026-10-20)
+Local additions to tools/op05_grader/grader.py for free-tier substitute
+judging ONLY (16 inserted lines; original bytes preserved in git,
+sha256 8c3fcf3068e9940c130e7c54200d7f82bdcd1120bef60599918ee0998a718b80):
+env JUDGE_DELAY_SEC pacing for RPM caps, and loud SystemExit on HTTP 429
+instead of degrading into ERROR verdicts that null out judged metrics.
+Official paid-endpoint behavior is untouched. Substitute judge
+(gemini-3.5-flash-lite, same family as the generator) is a diagnostic
+signal only - self-family judging inflates agreement and is NOT the
+official pinned judge measurement; reported separately and labeled.

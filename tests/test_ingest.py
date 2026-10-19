@@ -110,13 +110,15 @@ class IngestTests(unittest.TestCase):
 
         # metadata survives: role is what later stages filter on
         sys.path.insert(0, str(REPO))
-        from policybook.db import VectorStore
-        store = VectorStore(self.index)
+        from policybook.db import PassageStore
+        store = PassageStore(self.index)
         self.assertEqual(store.count(), first["chunks"])
-        col = store.client.get_collection("passages")
-        got = col.get(where={"doc_id": "DOC_B"}, include=["metadatas"])
-        self.assertEqual(got["metadatas"][0]["role"], "legal")
-        self.assertEqual(got["metadatas"][0]["effective_date"], "2026-01-01")
+        ids, texts, metas, embeddings = store.load()
+        meta_b = [m for m, i in zip(metas, ids) if m["doc_id"] == "DOC_B"]
+        self.assertTrue(meta_b)
+        self.assertEqual(meta_b[0]["role"], "legal")
+        self.assertEqual(meta_b[0]["effective_date"], "2026-01-01")
+        self.assertEqual(embeddings.shape[0], first["chunks"])
 
         # unchanged corpus: skip, no re-embedding
         second = self._ingest()

@@ -7,6 +7,7 @@ The backend stays OFF by default; these tests prove only the plumbing.
 import json
 import sys
 import threading
+import time
 import unittest
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -200,3 +201,29 @@ class DeadEndpointTests(unittest.TestCase):
         out = llm.generate("q", "2023-01-01", [Hit()], verify_quote=lambda *a: True,
                            model="m", base_url="http://127.0.0.1:9", api_key="k")
         self.assertIsNone(out)
+
+
+class _TrickleResp:
+    """Fake response whose body trickles in slower than the deadline."""
+    def __init__(self, parts, delay=0.5):
+        self._parts = list(parts)
+        self._delay = delay
+    def read1(self, n):
+        if not self._parts:
+            return b""
+        time.sleep(self._delay)
+        return self._parts.pop(0)
+
+
+class ReadBoundedTests(unittest.TestCase):
+    def test_fast_body_reads_fully(self):
+        resp = _TrickleResp([b'{"ok":', b' true}'], delay=0)
+        self.assertEqual(llm._read_bounded(resp, deadline=5), b'{"ok": true}')
+
+    def test_slow_trickle_raises_transient_unavailable(self):
+        # 3 parts, 0.5s apart each; 0.6s total deadline must trip mid-body.
+        resp = _TrickleResp([b"a", b"b", b"c"], delay=0.5)
+        t0 = time.monotonic()
+        with self.assertRaises(llm.TransientUnavailable):
+            llm._read_bounded(resp, deadline=0.6)
+        self.assertLess(time.monotonic() - t0, 2.0)  # bounded, not hung

@@ -54,14 +54,23 @@ last_error = None  # why the last generate() returned None (debug visibility)
 
 
 def _post(base_url, api_key, payload, timeout=90):
+    """One HTTP attempt under a single wall-clock budget: `timeout` covers
+    connect + request + response headers + response body together, not each
+    phase separately. The connect phase keeps the socket timeout as its own
+    cap; whatever budget it leaves is the body's deadline."""
     body = json.dumps(payload).encode()
     req = urllib.request.Request(
         f"{base_url.rstrip('/')}/chat/completions", data=body,
         headers={"Content-Type": "application/json",
                  "Authorization": f"Bearer {api_key}"})
+    started = time.monotonic()
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
-            return json.load(r)
+            remaining = timeout - (time.monotonic() - started)
+            if remaining <= 0:
+                raise TransientUnavailable(
+                    f"headers consumed the whole request budget ({timeout}s)")
+            return json.loads(_read_bounded(r, deadline=remaining))
     except urllib.error.HTTPError as e:
         detail = ""
         try:
@@ -75,20 +84,64 @@ def _post(base_url, api_key, payload, timeout=90):
         raise RuntimeError(f"HTTP {e.code} from {base_url}: {detail}") from e
 
 
+
+
+def _read_bounded(resp, deadline):
+    """Read a response body under a TOTAL wall-clock deadline.
+
+    urllib's socket timeout caps each blocking operation, not the whole
+    transfer: a stalled endpoint that trickles a byte every few seconds
+    holds a read open indefinitely (observed live 2026-10-20: single
+    requests blocking 10+ minutes while still returning 200s). read1
+    returns after each underlying recv, so a slow trickle trips the
+    deadline and becomes a bounded TransientUnavailable that the 503
+    backoff can retry instead of hanging the run.
+    """
+    end = time.monotonic() + deadline
+    buf = bytearray()
+    while True:
+        remaining = end - time.monotonic()
+        if remaining <= 0:
+            raise TransientUnavailable(
+                f"response body exceeded total deadline ({deadline}s)")
+        try:
+            sock = resp.fp.raw._sock
+            sock.settimeout(min(30.0, remaining))
+        except Exception:  # noqa: BLE001 - non-socket stub responses
+            pass
+        try:
+            chunk = resp.read1(65536) if hasattr(resp, "read1") else resp.read(65536)
+        except (TimeoutError, OSError) as e:
+            raise TransientUnavailable(f"stalled response body: {e}") from e
+        if not chunk:
+            return bytes(buf)
+        buf.extend(chunk)
+
 class TransientUnavailable(Exception):
     """HTTP 503 high-demand - temporary provider capacity, not quota."""
 
 
 def _post_with_503_backoff(base_url, api_key, payload, timeout=90):
     """503 'high demand' is transient capacity, not quota: a few short
-    backoff retries are honest recovery. 429 quota still stops the run."""
+    backoff retries are honest recovery. 429 quota still stops the run.
+
+    The whole call - every attempt's connect/request/headers/body plus the
+    backoff sleeps - is bounded by one total deadline of 4*timeout + 30s
+    (worst case ~6.5 min at the default), so no code path can hang the run
+    indefinitely."""
+    total_deadline = time.monotonic() + 4 * timeout + 30
     for attempt in range(4):
+        remaining = total_deadline - time.monotonic()
+        if remaining <= 0:
+            raise TransientUnavailable(
+                f"total request deadline exhausted after {attempt} attempts")
         try:
-            return _post(base_url, api_key, payload, timeout)
+            return _post(base_url, api_key, payload, min(timeout, remaining))
         except TransientUnavailable:
             if attempt == 3:
                 raise
-            time.sleep(5 * (attempt + 1))
+            time.sleep(min(5 * (attempt + 1),
+                           max(0.0, total_deadline - time.monotonic())))
 
 
 def _chat(base_url, api_key, model, messages, timeout=90):

@@ -45,7 +45,9 @@ def main(argv=None) -> int:
     tok_in = tok_out = gen_calls = fallbacks = 0
     cost_total = 0.0
     t0 = time.perf_counter()
-    try:
+
+    def _iter_rows():
+        nonlocal tok_in, tok_out, gen_calls, fallbacks, cost_total
         for q in questions:
             # Quota policy: stop on the first rate/quota signal and report
             # partial evidence - no automatic retries, no silent fallback
@@ -54,7 +56,14 @@ def main(argv=None) -> int:
             if ans.gen_backend != "extractive":
                 time.sleep(float(os.environ.get("OP05_GEN_DELAY_SEC", "1.0")))
             lat.append(res.latency_ms)
-            rows.append(res.public_dict())
+            row = res.public_dict()
+            # Provenance per row: a run summary that counts fallbacks is not
+            # enough - consumers of the jsonl must be able to tell
+            # LLM-generated rows from extractive fallbacks.
+            row["generator"] = res.generator
+            row["extractive_fallback"] = (ans.gen_backend != "extractive"
+                                          and not res.generator.startswith("llm:"))
+            rows.append(row)
             cost_total += res.cost_usd
             if res.generator.startswith("llm:"):
                 u = res.debug.get("gen_usage", {})
@@ -63,6 +72,18 @@ def main(argv=None) -> int:
                 gen_calls += u.get("calls", 0)
             elif ans.gen_backend != "extractive" and res.status == "answered":
                 fallbacks += 1
+            yield row
+
+    # Row-level checkpointing: every completed row is appended to a
+    # .checkpoint.jsonl sidecar immediately, so a killed/hung run still
+    # leaves inspectable partial evidence (the old code wrote only at the
+    # very end - a 90-minute run could die with nothing on disk).
+    checkpoint_path = Path(args.out).with_suffix(".checkpoint.jsonl")
+    try:
+        with open(checkpoint_path, "w") as checkpoint:
+            for row in _iter_rows():
+                checkpoint.write(json.dumps(row) + "\n")
+                checkpoint.flush()
     except QuotaExceeded as e:
         partial = Path(args.out).with_suffix(".partial.jsonl")
         with open(partial, "w") as f:

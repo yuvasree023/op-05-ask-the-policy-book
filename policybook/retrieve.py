@@ -28,14 +28,16 @@ import numpy as np
 
 from .bm25 import BM25
 from .corpus import ROLES
-from .db import COLLECTION
+from .db import PassageStore
 from .embed import MiniLMEncoder
 
 ROLE_RANK = {role: i for i, role in enumerate(ROLES)}  # public < ops < legal
-# Fusion: max-normalized weighted sum of the vector and BM25 channels.
-# w_vec/w_lex tuned on the dev split only (see EXPERIMENT_LOG.md): BM25 is the
-# stronger channel on regulatory text, the vector channel covers paraphrase.
-W_VEC, W_LEX = 0.3, 0.7
+# Fusion: reciprocal rank fusion (RRF) over the vector and BM25 channels
+# (spec: user-pasted approach 2026-10-19, step 2). Rank-based fusion needs no
+# per-channel score normalization and no tuned weights; k=60 is the standard
+# constant (Cormack et al. 2009). Supersedes the v1 max-normalized weighted
+# sum (0.3 vector / 0.7 BM25) - v1 metrics stay labeled, never relabeled.
+RRF_K = 60
 
 
 @dataclass
@@ -61,27 +63,26 @@ class Retrieval:
 
 
 def _fuse(idx, vec, lex):
-    """Max-normalized weighted sum of channel scores over candidate idx."""
-    lv = max((vec[i] for i in idx), default=0.0) or 1.0
-    ll = max((lex[i] for i in idx), default=0.0) or 1.0
-    return {i: W_VEC * vec[i] / lv + W_LEX * lex[i] / ll for i in idx}
+    """Reciprocal rank fusion of the two channels over candidate idx.
+
+    Ranks are computed within idx (1 = best), so the same function serves the
+    allowed pool and the allowed+denied union used for the blocked signal.
+    """
+    vec_order = sorted(idx, key=lambda i: (-vec[i], i))
+    lex_order = sorted(idx, key=lambda i: (-lex[i], i))
+    vec_rank = {i: r for r, i in enumerate(vec_order, 1)}
+    lex_rank = {i: r for r, i in enumerate(lex_order, 1)}
+    return {i: 1.0 / (RRF_K + vec_rank[i]) + 1.0 / (RRF_K + lex_rank[i])
+            for i in idx}
 
 
 class Retriever:
     def __init__(self, index_dir, model_dir):
-        import chromadb
-        from chromadb.config import Settings
-        client = chromadb.PersistentClient(
-            path=str(index_dir),
-            settings=Settings(anonymized_telemetry=False))
-        col = client.get_collection(COLLECTION)
-        got = col.get(include=["documents", "metadatas", "embeddings"])
-        if not got["ids"]:
-            raise RuntimeError(f"index at {index_dir} is empty - run ingestion first")
-        self.ids = list(got["ids"])
-        self.texts = list(got["documents"])
-        self.metas = list(got["metadatas"])
-        self.embeddings = np.array(got["embeddings"], dtype=np.float32)
+        ids, texts, metas, embeddings = PassageStore(index_dir).load()
+        self.ids = list(ids)
+        self.texts = list(texts)
+        self.metas = list(metas)
+        self.embeddings = np.array(embeddings, dtype=np.float32)
         self.bm25 = BM25(self.texts)
         self.encoder = MiniLMEncoder(model_dir)
         self.docs = {}

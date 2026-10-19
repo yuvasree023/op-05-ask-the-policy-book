@@ -25,8 +25,10 @@ split only; the held-out set is never touched.
   exact substring of the source bytes so citation quotes can verify verbatim.
 - Embeds with a vendored, quantized all-MiniLM-L6-v2 (ONNX, CPU, no download
   at run time — the review sandbox restricts egress).
-- Loads Chroma (local, persistent) with the metadata later stages filter on:
-  `role`, `effective_date`, `supersedes`, `doc_sha256`, `section`, `part`.
+- Stores chunks + embeddings as one local npz/json cache pair (no vector
+  database anywhere: 391 passages score brute-force) with the metadata later
+  stages filter on: `role`, `effective_date`, `supersedes`, `doc_sha256`,
+  `section`, `part`.
 - Corpus-hash keyed index: an unchanged corpus skips re-embedding; a swapped
   or amended corpus (the freshness update pack path) rebuilds automatically.
 
@@ -102,17 +104,17 @@ network touchpoint is pip installing pinned requirements on first run;
 `scripts/vendor_wheels.sh` builds a local wheelhouse (`vendor/wheels/`)
 before submission so the reviewer's egress-restricted container needs no
 network at all. pip runs with `--no-cache-dir`, so no wheel cache (hundreds
-of MB) is written on boxes that do not already disable it. Chroma telemetry
-(posthog) is disabled in code - nothing phones home.
+of MB) is written on boxes that do not already disable it. No telemetry
+anywhere - the stack is stdlib + numpy + onnxruntime + sentencepiece.
 
 ## Measured requirements (2 vCPU / 2 GB RAM / Python 3.10 Linux sandbox)
 
 | what | measured |
 |---|---|
 | repo working tree (model + corpus + code) | 24 MB |
-| `.venv` after `pip install` | 503 MB (Chroma's own dependency chain is most of it) |
-| `.index` after ingesting the shipped corpus | 4 MB |
-| **total installed footprint** | **~530 MB; keep ~1 GB free** |
+| `.venv` after `pip install` | MEASURE-IN-PACKAGING (Chroma removed 2026-10-19) |
+| `.index` after ingesting the shipped corpus | 1.5 MB |
+| **total installed footprint** | **MEASURE-IN-PACKAGING; keep ~1 GB free** |
 | peak RAM during ingestion | 485 MB |
 | first clean run (venv + install + ingest) | ~45 s |
 | /ask latency (dev, 146 questions) | p50 ~7 ms, p95 ~10 ms, 0 API tokens |
@@ -128,10 +130,10 @@ policybook/            solution package
   corpus.py            corpus reader + format/sha256 validation + corpus hash
   chunk.py             section-marker chunking (exact substrings only)
   embed.py             vendored ONNX MiniLM encoder
-  db.py                Chroma store, corpus-hash rebuild logic
+  db.py                npz/json passage store, corpus-hash rebuild logic (no vector DB)
   ingest.py            ingestion CLI entry point
   bm25.py              Okapi BM25 (stdlib only)
-  retrieve.py          hybrid retrieval: role filter, as_of eligibility, fusion
+  retrieve.py          hybrid retrieval: role filter, as_of eligibility, RRF fusion
   retrieve_eval.py     dev-split retrieval evaluation CLI
   answer.py            refusal policy + extractive answer composition + role guard
   service.py           POST /ask + GET /healthz HTTP service (stdlib)

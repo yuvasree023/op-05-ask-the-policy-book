@@ -1,66 +1,87 @@
-"""Chroma vector store: persistent, local, metadata-filterable.
+"""In-process passage store: corpus-hash-keyed cache, no vector database.
 
-Metadata filtering is what later stages use for role isolation and as_of
-(temporal) filtering, so role / effective_date / supersedes are stored on
-every chunk. The collection metadata carries the corpus hash: a swapped
-corpus (freshness update pack) hashes differently and forces a rebuild, and
-an unchanged corpus skips re-embedding entirely.
+Build spec (user approach, 2026-10-19, step 2): 391 passages, brute force is
+fine, no vector DB. Embeddings, chunk text and metadata are cached as one
+local npz+json pair under the index dir. The json sidecar carries the corpus
+hash: a swapped corpus (freshness update pack) hashes differently and forces
+a rebuild, and an unchanged corpus skips re-embedding entirely. Retrieval
+loads the whole cache in milliseconds and scores in plain numpy, so both
+channels always share one identical candidate set.
 """
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
-import chromadb
-from chromadb.config import Settings
+import numpy as np
 
-COLLECTION = "passages"
+STORE_NPZ = "passages.npz"
+STORE_JSON = "passages.json"
 
 
-class VectorStore:
+def _paths(index_dir):
+    d = Path(index_dir)
+    return d / STORE_NPZ, d / STORE_JSON
+
+
+class PassageStore:
+    """File-backed cache of chunks + embeddings + role/time metadata."""
+
     def __init__(self, index_dir):
-        # anonymized_telemetry=False: no posthog phone-home. The reviewer
-        # sandbox meters egress, and "offline ingestion" must mean it.
-        self.client = chromadb.PersistentClient(
-            path=str(index_dir),
-            settings=Settings(anonymized_telemetry=False))
+        self.index_dir = Path(index_dir)
 
-    def _get(self):
+    def stored_corpus_hash(self):
+        _, jp = _paths(self.index_dir)
+        if not jp.exists():
+            return None
         try:
-            return self.client.get_collection(COLLECTION)
+            return json.loads(jp.read_text()).get("corpus_hash")
         except Exception:
             return None
 
-    def stored_corpus_hash(self):
-        col = self._get()
-        return (col.metadata or {}).get("corpus_hash") if col else None
-
     def count(self) -> int:
-        col = self._get()
-        return col.count() if col else 0
+        _, jp = _paths(self.index_dir)
+        if not jp.exists():
+            return 0
+        try:
+            return len(json.loads(jp.read_text()).get("ids", []))
+        except Exception:
+            return 0
 
     def rebuild(self, chunks, embeddings, corpus, model_name: str):
-        if self._get() is not None:
-            self.client.delete_collection(COLLECTION)
-        col = self.client.create_collection(
-            COLLECTION,
-            metadata={"hnsw:space": "cosine", "corpus_hash": corpus.corpus_hash,
-                      "embedding_model": model_name,
-                      "documents": len(corpus.docs),
-                      "sections": len(corpus.sections)})
-        for i in range(0, len(chunks), 256):
-            batch = chunks[i:i + 256]
-            col.add(
-                ids=[c.chunk_id for c in batch],
-                embeddings=[e.tolist() for e in embeddings[i:i + 256]],
-                documents=[c.text for c in batch],
-                metadatas=[{
-                    "doc_id": c.doc_id,
-                    "section": c.passage_id,
-                    "part": c.part,
-                    "role": corpus.docs[c.doc_id].role,
-                    "effective_date": corpus.docs[c.doc_id].effective_date,
-                    "supersedes": json.dumps(corpus.docs[c.doc_id].supersedes),
-                    "doc_sha256": corpus.docs[c.doc_id].sha256,
-                    "chunk_chars": len(c.text),
-                } for c in batch])
-        return col
+        self.index_dir.mkdir(parents=True, exist_ok=True)
+        npz_path, jp = _paths(self.index_dir)
+        metas = [{
+            "doc_id": c.doc_id,
+            "section": c.passage_id,
+            "part": c.part,
+            "role": corpus.docs[c.doc_id].role,
+            "effective_date": corpus.docs[c.doc_id].effective_date,
+            "supersedes": json.dumps(corpus.docs[c.doc_id].supersedes),
+            "doc_sha256": corpus.docs[c.doc_id].sha256,
+            "chunk_chars": len(c.text),
+        } for c in chunks]
+        jp.write_text(json.dumps({
+            "corpus_hash": corpus.corpus_hash,
+            "embedding_model": model_name,
+            "documents": len(corpus.docs),
+            "sections": len(corpus.sections),
+            "ids": [c.chunk_id for c in chunks],
+            "texts": [c.text for c in chunks],
+            "metas": metas,
+        }))
+        np.savez_compressed(npz_path,
+                            embeddings=np.asarray(embeddings, dtype=np.float32))
+
+    def load(self):
+        """Return (ids, texts, metas, embeddings); raise when no index."""
+        npz_path, jp = _paths(self.index_dir)
+        if not jp.exists() or not npz_path.exists():
+            raise RuntimeError(
+                f"index at {self.index_dir} is empty - run ingestion first")
+        meta = json.loads(jp.read_text())
+        if not meta.get("ids"):
+            raise RuntimeError(
+                f"index at {self.index_dir} is empty - run ingestion first")
+        embeddings = np.load(npz_path)["embeddings"]
+        return meta["ids"], meta["texts"], meta["metas"], embeddings
