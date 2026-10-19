@@ -221,3 +221,39 @@ Official paid-endpoint behavior is untouched. Substitute judge
 (gemini-3.5-flash-lite, same family as the generator) is a diagnostic
 signal only - self-family judging inflates agreement and is NOT the
 official pinned judge measurement; reported separately and labeled.
+
+## 26. PENDING (user decision required): live /ask behavior when the LLM
+backend times out (2026-10-20)
+Current state: service.py uses the same Answerer as batch eval; under the
+LLM backend a single stalled request can now take up to the batch retry
+budget (~6.5 min worst case), which cannot meet the p95 <= 10.8s reference
+bar. LLM-backend live /ask latency is UNMEASURED; only the extractive
+default is measured (48 reqs @ conc 12: p50 30ms, p95 1010ms, 2026-10-20).
+This stays an explicit open gap in the readiness package until she picks:
+
+A. Strict LLM-only (recommended default under her spec): one attempt with a
+   whole-request deadline sized inside the p95 bar (budget must also cover
+   queueing + retrieval ~30ms + citation validation + concurrency, so the
+   model call budget is ~8s, not the whole 10.8s); on timeout/transient the
+   service returns an honest error (503 + retry-after) rather than an
+   answer. No silent fallback, matches "strictly follow the approach".
+   Tradeoff: availability depends on endpoint health; failed answers are
+   visible failures, not hidden degradation.
+
+B. Schema-safe extractive fallback: same bounded attempt, but on failure
+   serve the extractive answer with provenance recorded ONLY in
+   sidecar/internal logs (the /ask contract does not verifiably permit an
+   extra provenance field, and the vendored grader's shape check ignores
+   extra keys - permissiveness is not permission). Tradeoff: judges and
+   reviewers cannot tell model answers from fallback answers from the
+   outputs alone; weakens the "budget-model generation" claim.
+
+C. In-contract labeled fallback: fallback plus a visible generator field in
+   responses. REJECTED unless the challenge schema explicitly permits
+   additional fields (unverified).
+
+D. Keep batch retry behavior on the live path. REJECTED: incompatible with
+   the latency bar under observed endpoint stalls.
+
+Any of A/B needs a fresh 146-question dev re-measurement (one day of
+free-tier generation budget) before numbers are claimed for it.
