@@ -111,13 +111,13 @@ anywhere - the stack is stdlib + numpy + onnxruntime + sentencepiece.
 
 | what | measured |
 |---|---|
-| repo working tree (model + corpus + code) | 24 MB |
-| `.venv` after `pip install` | MEASURE-IN-PACKAGING (Chroma removed 2026-10-19) |
+| repo working tree (model + corpus + code) | 26 MB |
+| `.venv` after `pip install` | 241 MB (fresh venv, 2026-10-20, no Chroma) |
 | `.index` after ingesting the shipped corpus | 1.5 MB |
-| **total installed footprint** | **MEASURE-IN-PACKAGING; keep ~1 GB free** |
+| **total installed footprint** | **~270 MB; keep ~1 GB free** |
 | peak RAM during ingestion | 485 MB |
 | first clean run (venv + install + ingest) | ~45 s |
-| /ask latency (dev, 146 questions) | p50 ~7 ms, p95 ~10 ms, 0 API tokens |
+| /ask latency (extractive default, 48 reqs @ concurrency 12) | p50 30 ms, p95 1010 ms, 0 API tokens (2026-10-20; LLM-backend live latency unmeasured - see EXPERIMENT_LOG) |
 | unchanged-corpus rerun | skip, < 2 s |
 | corpus swap via CORPUS_DIR | full rebuild, ~10 s |
 

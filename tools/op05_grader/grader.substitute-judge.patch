@@ -1,0 +1,32 @@
+diff --git a/tools/op05_grader/grader.py b/tools/op05_grader/grader.py
+index ebd2695..64105c0 100644
+--- a/tools/op05_grader/grader.py
++++ b/tools/op05_grader/grader.py
+@@ -95,11 +95,27 @@ class Judge:
+         except json.JSONDecodeError:
+             pass
+         req = urllib.request.Request(f"{self.base_url}/chat/completions", data=body, headers=headers)
++        # Substitute-judge operation on free-tier keys (local addition, not
++        # part of the published grader): JUDGE_DELAY_SEC paces requests for
++        # RPM caps, and a 429 aborts loudly instead of degrading into ERROR
++        # verdicts that silently null out judged metrics.
++        delay = float(os.environ.get("JUDGE_DELAY_SEC", "0"))
++        if delay and self.calls:
++            time.sleep(delay)
+         for attempt in range(3):
+             try:
+                 with urllib.request.urlopen(req, timeout=90) as r:
+                     data = json.load(r)
+                 break
++            except urllib.error.HTTPError as e:
++                if e.code == 429:
++                    raise SystemExit(
++                        f"ABORTED: judge endpoint rate/quota (HTTP 429) after "
++                        f"{self.calls} judge calls. Partial grading is not "
++                        f"written; rerun with fresh quota. Detail: {e.read()[:300]!r}")
++                if attempt == 2:
++                    return "ERROR"
++                time.sleep(1.5 * (attempt + 1))
+             except Exception:                      # noqa: BLE001 - a flaky judge must not end the run
+                 if attempt == 2:
+                     return "ERROR"

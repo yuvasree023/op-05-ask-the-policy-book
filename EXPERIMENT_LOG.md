@@ -207,15 +207,21 @@ results/answers_dev_llm_provenance_inferred.jsonl carries INFERRED labels
 rows with positive generation spend + 28 with zero; 90 API calls vs 89
 positive-spend answered rows leaves one row that consumed a call without an
 LLM answer - spent-call fallback or spent-call refusal; unresolvable from
-the raw rows, hence the new labels). Raw answers_dev_llm.jsonl is preserved
-byte-identical to what the run wrote.
+the raw rows, hence the new labels). Raw answers_dev_llm.jsonl was briefly modified post-run (two label keys
+added) and then reconstructed by removing them: content (answers, citations,
+costs, latencies) is untouched, but NO pre-modification hash or copy exists,
+so byte-identity with the run's original bytes is plausible, not proven.
+Recorded honestly: the file is a reconstructed original-format dataset, not
+verified raw evidence. The labeled variant lives at
+results/answers_dev_llm_provenance_inferred.jsonl.
 
 Timing caveat (material): wall launch->finish was 79m56s, but the process's
-own monotonic loop timer measured 962.83s. The ~64-minute gap matches a
-sandbox infrastructure suspension: the workspace VM shows uptime/boot
-evidence of a freeze ending ~00:14 IST while the same PID and log fd
-predate it (23:52). CLOCK_MONOTONIC excludes suspend time; filesystem
-timestamps include it. Consequences: (a) per-row monotonic latencies are
+own monotonic loop timer measured 962.83s. The ~64-minute gap is CONSISTENT WITH a
+sandbox infrastructure suspension (plausible explanation, not a verified
+platform diagnosis): the workspace shows uptime/boot evidence of a clock
+discontinuity ending ~00:14 IST while the same PID and log fd predate it
+(23:52); CLOCK_MONOTONIC excludes suspend time where filesystem timestamps
+include it. No owning-source confirmation of a suspension exists. Consequences: (a) per-row monotonic latencies are
 the honest numbers: p50 1199ms, p90 2158ms, p95 3829ms, p99 13.6s, max
 90.1s (one row hit the 90s socket timeout); (b) batch wall time tonight is
 polluted by the suspension and says nothing about the endpoint; (c)
