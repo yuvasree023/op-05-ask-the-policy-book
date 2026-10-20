@@ -1,0 +1,3177 @@
+{
+  "summary": {
+    "grader_version": "2.0",
+    "n": 146,
+    "judge_calls": 0,
+    "judge_enabled": false,
+    "judge_errors": 0,
+    "schema_valid_rate": 1.0,
+    "answer_accuracy": null,
+    "citation_verbatim_rate": 1.0,
+    "citation_support_rate": null,
+    "answered_rate_on_answerable": 0.9832,
+    "ooc_refusal_rate": 1.0,
+    "fabricated_count": 0,
+    "fabrication_review_complete": false,
+    "not_permitted_rate": 1.0,
+    "role_violations": 0,
+    "role_semantic_review_complete": false,
+    "cost_per_question_usd": null,
+    "latency_p95_ms": null,
+    "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+    "slices": {
+      "contradiction": {
+        "n": 8,
+        "answer_accuracy": null
+      },
+      "temporal": {
+        "n": 19,
+        "answer_accuracy": null
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "indiafinbench_REG_004",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_084",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_142",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_012",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_098",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_111",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": false,
+      "correct": false,
+      "verbatim_ok": false,
+      "support_ok": false,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "ooc-009",
+      "tags": [
+        "out_of_corpus"
+      ],
+      "expected_status": "not_in_corpus",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_131",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_061",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_136",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "ooc-014",
+      "tags": [
+        "out_of_corpus"
+      ],
+      "expected_status": "not_in_corpus",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "ooc-006",
+      "tags": [
+        "out_of_corpus"
+      ],
+      "expected_status": "not_in_corpus",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_072",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_103",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_174",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_169",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_073",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_115",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_188",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_009",
+      "tags": [
+        "numerical_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_013",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "tags": [
+        "contradiction_detection",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_058",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_130",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_104",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_079",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_153",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_178",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_040",
+      "tags": [
+        "temporal_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_080",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_036",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_095",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_114",
+      "tags": [
+        "numerical_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_002",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_065",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_184",
+      "tags": [
+        "regulatory_interpretation",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_137",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_114",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_068",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_180",
+      "tags": [
+        "regulatory_interpretation",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_176",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_113",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_181",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_177",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_124",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_067",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_108",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_106",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_074",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_064",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "tags": [
+        "contradiction_detection",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_007",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_094",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_127",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "internal-004",
+      "tags": [
+        "internal_policy",
+        "medium",
+        "internal"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_118",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_006",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_023",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "ooc-010",
+      "tags": [
+        "out_of_corpus"
+      ],
+      "expected_status": "not_in_corpus",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_071",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_183",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_078",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_070",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_047",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_102",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_086",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "tags": [
+        "numerical_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_074",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_154",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "ooc-011",
+      "tags": [
+        "out_of_corpus"
+      ],
+      "expected_status": "not_in_corpus",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_077",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_135",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_058",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_186",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_030",
+      "tags": [
+        "contradiction_detection",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_119",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_151",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_052",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_007",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_164",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_173",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_101",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_109",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_018",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_120",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_087",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_085",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_029",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_089",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_128",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_016",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_008",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_197",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": false,
+      "correct": false,
+      "verbatim_ok": false,
+      "support_ok": false,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_077",
+      "tags": [
+        "contradiction_detection",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_082",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_097",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_004",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_035",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_093",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_040",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_165",
+      "tags": [
+        "regulatory_interpretation",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_138",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_063",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_194",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_033",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_090",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_010",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_003",
+      "tags": [
+        "temporal_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_069",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_010",
+      "tags": [
+        "temporal_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "internal-006",
+      "tags": [
+        "internal_policy",
+        "medium",
+        "internal"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "internal-009",
+      "tags": [
+        "internal_policy",
+        "medium",
+        "internal"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_089",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_038",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_168",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_107",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_086",
+      "tags": [
+        "temporal_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_132",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_134",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "ooc-000",
+      "tags": [
+        "out_of_corpus"
+      ],
+      "expected_status": "not_in_corpus",
+      "status": "not_in_corpus",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_167",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_077",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_017",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_022",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_079",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_039",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_049",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_080",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_055",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_172",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "internal-008",
+      "tags": [
+        "internal_policy",
+        "medium",
+        "internal"
+      ],
+      "expected_status": "not_permitted",
+      "status": "not_permitted",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": null,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_066",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "tags": [
+        "numerical_reasoning",
+        "hard",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_161",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_NUM_098",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_009",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_070",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "tags": [
+        "contradiction_detection",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_REG_148",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    },
+    {
+      "id": "indiafinbench_TMP_078",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "expected_status": "answered",
+      "status": "answered",
+      "schema_valid": true,
+      "status_ok": true,
+      "correct": null,
+      "verbatim_ok": true,
+      "support_ok": null,
+      "fabricated": null,
+      "role_violation": false
+    }
+  ],
+  "citations": [
+    {
+      "id": "indiafinbench_REG_004",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_084",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_142",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_098",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_061",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_103",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_174",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_169",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_073",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_115",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_188",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_009",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_058",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_130",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_079",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_153",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_178",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_040",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_080",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_080",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_036",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_036",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_095",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_114",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_002",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_065",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_184",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_137",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_114",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_068",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_068",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_068",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_180",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_176",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_113",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_181",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_177",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_124",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_067",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_067",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_108",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_074",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_064",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_007",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_094",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "internal-004",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "internal-004",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_006",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_023",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_071",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_183",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_078",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_070",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_102",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_086",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_074",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_154",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_058",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_186",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_186",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_030",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_119",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_151",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_007",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_007",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_164",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_173",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_101",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_109",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_018",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_120",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_029",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_089",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_128",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_016",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_008",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_082",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_097",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_035",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_093",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_040",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_165",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_138",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_063",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_033",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_090",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_010",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_003",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_069",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_010",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "internal-009",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_089",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_038",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_168",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_107",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_132",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_134",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_167",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_077",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_017",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_022",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_079",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_039",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_049",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_080",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_055",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_172",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_066",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_161",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_NUM_098",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_009",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_070",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_148",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_REG_148",
+      "verbatim": true,
+      "support": null
+    },
+    {
+      "id": "indiafinbench_TMP_078",
+      "verbatim": true,
+      "support": null
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "corpus_dir": "/home/sandbox/op05/submission/data/corpus",
+  "index_dir": "/home/sandbox/op05/submission/.index",
+  "corpus_hash": "686c1a2db978644fa26ddd37afc0c9d434afcf8c0f4db78aa66cac96d380fa11",
+  "documents": 34,
+  "sections": 391,
+  "validation": [],
+  "embedding_model": "all-MiniLM-L6-v2 (quantized ONNX, Xenova export, vendored)",
+  "skipped": false,
+  "chunks": 396,
+  "sections_split": 5,
+  "embedding_dim": 384,
+  "embed_seconds": 9.367,
+  "index_seconds": 0.028,
+  "seconds": 9.401
+}

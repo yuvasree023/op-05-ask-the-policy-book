@@ -13,7 +13,6 @@
       "status": "completed",
       "timestamp": "2026-10-18T16:10:22Z",
       "input_sha256": "c415eee5664b4488cba460759c29add0280ef09f07edf7083dc2d6158b9b436f",
-      "raw_path": "results/answers_dev.jsonl",
       "config": {
         "generator": "extractive",
         "retrieval": "hybrid BM25+MiniLM wsum 0.3/0.7",
@@ -47,7 +46,75 @@
         "p50": 6.9,
         "p95": 10.0,
         "note": "in-process dev run; HTTP service 24 req @ concurrency 12 in ~1.2 s"
+      },
+      "raw": {
+        "answers_dev.jsonl": {
+          "path": "results/raw/answers_dev.jsonl",
+          "sha256": "9ececf550632e5c80a91fbd53f8171a349f4b07d85a465da7cefc3476b58a944"
+        },
+        "grader_dev_report.json": {
+          "path": "results/raw/grader_dev_report.json",
+          "sha256": "b7b2735a4dca8a5183c5a3261092d3b01982829125946a58729c69b9a8a560a3"
+        },
+        "grader_dev_report.run.json": {
+          "path": "results/raw/grader_dev_report.run.json",
+          "sha256": "723bd5ad05fb5b0d33ee971d417c370458ba404ac6188b0ac2e214e28780cbc9"
+        }
       }
+    },
+    {
+      "run_id": "dev-llm-v1-weighted-chroma-SUPERSEDED",
+      "model": "gemini-3.5-flash-lite (temp-0 JSON) over Chroma weighted 0.3/0.7 retrieval",
+      "status": "completed-superseded",
+      "timestamp": "2026-10-19T17:30:00Z",
+      "raw": {
+        "answers_dev_llm_v1_weighted_chroma_SUPERSEDED.jsonl": {
+          "path": "results/raw/answers_dev_llm_v1_weighted_chroma_SUPERSEDED.jsonl",
+          "sha256": "ad8bf49e48c99359c96d2bb93fb50e596bfc5c30377afc66e20cfe1e265be15e"
+        },
+        "grader_dev_llm_v1_weighted_chroma_SUPERSEDED.report.json": {
+          "path": "results/raw/grader_dev_llm_v1_weighted_chroma_SUPERSEDED.report.json",
+          "sha256": "3a4c4facf10adf3f5fe1a62458ea0f3ad9483844921e234b134041bee2150e80"
+        },
+        "grader_dev_llm_v1_weighted_chroma_SUPERSEDED.run.json": {
+          "path": "results/raw/grader_dev_llm_v1_weighted_chroma_SUPERSEDED.run.json",
+          "sha256": "9e07246280b0040b389a90041a9a8f2f797e6c6cfc343118cc7d0b79bc05b3a6"
+        }
+      },
+      "config": {
+        "generator": "llm:gemini-3.5-flash-lite",
+        "retrieval": "weighted 0.3/0.7 BM25+MiniLM on Chroma (SUPERSEDED architecture, kept as labeled baseline)"
+      }
+    },
+    {
+      "run_id": "dev-llm-v2-rrf-nodb",
+      "model": "gemini-3.5-flash-lite (temp-0 JSON) over RRF k=60 fusion, no vector DB",
+      "status": "completed-deterministic-gates; judged metrics pending substitute-judge pass",
+      "timestamp": "2026-10-19T19:42:30Z",
+      "raw": {
+        "answers_dev_llm.jsonl": {
+          "path": "results/raw/answers_dev_llm.jsonl",
+          "sha256": "1ea6f34e359c14c5779dd9613df795e9d324b548984f7d713ea04ffe114ab0a6"
+        },
+        "grader_dev_llm_report.nojudge.json": {
+          "path": "results/raw/grader_dev_llm_report.nojudge.json",
+          "sha256": "32c607f59c878c19041cd96adcdf53a85a70c0dda526480f738a2a4a8ab61f36"
+        },
+        "grader_dev_llm_report.run.json": {
+          "path": "results/raw/grader_dev_llm_report.run.json",
+          "sha256": "7e7f652e5922e58a578a7a59a1aca815faa3638ecce7d721b2a62825567bcb14"
+        },
+        "answers_dev_llm_provenance_inferred.jsonl": {
+          "path": "results/raw/answers_dev_llm_provenance_inferred.jsonl",
+          "sha256": "5a328eec3f46268a8caeae261fc1b6343226180c1dafd684317c2d25c355cb1c"
+        }
+      },
+      "config": {
+        "generator": "llm:gemini-3.5-flash-lite (90 calls; 28/117 answered rows extractive fallback, labels INFERRED - see EXPERIMENT_LOG)",
+        "retrieval": "RRF k=60 BM25+MiniLM, PassageStore npz/json (no vector DB)"
+      },
+      "provenance_caveat": "answers_dev_llm.jsonl is a reconstructed original-format dataset (two label keys added post-run then stripped; no pre-modification hash exists); batch wall time suspension-polluted - see EXPERIMENT_LOG"
     }
-  ]
+  ],
+  "note": "Raw outputs for every run live in results/raw/ with SHA-256 below; canonical working copies stay in results/. v2 judged artifacts are appended after the substitute-judge pass."
 }
