@@ -16,6 +16,7 @@ chat-completions endpoint; set LLM_API_KEY in the environment.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -70,6 +71,67 @@ def load_jsonl(path: str) -> list[dict]:
     return out
 
 
+
+
+class VerdictCache:
+    """Local addition (substitute-judge operation, not published-grader
+    behavior): crash-safe verdict checkpointing + resume.
+
+    Every judge verdict is appended to a JSONL sidecar IMMEDIATELY, keyed by
+    a content hash of the FULL measurement configuration - judge model, the
+    three rubric prompt templates, and SHA-256 of the pred/gold/corpus/
+    passages inputs - plus the exact prompt text. A resume only reuses
+    verdicts whose key matches the current configuration bit-for-bit; any
+    config or input change invalidates the whole cache automatically.
+
+    Errors are recorded DISTINCTLY from verdicts (ok=false rows are never
+    reused - they are retried on resume - and never counted as verdicts).
+    Prompt TEXT is never written to the sidecar, only its hash, so the
+    sidecar carries no secrets and can be pushed to the private repo as a
+    durable checkpoint."""
+
+    def __init__(self, path, config_id):
+        self.path, self.config_id = path, config_id
+        self.verdicts, self.errors = {}, []
+        self.reused = 0
+        self._fh = None
+        if not path:
+            return
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                for line in f:
+                    try:
+                        e = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if e.get("config") != config_id:
+                        continue  # config changed: foreign verdicts ignored
+                    if e.get("ok"):
+                        self.verdicts[e["key"]] = e["result"]
+                    else:
+                        self.errors.append(e)
+        self._fh = open(path, "a", encoding="utf-8")
+
+    def key(self, prompt):
+        return hashlib.sha256((self.config_id + "\0" + prompt).encode()).hexdigest()
+
+    def get(self, key):
+        hit = self.verdicts.get(key)
+        if hit is not None:
+            self.reused += 1
+        return hit
+
+    def put(self, key, qid, kind, result, ok):
+        if ok:
+            self.verdicts[key] = result
+        if self._fh:
+            self._fh.write(json.dumps({"config": self.config_id, "key": key,
+                                       "qid": qid, "kind": kind,
+                                       "result": result, "ok": ok,
+                                       "ts": int(time.time())}) + "\n")
+            self._fh.flush()
+
+
 class Judge:
     def __init__(self, base_url: str | None, model: str | None, enabled: bool):
         self.base_url, self.model, self.enabled = (base_url or "").rstrip("/"), model, enabled and bool(base_url and model)
@@ -94,6 +156,12 @@ class Judge:
             headers.update(json.loads(os.environ.get("LLM_EXTRA_HEADERS", "") or "{}"))
         except json.JSONDecodeError:
             pass
+        cache = getattr(self, "cache", None)
+        cache_key = cache.key(prompt) if cache else None
+        if cache:
+            hit = cache.get(cache_key)
+            if hit is not None:
+                return hit
         req = urllib.request.Request(f"{self.base_url}/chat/completions", data=body, headers=headers)
         # Substitute-judge operation on free-tier keys (local addition, not
         # part of the published grader): JUDGE_DELAY_SEC paces requests for
@@ -118,13 +186,20 @@ class Judge:
                 time.sleep(1.5 * (attempt + 1))
             except Exception:                      # noqa: BLE001 - a flaky judge must not end the run
                 if attempt == 2:
+                    if cache:
+                        cache.put(cache_key, getattr(self, "_cur_qid", ""),
+                                  getattr(self, "_cur_kind", ""), "ERROR", ok=False)
                     return "ERROR"
                 time.sleep(1.5 * (attempt + 1))
         self.calls += 1
         try:
-            return (data["choices"][0]["message"]["content"] or "").strip().upper()
+            result = (data["choices"][0]["message"]["content"] or "").strip().upper()
         except (KeyError, IndexError, TypeError):
-            return "ERROR"
+            result = "ERROR"
+        if cache:
+            cache.put(cache_key, getattr(self, "_cur_qid", ""), getattr(self, "_cur_kind", ""),
+                      result, ok=result not in ("ERROR", "SKIPPED"))
+        return result
 
 
 def grade(gold: list[dict], predictions: list[dict], docs: dict[str, dict], corpus_dir: Path, judge: Judge) -> dict:
@@ -245,7 +320,26 @@ def main() -> None:
     a = ap.parse_args()
     docs = {d["doc_id"]: d for d in load_jsonl(a.corpus)}
     judge = Judge(a.judge_base_url, a.judge_model, not a.no_judge)
+    verdicts_path = os.environ.get("JUDGE_VERDICTS_PATH", "")
+    if verdicts_path and judge.enabled:
+        def _sha(path):
+            h = hashlib.sha256()
+            with open(path, "rb") as f:
+                for chunk in iter(lambda: f.read(1 << 20), b""):
+                    h.update(chunk)
+            return h.hexdigest()
+        # Exact measurement-config identity: model, rubric templates, and the
+        # pred/gold/corpus/passages inputs. Any change invalidates the cache.
+        parts = [a.judge_model or "", _prompt("A"), _prompt("B"), _prompt("C"),
+                 _sha(a.pred), _sha(a.gold), _sha(a.corpus)]
+        passages = Path(a.corpus).parent / "passages.jsonl"
+        parts.append(_sha(passages) if passages.is_file() else "no-passages")
+        judge.cache = VerdictCache(verdicts_path,
+                                   hashlib.sha256("\0".join(parts).encode()).hexdigest())
     report = grade(load_jsonl(a.gold), load_jsonl(a.pred), docs, Path(a.corpus).parent, judge)
+    if getattr(judge, "cache", None):
+        report["summary"]["judge_verdicts_reused"] = judge.cache.reused
+        report["summary"]["judge_verdicts_path"] = verdicts_path
     print(json.dumps(report["summary"], indent=2, allow_nan=False))
     if a.report:
         Path(a.report).write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
