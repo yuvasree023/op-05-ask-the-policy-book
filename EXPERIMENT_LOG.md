@@ -237,3 +237,17 @@ deadline across all 4 retries incl. backoff sleeps (~6.5 min worst case);
 row-level checkpointing (.checkpoint.jsonl per completed row). Stub-tested,
 33/33 pass. v2 was measured WITHOUT these; re-measurement under the new
 transport is a separate future run decision (quota cost: 146 calls).
+
+### Substitute-judge run 1 - LOST to sandbox rebuild (2026-10-20 12:37-16:0x IST)
+
+The first judged grading pass (gemini-3.5-flash-lite substitute judge,
+JUDGE_DELAY_SEC=4.5) was killed mid-flight when the sandbox was rebuilt at
+~16:07 IST (uptime evidence). The vendored grader writes its report only at
+completion, so ~3.3h of grading produced no evidence. Judge calls spent:
+ESTIMATED 230-280 (byte-volume based; not measurable after the fact - no
+provider usage API was available), plus 1 probe call. Recorded as estimate,
+not measured cost. Fix implemented before any rerun: VerdictCache (per-verdict
+JSONL checkpoint keyed by full config+prompt hash, errors kept distinct),
+resume semantics, 3-minute durable pushes to the judge-checkpoints branch,
+and a crash-resume test proving no duplicate calls and identical rows vs an
+uninterrupted control run.
