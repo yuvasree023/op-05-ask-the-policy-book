@@ -251,3 +251,38 @@ JSONL checkpoint keyed by full config+prompt hash, errors kept distinct),
 resume semantics, 3-minute durable pushes to the judge-checkpoints branch,
 and a crash-resume test proving no duplicate calls and identical rows vs an
 uninterrupted control run.
+
+### Substitute-judge pass COMPLETE (2026-10-21/22, gemini-3.5-flash-lite; DIAGNOSTIC ONLY - not the official pinned judge)
+
+All 253 judge evaluations for the dev-llm-v2-rrf-nodb answer set
+(results/answers_dev_llm.jsonl, 146 dev questions) are now gathered:
+213 verdicts carried from the earlier checkpointed progress, 37 on
+2026-10-22 after the approved request-shape fix, 3 on a final short resume.
+judge_errors = 0. Results (substitute judge, same family as the generator -
+self-family judging inflates agreement; reported separately, never as the
+official score):
+
+- answer_accuracy: 0.7731 (slice contradiction 0.875 n=8; temporal 0.8947 n=19)
+- citation_support_rate: 0.6923
+- fabrication_review_complete: true (fabricated_count 0)
+- deterministic gates unchanged: schema 1.0, citation_verbatim 1.0,
+  answered_on_answerable 0.9832, ooc_refusal 1.0, not_permitted 1.0,
+  role_violations 0 (role_semantic_review_complete stays false in the
+  vendored grader: it needs independent reviewer evidence, not judge output)
+
+History behind these numbers (measurement caveats, not score changes):
+- 2026-10-20 run 2 aborted loudly on HTTP 429 after 240 verdicts (free-tier
+  daily quota; no paid fallback per constraint).
+- 2026-10-21 post-reset resume found 53 cached verdicts were truncated
+  reasoning preambles, not verdict tokens (gemini reasoning exhausted the
+  2000-token completion budget). Dropped via the cache's own retry
+  semantics; blind retries converted only 13/95, confirming a deterministic
+  request-shape failure, not flakiness.
+- 2026-10-22 fix (user-approved): JUDGE_MAX_COMPLETION_TOKENS 2000 -> 8192
+  plus last-standalone-token extraction; tokenless replies cache ok=false
+  and retry. Cache identity (model + rubric templates + input hashes)
+  unchanged, so the 213 valid earlier verdicts remained reusable.
+- Wall time across the pass is polluted by two sandbox suspensions and the
+  429 wait; per-call latency was not the measurement target here.
+- API spend stayed $0 (free-tier key only). Judge calls by session:
+  240 (Oct 20) + 109 (Oct 21 incl. probe and retries) + 40 (Oct 22).

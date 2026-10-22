@@ -89,7 +89,7 @@
     {
       "run_id": "dev-llm-v2-rrf-nodb",
       "model": "gemini-3.5-flash-lite (temp-0 JSON) over RRF k=60 fusion, no vector DB",
-      "status": "completed-deterministic-gates; judged metrics pending substitute-judge pass",
+      "status": "completed-deterministic-gates; substitute-judge pass completed (diagnostic only)",
       "timestamp": "2026-10-19T19:42:30Z",
       "raw": {
         "answers_dev_llm.jsonl": {
@@ -113,7 +113,26 @@
         "generator": "llm:gemini-3.5-flash-lite (90 calls; 28/117 answered rows extractive fallback, labels INFERRED - see EXPERIMENT_LOG)",
         "retrieval": "RRF k=60 BM25+MiniLM, PassageStore npz/json (no vector DB)"
       },
-      "provenance_caveat": "answers_dev_llm.jsonl is a reconstructed original-format dataset (two label keys added post-run then stripped; no pre-modification hash exists); batch wall time suspension-polluted - see EXPERIMENT_LOG"
+      "provenance_caveat": "answers_dev_llm.jsonl is a reconstructed original-format dataset (two label keys added post-run then stripped; no pre-modification hash exists); batch wall time suspension-polluted - see EXPERIMENT_LOG",
+      "substitute_judge": {
+        "judge_model": "gemini-3.5-flash-lite (substitute, diagnostic only - NOT the official pinned judge; self-family judging inflates agreement)",
+        "verdicts": 253,
+        "judge_errors": 0,
+        "answer_accuracy": 0.7731,
+        "citation_support_rate": 0.6923,
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 0.875
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.8947
+          }
+        },
+        "fabrication_review_complete": true,
+        "note": "Official judge measurement still required for any claimed correctness/support score."
+      }
     }
   ],
   "note": "Raw outputs for every run live in results/raw/ with SHA-256 below; canonical working copies stay in results/. v2 judged artifacts are appended after the substitute-judge pass."
