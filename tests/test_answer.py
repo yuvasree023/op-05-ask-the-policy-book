@@ -1,9 +1,11 @@
 """Stage 3 tests: refusal policy, citation verbatim guarantee, role guard."""
 import hashlib
 import json
+import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -118,6 +120,34 @@ class AnswerTests(unittest.TestCase):
         self.assertEqual(hist.status, "answered")
         self.assertEqual(hist.citations[0].doc_id, "PUB_KYC_OLD")
         self.assertIn("later version", hist.answer)  # future change disclosed
+
+    def test_backend_auto_activates_on_gateway_credentials(self):
+        # Approved 2026-10-22: reviewer gateway credentials (LLM_BASE_URL +
+        # LLM_API_KEY) activate the model generator with no OP05-specific
+        # flag; LLM_MODEL supplies the model name when present.
+        with mock.patch.dict(os.environ, {"LLM_BASE_URL": "http://127.0.0.1:9",
+                                          "LLM_API_KEY": "k", "LLM_MODEL": "m-x"}):
+            os.environ.pop("OP05_GEN_BACKEND", None)
+            a = Answerer(self.root / "index", MODEL_DIR, self.root / "corpus")
+            self.assertEqual(a.gen_backend, "openai")
+            self.assertTrue(a.gen_auto)
+            self.assertEqual(a.gen_model, "m-x")
+
+    def test_explicit_backend_beats_gateway_credentials(self):
+        with mock.patch.dict(os.environ, {"LLM_BASE_URL": "http://127.0.0.1:9",
+                                          "LLM_API_KEY": "k",
+                                          "OP05_GEN_BACKEND": "extractive"}):
+            a = Answerer(self.root / "index", MODEL_DIR, self.root / "corpus")
+            self.assertEqual(a.gen_backend, "extractive")
+            self.assertFalse(a.gen_auto)
+
+    def test_extractive_default_without_credentials(self):
+        with mock.patch.dict(os.environ, {}):
+            for k in ("LLM_BASE_URL", "LLM_API_KEY", "OP05_GEN_BACKEND"):
+                os.environ.pop(k, None)
+            a = Answerer(self.root / "index", MODEL_DIR, self.root / "corpus")
+            self.assertEqual(a.gen_backend, "extractive")
+            self.assertFalse(a.gen_auto)
 
     def test_refusal_texts_name_no_corpus_doc(self):
         for doc_id in DOCS:

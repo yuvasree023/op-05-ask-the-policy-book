@@ -1,9 +1,12 @@
 """Optional budget-class LLM answer generator. OFF by default.
 
 The default generator is the deterministic extractive composer in
-policybook.answer (zero API tokens, fully offline). This module is used only
-when OP05_GEN_BACKEND=openai is set explicitly; reproduce.sh does not set it,
-so the offline/$0 default is unchanged.
+policybook.answer (zero API tokens, fully offline, clearly labeled). This
+module activates when OP05_GEN_BACKEND=openai is set explicitly, or
+automatically when reviewer-gateway credentials (LLM_BASE_URL +
+LLM_API_KEY) are present, so reproduce.sh serves model answers with no
+OP05-specific flag. LLM_MODEL is omittable: unnamed, the request omits
+"model" and the gateway serves its default model.
 
 Design constraints carried from the challenge contract:
 - budget-class models only (MODELS.md: mini/nano/Flash/Haiku tier or
@@ -144,17 +147,22 @@ def _post_with_503_backoff(base_url, api_key, payload, timeout=90):
                            max(0.0, total_deadline - time.monotonic())))
 
 
-def _chat(base_url, api_key, model, messages, timeout=90):
+def _chat(base_url, api_key, model, messages, timeout=90, one_attempt=False):
     """One chat completion, adapting the request shape to provider dialect.
 
     First attempt mirrors the grader's judge client (no temperature,
     max_completion_tokens). A 400 that names max_completion_tokens retries
     once with max_tokens; a 400 that names response_format retries once
     without JSON mode. Adaptations are per-call and recorded.
-    """
+
+    model may be empty: the "model" field is then omitted and the gateway
+    serves its default model. one_attempt=True (the live service path)
+    skips the 503 backoff loop: exactly one bounded HTTP attempt, and a
+    TransientUnavailable propagates so the caller can answer 503."""
     json_mode = os.environ.get("OP05_GEN_JSON_MODE", "1") != "0"
-    payload = {"model": model, "max_completion_tokens": 2500,
-               "messages": messages}
+    payload = {"max_completion_tokens": 2500, "messages": messages}
+    if model:
+        payload["model"] = model
     # Reasoning models burn output tokens on hidden thinking; the challenge
     # output budget is measured on usage, so ask for low effort when the
     # provider supports it (adapted away on a 400).
@@ -164,7 +172,8 @@ def _chat(base_url, api_key, model, messages, timeout=90):
     adaptations = []
     for _ in range(3):
         try:
-            data = _post_with_503_backoff(base_url, api_key, payload, timeout)
+            post = _post if one_attempt else _post_with_503_backoff
+            data = post(base_url, api_key, payload, timeout)
             return data, adaptations
         except RuntimeError as e:
             msg = str(e).lower()
@@ -215,20 +224,26 @@ def pack_evidence(hits, meta, char_budget=None, min_passages=3):
 
 
 def generate(question, as_of, hits, verify_quote, model=None,
-             base_url=None, api_key=None, meta=None):
+             base_url=None, api_key=None, meta=None, one_attempt=False):
     """hits: role-filtered retrieval hits; verify_quote(doc_id, section, quote)->bool;
     meta: optional {doc_id: {title, effective_date, later_version, later_date}}.
 
     Returns (answer_text, citations, usage) or None when generation failed /
     was INSUFFICIENT / nothing verifiable remained (caller then falls back to
     the extractive generator). Raises QuotaExceeded on provider quota signals.
+    Model resolution: explicit arg, then OP05_GEN_MODEL, then LLM_MODEL; when
+    all are empty the request omits "model" and the gateway default is used.
+    one_attempt=True (live path): a single bounded HTTP attempt, and
+    TransientUnavailable (timeout/stall/provider 503) raises instead of
+    degrading into a silent extractive fallback.
     """
     global last_error
     last_error = None
-    model = model or os.environ.get("OP05_GEN_MODEL", "")
+    model = (model or os.environ.get("OP05_GEN_MODEL")
+             or os.environ.get("LLM_MODEL", ""))
     base_url = base_url or os.environ.get("LLM_BASE_URL", "")
     api_key = api_key if api_key is not None else os.environ.get("LLM_API_KEY", "")
-    if not (model and base_url):
+    if not base_url:
         last_error = "not configured"
         return None
     evidence = "\n\n".join(pack_evidence(hits, meta))
@@ -239,9 +254,15 @@ def generate(question, as_of, hits, verify_quote, model=None,
              "adaptations": []}
     for attempt in (1, 2):
         try:
-            data, adaptations = _chat(base_url, api_key, model, messages)
+            data, adaptations = _chat(base_url, api_key, model, messages,
+                                      one_attempt=one_attempt)
         except QuotaExceeded:
             raise  # quota signals must stay loud; caller decides
+        except TransientUnavailable:
+            if one_attempt:
+                raise  # live path: temporary error, never silent fallback
+            last_error = "temporarily unavailable"
+            return None
         except Exception as e:  # noqa: BLE001 - a flaky API must not end the run
             last_error = f"{type(e).__name__}: {e}"[:300]
             return None

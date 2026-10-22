@@ -163,3 +163,57 @@ class CacheTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ReasoningStub(BaseHTTPRequestHandler):
+    """Judge that leads with reasoning prose instead of the bare token
+    (the gemini-3.5-flash-lite failure mode observed 2026-10-21)."""
+    def do_POST(self):
+        raw = self.rfile.read(int(self.headers["Content-Length"]))
+        prompt = json.loads(raw)["messages"][1]["content"]
+        if "UNWINNABLE" in prompt:
+            content = "TO DETERMINE WHETHER THE PASSAGE SUPPO"  # budget cut mid-reasoning, no token
+        else:
+            content = ("Let me evaluate the evidence step by step. The "
+                       "passage covers every fact asked for. SUPPORTS")
+        body = json.dumps({"choices": [{"message": {"content": content}}],
+                           "usage": {}}).encode()
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, *a):
+        pass
+
+
+class TrailingTokenTests(unittest.TestCase):
+    def test_trailing_token_extracted(self):
+        srv = HTTPServer(("127.0.0.1", 0), ReasoningStub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        j = grader.Judge(f"http://127.0.0.1:{srv.server_address[1]}",
+                         "stub-judge", True)
+        try:
+            r = j.ask("any prompt", tokens=("SUPPORTS", "DOES_NOT_SUPPORT"))
+            self.assertEqual(r, "SUPPORTS")
+        finally:
+            srv.shutdown()
+
+    def test_tokenless_reply_is_retryable_error_not_verdict(self):
+        td = tempfile.TemporaryDirectory()
+        path = os.path.join(td.name, "v.jsonl")
+        srv = HTTPServer(("127.0.0.1", 0), ReasoningStub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        j = grader.Judge(f"http://127.0.0.1:{srv.server_address[1]}",
+                         "stub-judge", True)
+        j.cache = grader.VerdictCache(path, "cfg")
+        try:
+            r = j.ask("UNWINNABLE prompt", tokens=("SUPPORTS", "DOES_NOT_SUPPORT"))
+            self.assertEqual(r, "ERROR")
+            rows = [json.loads(l) for l in open(path)]
+            self.assertEqual(len(rows), 1)
+            self.assertFalse(rows[0]["ok"])   # retried on resume, never replayed
+        finally:
+            srv.shutdown()
+            td.cleanup()

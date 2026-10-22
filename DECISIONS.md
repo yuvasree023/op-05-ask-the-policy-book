@@ -222,8 +222,14 @@ Official paid-endpoint behavior is untouched. Substitute judge
 signal only - self-family judging inflates agreement and is NOT the
 official pinned judge measurement; reported separately and labeled.
 
-## 26. PENDING (user decision required): live /ask behavior when the LLM
-backend times out (2026-10-20)
+## 26. RESOLVED 2026-10-22 (user approved option A): live /ask behavior
+   when the LLM backend times out (2026-10-20, decided 2026-10-22)
+She approved option A after an elaborated explanation: on the live path the
+model call is one bounded attempt; on timeout/stall/provider 503 the service
+returns 503 + Retry-After, never a silent extractive fallback. Quota signals
+stay loud the same way. Batch eval behavior is unchanged (labeled per-row
+fallback provenance). Original analysis kept below.
+
 Current state: service.py uses the same Answerer as batch eval; under the
 LLM backend a single stalled request can now take up to the batch retry
 budget (~6.5 min worst case), which cannot meet the p95 <= 10.8s reference
@@ -257,3 +263,28 @@ D. Keep batch retry behavior on the live path. REJECTED: incompatible with
 
 Any of A/B needs a fresh 146-question dev re-measurement (one day of
 free-tier generation budget) before numbers are claimed for it.
+
+## 27. Reviewer-gateway auto-activation + substitute-judge request shape
+   (user approved 2026-10-22, "yes to all" after elaborated context)
+Three held decisions approved together on her WhatsApp channel:
+1. The model generator auto-activates when LLM_BASE_URL + LLM_API_KEY are
+   present (the documented reviewer-gateway pattern); LLM_MODEL is omittable
+   and the request then omits "model" so the gateway serves its default.
+   OP05_GEN_BACKEND still overrides explicitly. With no credentials the
+   extractive composer remains, clearly labeled (startup banner, X-Generator
+   response header, per-row generator field in batch outputs).
+2. Decision 26 option A (above).
+3. The substitute judge's request shape: JUDGE_MAX_COMPLETION_TOKENS default
+   raised 2000 -> 8192 (reasoning models were exhausting the budget before
+   emitting a verdict token: 53/293 evaluations returned truncated reasoning
+   on 2026-10-21), plus extraction of the LAST standalone allowed verdict
+   token when a reply leads with reasoning. A reply with no allowed token is
+   cached ok=false and retried on resume instead of replaying as a permanent
+   error. Prompt templates, model and inputs - the cached measurement
+   identity - are unchanged, so the 213 verdicts already gathered stay valid.
+Also fixed durably: judge_checkpoint_push.sh now bases the checkpoint
+worktree on origin/judge-checkpoints and re-syncs before each commit, so a
+rebuilt sandbox no longer produces a non-fast-forward rejection.
+Still held (NOT approved): role score-all-then-split (exclusion-before-
+ranking stays), any reviewer invitation, final submission. Agent Evals key
+untouched; held-out file never read.

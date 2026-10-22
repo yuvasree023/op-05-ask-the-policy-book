@@ -28,6 +28,7 @@ from pathlib import Path
 
 from .answer import Answerer
 from .corpus import ROLES
+from .llm import QuotaExceeded, TransientUnavailable
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -43,11 +44,13 @@ class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     # -- helpers -------------------------------------------------------------
-    def _send(self, code, obj):
+    def _send(self, code, obj, headers=None):
         body = json.dumps(obj).encode()
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
+        for k, v in (headers or {}).items():
+            self.send_header(k, v)
         self.end_headers()
         self.wfile.write(body)
 
@@ -96,12 +99,23 @@ class Handler(BaseHTTPRequestHandler):
         t0 = time.perf_counter()
         try:
             res = _State.answerer.answer(qid, question, role, as_of)
+        except (TransientUnavailable, QuotaExceeded):
+            # Model path temporary failure (timeout/stall/provider 503/quota):
+            # generic temporary error + Retry-After, never a silent
+            # extractive fallback. No internals or corpus text leak.
+            print(f"/ask {qid}: generator temporarily unavailable", file=sys.stderr)
+            self._send(503, {"error": "generator temporarily unavailable"},
+                       headers={"Retry-After": "5"})
+            return
         except Exception:  # noqa: BLE001 - never leak internals or corpus text
             print(f"/ask {qid}: unhandled error", file=sys.stderr)
             self._send(500, {"error": "internal error"})
             return
-        self._send(200, res.public_dict())
+        # Every served answer names its generator, so an extractive
+        # offline-fallback answer is never indistinguishable from a model one.
+        self._send(200, res.public_dict(), headers={"X-Generator": res.generator})
         print(f"/ask {qid}: {res.status} {res.latency_ms:.0f}ms "
+              f"generator={res.generator} "
               f"(total {(time.perf_counter() - t0) * 1000:.0f}ms)", file=sys.stderr)
 
 
@@ -111,7 +125,17 @@ def main(argv=None) -> int:
     model_dir = os.environ.get("MODEL_DIR", str(REPO_ROOT / "models" / "all-MiniLM-L6-v2"))
     port = int(os.environ.get("PORT", "8000"))
     print(f"loading index {index_dir} and corpus {corpus_dir} ...", file=sys.stderr)
-    _State.answerer = Answerer(index_dir, model_dir, corpus_dir)
+    _State.answerer = Answerer(index_dir, model_dir, corpus_dir, live=True)
+    a = _State.answerer
+    if a.gen_backend == "openai":
+        mode = ("auto-activated on reviewer gateway credentials"
+                if a.gen_auto else "explicitly enabled")
+        print(f"generator: llm:{a.gen_model or 'gateway-default'} ({mode})",
+              file=sys.stderr)
+    else:
+        print("generator: extractive (offline fallback - no LLM_BASE_URL/"
+              "LLM_API_KEY credentials; answers are labeled extractive)",
+              file=sys.stderr)
     _State.ready = True
     srv = ThreadingHTTPServer(("0.0.0.0", port), Handler)
     srv.daemon_threads = True

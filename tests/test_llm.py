@@ -5,10 +5,12 @@ route so the retry/verify plumbing is exercised without any live API call.
 The backend stays OFF by default; these tests prove only the plumbing.
 """
 import json
+import os
 import sys
 import threading
 import time
 import unittest
+from unittest import mock
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
@@ -48,6 +50,21 @@ class Hit:
         self.text = "One third of the anchor investor portion is reserved."
 
 
+class BusyStub(BaseHTTPRequestHandler):
+    """Provider 503 'high demand': transient capacity, not quota."""
+    def do_POST(self):
+        self.rfile.read(int(self.headers["Content-Length"]))
+        body = b'{"error": "high demand"}'
+        self.send_response(503)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, *a):
+        pass
+
+
 class LLMTests(unittest.TestCase):
     def test_retry_then_verified_citation(self):
         Stub.calls = []
@@ -71,6 +88,41 @@ class LLMTests(unittest.TestCase):
         # request shape: no temperature field, max_completion_tokens only
         self.assertNotIn("temperature", Stub.calls[0])
         self.assertIn("max_completion_tokens", Stub.calls[0])
+
+    def test_model_omitted_when_unnamed(self):
+        # LLM_MODEL omittable: with no model named anywhere, the request
+        # carries no "model" field and the gateway serves its default.
+        Stub.calls = []
+        srv = HTTPServer(("127.0.0.1", 0), Stub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            with mock.patch.dict(os.environ, {}):
+                os.environ.pop("OP05_GEN_MODEL", None)
+                os.environ.pop("LLM_MODEL", None)
+                out = llm.generate("What fraction?", "2023-01-01", [Hit()],
+                                   verify_quote=lambda d, s, q: q in Hit().text,
+                                   model="",
+                                   base_url=f"http://127.0.0.1:{srv.server_address[1]}",
+                                   api_key="stub")
+        finally:
+            srv.shutdown()
+        self.assertIsNotNone(out)
+        self.assertNotIn("model", Stub.calls[0])
+
+    def test_one_attempt_live_path_raises_transient(self):
+        # Approved 2026-10-22: on the live path a provider 503/timeout is one
+        # bounded attempt, then a loud temporary error - never a silent
+        # extractive fallback.
+        srv = HTTPServer(("127.0.0.1", 0), BusyStub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            with self.assertRaises(llm.TransientUnavailable):
+                llm.generate("q", "2023-01-01", [Hit()],
+                             verify_quote=lambda d, s, q: True, model="m",
+                             base_url=f"http://127.0.0.1:{srv.server_address[1]}",
+                             api_key="k", one_attempt=True)
+        finally:
+            srv.shutdown()
 
     def test_insufficient_returns_none(self):
         class Stub2(Stub):

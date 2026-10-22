@@ -134,7 +134,10 @@ class AnswerResult:
 
 
 class Answerer:
-    def __init__(self, index_dir, model_dir, corpus_dir):
+    def __init__(self, index_dir, model_dir, corpus_dir, live=False):
+        # live=True (the HTTP service): one bounded model attempt, then a
+        # temporary error - never a silent extractive fallback on timeout.
+        self.live = live
         self.retr = Retriever(index_dir, model_dir)
         self.corpus = read_corpus(corpus_dir)
         # Normalized full texts per doc for the role-overlap guard. Restricted
@@ -151,10 +154,26 @@ class Answerer:
             for tok in {x.lower() for x in _TOKEN.findall(t)}:
                 df[tok] = df.get(tok, 0) + 1
         self._idf = {t: math.log(1 + n / (1 + c)) for t, c in df.items()}
-        # Optional LLM generation backend (OFF unless explicitly enabled).
-        # Default stays the extractive composer: offline, $0, no API calls.
-        self.gen_backend = os.environ.get("OP05_GEN_BACKEND", "extractive")
-        self.gen_model = os.environ.get("OP05_GEN_MODEL", "")
+        # Generator selection (approved 2026-10-22):
+        # - OP05_GEN_BACKEND set explicitly -> honored as-is.
+        # - else, reviewer-gateway credentials present (LLM_BASE_URL +
+        #   LLM_API_KEY) -> the model generator activates automatically, so
+        #   reproduce.sh serves model answers with no OP05-specific flag.
+        # - else -> the extractive composer: offline, $0, no API calls,
+        #   clearly labeled (startup banner, X-Generator header, per-row
+        #   generator field in batch outputs).
+        # LLM_MODEL is omittable: with no model named anywhere, the request
+        # omits "model" and the gateway serves its default.
+        explicit = os.environ.get("OP05_GEN_BACKEND", "")
+        if explicit:
+            self.gen_backend = explicit
+        elif os.environ.get("LLM_BASE_URL") and os.environ.get("LLM_API_KEY"):
+            self.gen_backend = "openai"
+        else:
+            self.gen_backend = "extractive"
+        self.gen_auto = not explicit and self.gen_backend == "openai"
+        self.gen_model = (os.environ.get("OP05_GEN_MODEL")
+                          or os.environ.get("LLM_MODEL", ""))
         # Pinned list prices (USD per 1M tokens) for cost reporting; free-tier
         # usage still counts at list price per FREE_CREDITS.md.
         self._price_in = float(os.environ.get("OP05_PRICE_IN_PER_M", "0") or 0)
@@ -331,9 +350,16 @@ class Answerer:
             from . import llm
             try:
                 out = llm.generate(question, as_of, hits, self._verify_quote,
-                                   meta=self._gen_meta(as_of))
+                                   meta=self._gen_meta(as_of),
+                                   one_attempt=self.live)
+            except llm.TransientUnavailable:
+                if self.live:
+                    raise  # the service answers 503 + Retry-After
+                print(f"/ask {qid}: generator temporarily unavailable; "
+                      "extractive fallback", file=sys.stderr)
+                out = None
             except llm.QuotaExceeded:
-                if os.environ.get("OP05_GEN_STRICT") == "1":
+                if self.live or os.environ.get("OP05_GEN_STRICT") == "1":
                     raise
                 print(f"/ask {qid}: generator quota exhausted; extractive fallback",
                       file=sys.stderr)
@@ -347,7 +373,7 @@ class Answerer:
                     citations=[Citation(**c) for c in cit_dicts],
                     confidence=min(1.0, max(0.0, hits[0].score)),
                     cost_usd=round(cost, 8),
-                    generator=f"llm:{self.gen_model or 'env'}")
+                    generator=f"llm:{self.gen_model or 'gateway-default'}")
                 res = finish(res)
                 res.debug["gen_usage"] = usage
                 return res

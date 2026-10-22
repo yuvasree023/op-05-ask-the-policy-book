@@ -12,7 +12,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from policybook import service  # noqa: E402
+from policybook import llm, service  # noqa: E402
 from policybook.answer import Answerer  # noqa: E402
 from policybook.ingest import run as ingest_run  # noqa: E402
 from test_answer import MODEL_DIR, write_corpus  # noqa: E402
@@ -27,6 +27,17 @@ def post(port, path, payload, raw=None):
             return r.status, json.load(r)
     except urllib.error.HTTPError as e:
         return e.code, json.loads(e.read() or b"{}")
+
+
+def post_full(port, path, payload):
+    data = json.dumps(payload).encode()
+    req = urllib.request.Request(f"http://127.0.0.1:{port}{path}", data=data,
+                                 headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as r:
+            return r.status, json.load(r), dict(r.headers)
+    except urllib.error.HTTPError as e:
+        return e.code, json.loads(e.read() or b"{}"), dict(e.headers)
 
 
 class ServiceTests(unittest.TestCase):
@@ -84,6 +95,33 @@ class ServiceTests(unittest.TestCase):
     def test_missing_fields_rejected(self):
         code, _ = post(self.port, "/ask", {"id": "x4"})
         self.assertEqual(code, 400)
+
+    def test_ask_names_generator_header(self):
+        # Every served answer names its generator, so an offline extractive
+        # answer is never indistinguishable from a model answer.
+        code, body, headers = post_full(self.port, "/ask", {
+            "id": "g1", "role": "legal", "as_of": "2023-01-01",
+            "question": "What fraction of the anchor investor portion is reserved?"})
+        self.assertEqual(code, 200)
+        self.assertEqual(headers.get("X-Generator"), "extractive")
+
+    def test_generator_timeout_503_retry_after(self):
+        # Model-path temporary failure: generic 503 + Retry-After, no
+        # internals, no silent extractive fallback.
+        class Boom:
+            def answer(self, *a, **k):
+                raise llm.TransientUnavailable("stalled")
+        old = service._State.answerer
+        service._State.answerer = Boom()
+        try:
+            code, body, headers = post_full(self.port, "/ask", {
+                "id": "t1", "role": "legal", "as_of": "2023-01-01",
+                "question": "anything"})
+            self.assertEqual(code, 503)
+            self.assertEqual(headers.get("Retry-After"), "5")
+            self.assertEqual(body["error"], "generator temporarily unavailable")
+        finally:
+            service._State.answerer = old
 
     def test_404(self):
         code, _ = post(self.port, "/admin", {"id": "x5"})

@@ -71,10 +71,15 @@ split only; the held-out set is never touched.
   is re-verified as an exact substring of the cited passage before returning,
   and the answer is checked for any 12-token overlap with above-role
   documents (the grader's role check). Zero API tokens, millisecond latency.
-- **Optional LLM generator** (`policybook/llm.py`, OFF by default): a
-  budget-class OpenAI-compatible backend with quote verification, one retry,
-  drop-or-refuse. Never called unless `OP05_GEN_BACKEND=openai` and a key
-  are explicitly configured; not required to run any part of this stage.
+- **LLM generator** (`policybook/llm.py`): a budget-class OpenAI-compatible
+  backend with quote verification, one retry, drop-or-refuse. It activates
+  automatically when reviewer-gateway credentials (`LLM_BASE_URL` +
+  `LLM_API_KEY`) are present - `LLM_MODEL` is optional; unnamed, the gateway
+  serves its default model. `OP05_GEN_BACKEND` overrides explicitly. With no
+  credentials the extractive composer runs, clearly labeled (startup banner,
+  `X-Generator` header, per-row generator field). On the live path a model
+  timeout/stall is one bounded attempt, then 503 + Retry-After - never a
+  silent extractive fallback.
 
 ## Run it
 
