@@ -39,7 +39,7 @@ Rules:
 - No outside knowledge; every fact must come from the evidence.
 - Be concise but complete: every fact asked for (numbers, dates, thresholds, conditions, rule names). If the evidence says a rule is conditional, has an exception, or is superseded/withdrawn as of the as-of date, say so.
 - Cite the passage(s) behind the facts. Each quote VERBATIM from the passage - exact characters, no paraphrase, no ellipsis, no merged non-adjacent sentences.
-- If the evidence lacks the answer: "INSUFFICIENT", no citations. Never guess.
+- INSUFFICIENT is for ABSENT facts, not for work: if the evidence states the underlying rule, DO the required reasoning - arithmetic, date calculation, threshold checks, and comparing two passages or versions - and answer with it. Answer "INSUFFICIENT" (no citations) only when the facts needed are not in the evidence at all. Never guess.
 - JSON only: {{"answer": "...", "citations": [{{"doc_id": "...", "section": "...", "quote": "..."}}]}} or {{"answer": "INSUFFICIENT", "citations": []}}
 
 QUESTION (as of {as_of}):

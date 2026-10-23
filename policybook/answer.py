@@ -318,6 +318,11 @@ class Answerer:
         # Only the boolean is used - denied text never leaves the signal.
         r = self.retr.retrieve(question, role, as_of, k=10)
         hits = r.hits[:6]
+        # Iteration B (approved lever: context assembly): top-6 starved some
+        # questions whose supporting passage ranked 7-10 (measured 2026-10-23:
+        # 3 of 25 INSUFFICIENT fallbacks), so the MODEL sees a wider pool;
+        # the char budget bounds prompt size. The extractive path keeps the
+        # original top-6 so its deterministic baseline is undisturbed.
         debug = {"blocked_evidence": r.blocked_evidence, "allowed_pool": r.allowed_pool,
                  "top_cosine": r.top_cosine, "top_bm25": r.top_bm25,
                  "top_score": hits[0].score if hits else 0.0}
@@ -349,7 +354,7 @@ class Answerer:
         if self.gen_backend == "openai":
             from . import llm
             try:
-                out = llm.generate(question, as_of, hits, self._verify_quote,
+                out = llm.generate(question, as_of, r.hits[:8], self._verify_quote,
                                    meta=self._gen_meta(as_of),
                                    one_attempt=self.live)
             except llm.TransientUnavailable:
