@@ -39,6 +39,7 @@ Rules:
 - No outside knowledge; every fact must come from the evidence.
 - Be concise but complete: every fact asked for (numbers, dates, thresholds, conditions, rule names). If the evidence says a rule is conditional, has an exception, or is superseded/withdrawn as of the as-of date, say so.
 - Cite the passage(s) behind the facts. Each quote VERBATIM from the passage - exact characters, no paraphrase, no ellipsis, no merged non-adjacent sentences.
+- Derived results: when the answer computes or combines facts (arithmetic, date math, threshold checks, comparisons), cite the passage(s) stating the INPUT figures or rules you used, and show the derivation briefly in the answer (e.g. "X - Y = Z"). A quote backs the facts you used - never cite a passage as if it stated the computed result.
 - INSUFFICIENT is for ABSENT facts, not for work: if the evidence states the underlying rule, DO the required reasoning - arithmetic, date calculation, threshold checks, and comparing two passages or versions - and answer with it. Answer "INSUFFICIENT" (no citations) only when the facts needed are not in the evidence at all. Never guess.
 - JSON only: {{"answer": "...", "citations": [{{"doc_id": "...", "section": "...", "quote": "..."}}]}} or {{"answer": "INSUFFICIENT", "citations": []}}
 
