@@ -2,13 +2,13 @@
   "summary": {
     "grader_version": "2.0",
     "n": 146,
-    "judge_calls": 3,
+    "judge_calls": 260,
     "judge_enabled": true,
     "judge_errors": 0,
     "schema_valid_rate": 1.0,
-    "answer_accuracy": 0.7731,
+    "answer_accuracy": 0.8319,
     "citation_verbatim_rate": 1.0,
-    "citation_support_rate": 0.6923,
+    "citation_support_rate": 0.6569,
     "answered_rate_on_answerable": 0.9832,
     "ooc_refusal_rate": 1.0,
     "fabricated_count": 0,
@@ -22,14 +22,14 @@
     "slices": {
       "contradiction": {
         "n": 8,
-        "answer_accuracy": 0.875
+        "answer_accuracy": 1.0
       },
       "temporal": {
         "n": 19,
-        "answer_accuracy": 0.8947
+        "answer_accuracy": 0.7895
       }
     },
-    "judge_verdicts_reused": 250,
+    "judge_verdicts_reused": 0,
     "judge_verdicts_path": "results/judge_verdicts.jsonl"
   },
   "rows": [
@@ -293,7 +293,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -327,7 +327,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": false,
       "fabricated": null,
@@ -446,7 +446,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": true,
+      "correct": false,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -582,7 +582,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": false,
       "fabricated": null,
@@ -633,7 +633,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -701,9 +701,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": true,
+      "correct": false,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -769,9 +769,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -786,7 +786,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": false,
       "fabricated": null,
@@ -820,9 +820,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -873,7 +873,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -924,7 +924,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -1126,7 +1126,7 @@
       "status_ok": true,
       "correct": false,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -1211,7 +1211,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -1260,7 +1260,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": true,
+      "correct": false,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -1394,9 +1394,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -1428,7 +1428,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": false,
       "fabricated": null,
@@ -1464,7 +1464,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -1719,7 +1719,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -1751,7 +1751,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": true,
+      "correct": false,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -1787,7 +1787,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -1870,7 +1870,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -1957,7 +1957,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -2040,9 +2040,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": true,
+      "correct": false,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -2059,7 +2059,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -2191,9 +2191,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": true,
+      "correct": false,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -2259,7 +2259,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -2327,7 +2327,7 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
       "support_ok": true,
       "fabricated": null,
@@ -2378,9 +2378,9 @@
       "status": "answered",
       "schema_valid": true,
       "status_ok": true,
-      "correct": false,
+      "correct": true,
       "verbatim_ok": true,
-      "support_ok": false,
+      "support_ok": true,
       "fabricated": null,
       "role_violation": false
     },
@@ -2414,7 +2414,7 @@
       "status_ok": true,
       "correct": true,
       "verbatim_ok": true,
-      "support_ok": true,
+      "support_ok": false,
       "fabricated": null,
       "role_violation": false
     },
@@ -2556,6 +2556,11 @@
       "support": false
     },
     {
+      "id": "indiafinbench_CON_061",
+      "verbatim": true,
+      "support": false
+    },
+    {
       "id": "indiafinbench_NUM_115",
       "verbatim": true,
       "support": true
@@ -2643,7 +2648,7 @@
     {
       "id": "indiafinbench_CON_036",
       "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_REG_095",
@@ -2673,7 +2678,7 @@
     {
       "id": "indiafinbench_REG_137",
       "verbatim": true,
-      "support": true
+      "support": false
     },
     {
       "id": "indiafinbench_REG_114",
@@ -2698,7 +2703,7 @@
     {
       "id": "indiafinbench_REG_176",
       "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_NUM_113",
@@ -2713,7 +2718,7 @@
     {
       "id": "indiafinbench_REG_177",
       "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_NUM_124",
@@ -2726,9 +2731,14 @@
       "support": true
     },
     {
+      "id": "indiafinbench_NUM_067",
+      "verbatim": true,
+      "support": true
+    },
+    {
       "id": "indiafinbench_NUM_108",
       "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_REG_074",
@@ -2738,7 +2748,7 @@
     {
       "id": "indiafinbench_TMP_064",
       "verbatim": true,
-      "support": true
+      "support": false
     },
     {
       "id": "indiafinbench_CON_069",
@@ -2798,7 +2808,7 @@
     {
       "id": "indiafinbench_REG_183",
       "verbatim": true,
-      "support": true
+      "support": false
     },
     {
       "id": "indiafinbench_REG_078",
@@ -2818,7 +2828,7 @@
     {
       "id": "indiafinbench_REG_086",
       "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_NUM_007",
@@ -2868,6 +2878,11 @@
     {
       "id": "indiafinbench_REG_151",
       "verbatim": true,
+      "support": true
+    },
+    {
+      "id": "indiafinbench_REG_007",
+      "verbatim": true,
       "support": false
     },
     {
@@ -2883,12 +2898,7 @@
     {
       "id": "indiafinbench_REG_173",
       "verbatim": true,
-      "support": false
-    },
-    {
-      "id": "indiafinbench_REG_173",
-      "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_NUM_101",
@@ -2946,6 +2956,11 @@
       "support": true
     },
     {
+      "id": "indiafinbench_REG_097",
+      "verbatim": true,
+      "support": false
+    },
+    {
       "id": "indiafinbench_NUM_035",
       "verbatim": true,
       "support": true
@@ -2958,7 +2973,7 @@
     {
       "id": "indiafinbench_NUM_040",
       "verbatim": true,
-      "support": true
+      "support": false
     },
     {
       "id": "indiafinbench_REG_165",
@@ -3003,7 +3018,12 @@
     {
       "id": "indiafinbench_CON_062",
       "verbatim": true,
-      "support": true
+      "support": false
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "verbatim": true,
+      "support": false
     },
     {
       "id": "indiafinbench_TMP_010",
@@ -3023,12 +3043,22 @@
     {
       "id": "indiafinbench_TMP_038",
       "verbatim": true,
-      "support": true
+      "support": false
     },
     {
       "id": "indiafinbench_REG_168",
       "verbatim": true,
-      "support": true
+      "support": false
+    },
+    {
+      "id": "indiafinbench_REG_168",
+      "verbatim": true,
+      "support": false
+    },
+    {
+      "id": "indiafinbench_REG_168",
+      "verbatim": true,
+      "support": false
     },
     {
       "id": "indiafinbench_NUM_107",
@@ -3058,7 +3088,12 @@
     {
       "id": "indiafinbench_REG_156",
       "verbatim": true,
-      "support": true
+      "support": false
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "verbatim": true,
+      "support": false
     },
     {
       "id": "indiafinbench_REG_017",
@@ -3108,12 +3143,7 @@
     {
       "id": "indiafinbench_NUM_096",
       "verbatim": true,
-      "support": false
-    },
-    {
-      "id": "indiafinbench_NUM_096",
-      "verbatim": true,
-      "support": false
+      "support": true
     },
     {
       "id": "indiafinbench_REG_161",
@@ -3123,7 +3153,12 @@
     {
       "id": "indiafinbench_NUM_098",
       "verbatim": true,
-      "support": true
+      "support": false
+    },
+    {
+      "id": "indiafinbench_NUM_098",
+      "verbatim": true,
+      "support": false
     },
     {
       "id": "indiafinbench_TMP_009",
