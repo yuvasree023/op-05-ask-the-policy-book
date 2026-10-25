@@ -1,0 +1,33 @@
+{
+ "date": "2026-10-25",
+ "run": "held-out inference run, complete 272/272, single pass, no quota abort on resume day",
+ "checks": "structural gold-free checks (vendored grader refuses unlabeled gold by design)",
+ "rows": 272,
+ "ids_match_input": true,
+ "status_distribution": {
+  "answered": 197,
+  "not_permitted": 62,
+  "not_in_corpus": 13
+ },
+ "generator_mix_all": {
+  "llm:gemini-3.5-flash-lite": 174,
+  "extractive": 98
+ },
+ "generator_mix_answered": {
+  "llm:gemini-3.5-flash-lite": 174,
+  "extractive": 23
+ },
+ "answered_with_zero_citations": 0,
+ "citations_total": 234,
+ "citation_verbatim_grader_compatible_normalized": 1.0,
+ "citation_verbatim_note": "2 of 234 quotes differ from raw corpus bytes in formatting only (case/markdown emphasis); verbatim under the pipeline and vendored grader's normalized comparison",
+ "role_violations_hierarchical": 0,
+ "role_guard_trips": 0,
+ "status_enum_violations": 0,
+ "latency_ms": {
+  "p50": 1267.8,
+  "p95": 5286.2,
+  "max": 11636.5
+ },
+ "note": "no gold exists for the held-out set; no accuracy/support/faithfulness judged metrics are claimed here"
+}
