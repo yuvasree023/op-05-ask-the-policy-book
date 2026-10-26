@@ -1,0 +1,14 @@
+{
+ "date": "2026-10-26",
+ "metric": "citation support, published rubric template B, substitute judge gemini-3.5-flash-lite",
+ "label": "DIAGNOSTIC SELF-SCORE - not an official score, never comparable 1:1 to dev numbers, never for submission narrative",
+ "support_per_citation": 0.6752,
+ "citations": 234,
+ "rows_fully_supported": "144/197",
+ "support_CON_slice": "0.1304 (6/46) - template-B artifact: multi-source comparison answers cannot be verified from one passage alone (spot-checked CON_028, CON_035: citations jointly support the answer)",
+ "support_non_CON": "0.8085 (152/188)",
+ "faithfulness_leg": "DROPPED by owner decision via Main: published template C is out-of-corpus-only by its own header and cannot measure faithfulness on answered rows; no self-authored prompt used",
+ "judge_calls": 227,
+ "judge_errors": 0,
+ "quota_abort": false
+}
