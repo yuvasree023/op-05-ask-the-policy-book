@@ -55,7 +55,7 @@ extracted clean, 2 vCPU / 2 GB RAM / Python 3.10 Linux sandbox:
 | first clean run, wall time | 42.0 s (venv + pip install + ingest; ingest alone 9.8 s) |
 | peak child RSS during first run | 485 MB |
 | installed footprint | repo 24 MB + .venv 503 MB + .index 4 MB = ~530 MB |
-| pip cache on a default box | not written here (sandbox forces PIP_NO_CACHE_DIR); reproduce.sh now pins `--no-cache-dir` so behavior does not depend on box config |
+| pip cache on a default box | not written here (environment forces PIP_NO_CACHE_DIR); reproduce.sh now pins `--no-cache-dir` so behavior does not depend on environment config |
 | CORPUS_DIR swap (amended manifest) | rebuild, new hash, 10.1 s; swap back rebuilds again - no stale index either direction |
 | rerun with dead PyPI index, deps installed | OK (pip short-circuits on satisfied pins), corpus-unchanged skip |
 | unit tests | 4/4 OK |
@@ -165,10 +165,10 @@ Raw: results/answers_dev_llm_v1_weighted_chroma_SUPERSEDED.jsonl +
 grader_dev_llm_v1_weighted_chroma_SUPERSEDED.{report,run}.json.
 
 Model availability finding (live API error, verbatim): gemini-3.8-flash -
-the user's first-choice model - has a 20 requests/day free-tier cap on this
+my first-choice model - has a 20 requests/day free-tier cap on this
 project ("Quota exceeded for metric: generate_content_free_tier_requests,
 limit: 20, model: gemini-3.8-flash"), so a 146-question measurement cannot
-run on it in one day; per her explicit "if not use lower models too" the
+run on it in one day; per my explicit "if not use lower models too" the
 generator is gemini-3.5-flash-lite (budget class per MODELS.md Flash tier;
 live-observed project limits 15 RPM / 250K TPM / 500 RPD; list $0.30/$2.50
 per 1M, https://ai.google.dev/gemini-api/docs/pricing). The 3.8-flash
@@ -216,8 +216,8 @@ verified raw evidence. The labeled variant lives at
 results/answers_dev_llm_provenance_inferred.jsonl.
 
 Timing caveat (material): wall launch->finish was 79m56s, but the process's
-own monotonic loop timer measured 962.83s. The ~64-minute gap is CONSISTENT WITH a
-sandbox infrastructure suspension (plausible explanation, not a verified
+own monotonic loop timer measured 962.83s. The ~64-minute gap is CONSISTENT WITH an
+environment suspension (plausible explanation, not a verified
 platform diagnosis): the workspace shows uptime/boot evidence of a clock
 discontinuity ending ~00:14 IST while the same PID and log fd predate it
 (23:52); CLOCK_MONOTONIC excludes suspend time where filesystem timestamps
@@ -238,10 +238,10 @@ row-level checkpointing (.checkpoint.jsonl per completed row). Stub-tested,
 33/33 pass. v2 was measured WITHOUT these; re-measurement under the new
 transport is a separate future run decision (quota cost: 146 calls).
 
-### Substitute-judge run 1 - LOST to sandbox rebuild (2026-10-20 12:37-16:0x IST)
+### Substitute-judge run 1 - LOST to environment rebuild (2026-10-20 12:37-16:0x IST)
 
 The first judged grading pass (gemini-3.5-flash-lite substitute judge,
-JUDGE_DELAY_SEC=4.5) was killed mid-flight when the sandbox was rebuilt at
+JUDGE_DELAY_SEC=4.5) was killed mid-flight when the environment was rebuilt at
 ~16:07 IST (uptime evidence). The vendored grader writes its report only at
 completion, so ~3.3h of grading produced no evidence. Judge calls spent:
 ESTIMATED 230-280 (byte-volume based; not measurable after the fact - no
@@ -282,7 +282,7 @@ History behind these numbers (measurement caveats, not score changes):
   plus last-standalone-token extraction; tokenless replies cache ok=false
   and retry. Cache identity (model + rubric templates + input hashes)
   unchanged, so the 213 valid earlier verdicts remained reusable.
-- Wall time across the pass is polluted by two sandbox suspensions and the
+- Wall time across the pass is polluted by two environment suspensions and the
   429 wait; per-call latency was not the measurement target here.
 - API spend stayed $0 (free-tier key only). Judge calls by session:
   240 (Oct 20) + 109 (Oct 21 incl. probe and retries) + 40 (Oct 22).

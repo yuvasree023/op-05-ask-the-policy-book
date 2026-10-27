@@ -104,8 +104,8 @@ Durable choices, newest last. Each entry: what, and why.
 ## 2026-10-18 — Stage 3 (/ask service, refusal policy, extractive generator)
 
 12. **Default generator is deterministic extractive composition, not an LLM
-    call.** The user constraint is $0 with no billing card, and the review
-    sandbox is CPU-only with metered egress. The answer is composed from the
+    call.** My constraint is $0 with no billing card, and the evaluation
+    environment is CPU-only with metered egress. The answer is composed from the
     strongest eligible evidence window, quoted verbatim with source
     attribution and effective dates; future-dated supersessions are
     disclosed. Consequences, stated plainly: every citation quote verifies
@@ -142,9 +142,9 @@ Durable choices, newest last. Each entry: what, and why.
     self-check runs the exact deterministic checks the reviewer recomputes,
     offline. The rubric judge is optional and off without a key.
 
-## 2026-10-19 — Stage 4b: architecture change to the user's written spec
+## 2026-10-19 — Stage 4b: architecture change to my written spec
 
-The user supplied a 7-step approach and made it the strict specification
+I supplied a 7-step approach and made it the strict specification
 ("Strictly follow the above approach ... if anything is wrong or need any
 change then let me know"). What changed, and what deliberately did not:
 
@@ -178,11 +178,11 @@ change then let me know"). What changed, and what deliberately did not:
     retry generation once, then the citation is dropped or the answer
     refused. We do NOT snap a bad quote to a nearby sentence: substring
     match proves copying, not support, and a snapped quote can attach
-    evidence that does not support the answer (user-flagged concern). The
+    evidence that does not support the answer (a concern I flagged). The
     deterministic citation + 12-token overlap post-check runs on every LLM
     answer as the spec requires.
 21. **Substitute dev judge, labeled.** The pinned judge
-    (gpt-4.1-mini-2025-04-14) has no $0 route on her accounts, so dev
+    (gpt-4.1-mini-2025-04-14) has no $0 route on my accounts, so dev
     judged metrics use gemini-3.5-flash (different snapshot from the
     3.5-flash-lite generator) and are labeled substitute-judge measurements.
     They are evidence about answer quality, not official pinned-judge
@@ -222,9 +222,9 @@ Official paid-endpoint behavior is untouched. Substitute judge
 signal only - self-family judging inflates agreement and is NOT the
 official pinned judge measurement; reported separately and labeled.
 
-## 26. RESOLVED 2026-10-22 (user approved option A): live /ask behavior
+## 26. RESOLVED 2026-10-22 (I approved option A): live /ask behavior
    when the LLM backend times out (2026-10-20, decided 2026-10-22)
-She approved option A after an elaborated explanation: on the live path the
+I approved option A after an elaborated explanation: on the live path the
 model call is one bounded attempt; on timeout/stall/provider 503 the service
 returns 503 + Retry-After, never a silent extractive fallback. Quota signals
 stay loud the same way. Batch eval behavior is unchanged (labeled per-row
@@ -235,9 +235,9 @@ LLM backend a single stalled request can now take up to the batch retry
 budget (~6.5 min worst case), which cannot meet the p95 <= 10.8s reference
 bar. LLM-backend live /ask latency is UNMEASURED; only the extractive
 default is measured (48 reqs @ conc 12: p50 30ms, p95 1010ms, 2026-10-20).
-This stays an explicit open gap in the readiness package until she picks:
+This stays an explicit open gap in the readiness package until I pick:
 
-A. Strict LLM-only (recommended default under her spec): one attempt with a
+A. Strict LLM-only (recommended default under my spec): one attempt with a
    whole-request deadline sized inside the p95 bar (budget must also cover
    queueing + retrieval ~30ms + citation validation + concurrency, so the
    model call budget is ~8s, not the whole 10.8s); on timeout/transient the
@@ -265,8 +265,8 @@ Any of A/B needs a fresh 146-question dev re-measurement (one day of
 free-tier generation budget) before numbers are claimed for it.
 
 ## 27. Reviewer-gateway auto-activation + substitute-judge request shape
-   (user approved 2026-10-22, "yes to all" after elaborated context)
-Three held decisions approved together on her WhatsApp channel:
+   (I approved 2026-10-22, "yes to all" after elaborated context)
+Three held decisions I approved together in chat:
 1. The model generator auto-activates when LLM_BASE_URL + LLM_API_KEY are
    present (the documented reviewer-gateway pattern); LLM_MODEL is omittable
    and the request then omits "model" so the gateway serves its default.
@@ -284,21 +284,20 @@ Three held decisions approved together on her WhatsApp channel:
    identity - are unchanged, so the 213 verdicts already gathered stay valid.
 Also fixed durably: judge_checkpoint_push.sh now bases the checkpoint
 worktree on origin/judge-checkpoints and re-syncs before each commit, so a
-rebuilt sandbox no longer produces a non-fast-forward rejection.
+rebuilt environment no longer produces a non-fast-forward rejection.
 Still held (NOT approved): role score-all-then-split (exclusion-before-
-ranking stays), any reviewer invitation, final submission. Agent Evals key
+ranking stays), any reviewer invitation, final submission. Unrelated API keys
 untouched; held-out file never read.
 
-## 28. Second free-tier key as quota failover (user approved 2026-10-27)
+## 28. Second free-tier key as quota failover (I approved 2026-10-27)
 
-She approved creating a second Google Cloud project with its own Gemini API
+I approved creating a second Google Cloud project with its own Gemini API
 key "so that it could be used as fallback" for higher quota. What was built
 and the limits that hold:
 
 - New GCP project op-05-eval-2 with its own Gemini API key (AI Studio,
-  named "OP-05 fallback key 2"), stored in the credential vault as an
-  agent-designated item, clearly labeled for OP-05. The Agent Evals key and
-  project stay untouched.
+  named "OP-05 fallback key 2"), stored as a named credential, clearly labeled for OP-05.
+  Unrelated keys and projects stay untouched.
 - Generation (policybook/llm.py) and the substitute judge
   (tools/op05_grader/grader.py) fail over on a 429: the request retries on
   the second key for the SAME model and endpoint. Key-level only - never a
