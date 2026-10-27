@@ -81,7 +81,9 @@ On the live `/ask` path the model call is one bounded attempt under a
 whole-request deadline; on timeout, stall or provider 503 the service
 returns `503 + Retry-After`. It never silently falls back to the
 extractive composer: a failed answer is a visible failure, not hidden
-degradation.
+degradation. For development and scoring runs, an optional second key
+(`LLM_API_KEY_FALLBACK`) fails over on a daily-quota 429 - same model,
+same endpoint, key-level only, and the switch is recorded per run.
 
 **Citation verification.** Every quote must be a verbatim substring of the
 cited passage after normalization. Failures retry generation once, then

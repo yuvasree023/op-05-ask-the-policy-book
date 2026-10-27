@@ -162,6 +162,34 @@ class QuotaStub(BaseHTTPRequestHandler):
         pass
 
 
+
+class KeyFallbackStub(BaseHTTPRequestHandler):
+    """429s the primary key, serves the fallback key: key-level failover,
+    same model and endpoint."""
+    calls = []
+
+    def do_POST(self):
+        body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        auth = self.headers.get("Authorization", "")
+        KeyFallbackStub.calls.append({"auth": auth, "model": body.get("model")})
+        if auth != "Bearer k2":
+            payload = b'{"error": {"message": "rate limit reached"}}'
+            self.send_response(429)
+        else:
+            obj = {"answer": "One third.", "citations": [
+                {"doc_id": "D", "section": "D#s00000", "quote": "One third of the anchor"}]}
+            payload = json.dumps({"choices": [{"message": {"content": json.dumps(obj)}}],
+                                  "usage": {"prompt_tokens": 10, "completion_tokens": 5}}).encode()
+            self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def log_message(self, *a):
+        pass
+
+
 class AdaptStub(BaseHTTPRequestHandler):
     calls = []
 
@@ -199,6 +227,38 @@ class LLMTests2(unittest.TestCase):
                 llm.generate("q", "2023-01-01", [Hit()], verify_quote=lambda *a: True,
                              model="m", base_url=f"http://127.0.0.1:{srv.server_address[1]}",
                              api_key="k")
+        finally:
+            srv.shutdown()
+
+
+    def test_key_fallback_converts_quota_429(self):
+        KeyFallbackStub.calls = []
+        srv = HTTPServer(("127.0.0.1", 0), KeyFallbackStub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            with mock.patch.dict(os.environ, {"LLM_API_KEY_FALLBACK": "k2"}):
+                out = llm.generate("What fraction?", "2023-01-01", [Hit()],
+                                   verify_quote=lambda d, s, q: q in Hit().text,
+                                   model="m", base_url=f"http://127.0.0.1:{srv.server_address[1]}",
+                                   api_key="k1")
+        finally:
+            srv.shutdown()
+        self.assertIsNotNone(out)
+        self.assertTrue(out[2]["key_fallback_used"])
+        self.assertEqual([c["auth"] for c in KeyFallbackStub.calls],
+                         ["Bearer k1", "Bearer k2"])
+        # STRICT: the failover changes the key only, never the model.
+        self.assertEqual({c["model"] for c in KeyFallbackStub.calls}, {"m"})
+
+    def test_key_fallback_exhaustion_raises_loudly(self):
+        srv = HTTPServer(("127.0.0.1", 0), QuotaStub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            with mock.patch.dict(os.environ, {"LLM_API_KEY_FALLBACK": "k2"}):
+                with self.assertRaises(llm.QuotaExceeded):
+                    llm.generate("q", "2023-01-01", [Hit()], verify_quote=lambda *a: True,
+                                 model="m", base_url=f"http://127.0.0.1:{srv.server_address[1]}",
+                                 api_key="k1")
         finally:
             srv.shutdown()
 

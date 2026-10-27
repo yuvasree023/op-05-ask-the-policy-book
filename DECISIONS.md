@@ -288,3 +288,27 @@ rebuilt sandbox no longer produces a non-fast-forward rejection.
 Still held (NOT approved): role score-all-then-split (exclusion-before-
 ranking stays), any reviewer invitation, final submission. Agent Evals key
 untouched; held-out file never read.
+
+## 28. Second free-tier key as quota failover (user approved 2026-10-27)
+
+She approved creating a second Google Cloud project with its own Gemini API
+key "so that it could be used as fallback" for higher quota. What was built
+and the limits that hold:
+
+- New GCP project op-05-eval-2 with its own Gemini API key (AI Studio,
+  named "OP-05 fallback key 2"), stored in the credential vault as an
+  agent-designated item, clearly labeled for OP-05. The Agent Evals key and
+  project stay untouched.
+- Generation (policybook/llm.py) and the substitute judge
+  (tools/op05_grader/grader.py) fail over on a 429: the request retries on
+  the second key for the SAME model and endpoint. Key-level only - never a
+  silent model change, labels unchanged. Cache identity of judge verdicts
+  (prompt + model + rubric) is unaffected, so existing verdicts stay valid.
+- The switch is logged per run: gen_usage.key_fallback_used per row,
+  key_fallback_rows in the eval run summary, judge_key_fallback_used in the
+  grader report summary. True exhaustion (both keys) still stops loudly -
+  a run measured half on hidden degradation would be mislabeled evidence.
+- Still $0 end to end: the free tier caps requests per day per project, so
+  two projects double the daily budget for OUR development and scoring
+  runs only. Reviewers run on their own gateway and quota; submission
+  behavior and claims are unchanged.

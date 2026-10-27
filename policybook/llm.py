@@ -22,8 +22,13 @@ Design constraints carried from the challenge contract:
 - provider differences are absorbed adaptively (max_completion_tokens vs
   max_tokens, optional JSON mode) instead of pinning one vendor's dialect;
 - a 429/quota signal raises QuotaExceeded so evaluation runs STOP loudly
-  instead of silently degrading to the fallback (a run measured half on the
-  fallback would be mislabeled evidence).
+  instead of silently degrading to the extractive fallback (a run measured
+  half on the fallback would be mislabeled evidence). One exception
+  (user-approved 2026-10-27): LLM_API_KEY_FALLBACK configures a second key
+  for the SAME model and endpoint; a 429 fails over to it key-level only,
+  never a model or behavior change, recorded in usage so the run is labeled.
+  QuotaExceeded raises only when both keys are exhausted or no fallback is
+  configured.
 """
 from __future__ import annotations
 
@@ -231,7 +236,9 @@ def generate(question, as_of, hits, verify_quote, model=None,
 
     Returns (answer_text, citations, usage) or None when generation failed /
     was INSUFFICIENT / nothing verifiable remained (caller then falls back to
-    the extractive generator). Raises QuotaExceeded on provider quota signals.
+    the extractive generator). Raises QuotaExceeded on provider quota signals
+    after the optional key-level failover (LLM_API_KEY_FALLBACK, second key
+    for the same model/endpoint) is exhausted or absent.
     Model resolution: explicit arg, then OP05_GEN_MODEL, then LLM_MODEL; when
     all are empty the request omits "model" and the gateway default is used.
     one_attempt=True (live path): a single bounded HTTP attempt, and
@@ -244,6 +251,7 @@ def generate(question, as_of, hits, verify_quote, model=None,
              or os.environ.get("LLM_MODEL", ""))
     base_url = base_url or os.environ.get("LLM_BASE_URL", "")
     api_key = api_key if api_key is not None else os.environ.get("LLM_API_KEY", "")
+    fallback_key = os.environ.get("LLM_API_KEY_FALLBACK", "")
     if not base_url:
         last_error = "not configured"
         return None
@@ -258,7 +266,18 @@ def generate(question, as_of, hits, verify_quote, model=None,
             data, adaptations = _chat(base_url, api_key, model, messages,
                                       one_attempt=one_attempt)
         except QuotaExceeded:
-            raise  # quota signals must stay loud; caller decides
+            # Key-level failover: the second key serves the SAME model and
+            # endpoint, so a converted call is identical evidence - only the
+            # quota project changes. The switch is recorded in usage and
+            # persists for the rest of the run. With no fallback configured,
+            # or when the fallback also 429s, the quota signal stays loud.
+            if fallback_key and api_key != fallback_key:
+                api_key = fallback_key
+                usage["key_fallback_used"] = True
+                data, adaptations = _chat(base_url, api_key, model, messages,
+                                          one_attempt=one_attempt)
+            else:
+                raise  # quota signals must stay loud; caller decides
         except TransientUnavailable:
             if one_attempt:
                 raise  # live path: temporary error, never silent fallback

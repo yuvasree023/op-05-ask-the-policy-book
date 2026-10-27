@@ -42,7 +42,7 @@ def main(argv=None) -> int:
     ans = Answerer(index_dir, model_dir, corpus_dir)
 
     rows, lat = [], []
-    tok_in = tok_out = gen_calls = fallbacks = 0
+    tok_in = tok_out = gen_calls = fallbacks = key_fallback_rows = 0
     cost_total = 0.0
     t0 = time.perf_counter()
 
@@ -70,6 +70,11 @@ def main(argv=None) -> int:
                 tok_in += u.get("input_tokens", 0)
                 tok_out += u.get("output_tokens", 0)
                 gen_calls += u.get("calls", 0)
+                # Key-level quota failover (LLM_API_KEY_FALLBACK): count the
+                # rows generated after the primary key 429'd. Same model and
+                # endpoint throughout - only the quota project changes - but
+                # the run must be labeled.
+                key_fallback_rows += 1 if u.get("key_fallback_used") else 0
             elif ans.gen_backend != "extractive" and res.status == "answered":
                 fallbacks += 1
             yield row
@@ -125,6 +130,7 @@ def main(argv=None) -> int:
         "cost_usd_at_list_price": round(cost_total, 6),
         "reference_tokens_per_question": {"input": 1005, "output": 743},
         "extractive_fallbacks": fallbacks,
+        "key_fallback_rows": key_fallback_rows,
     }
 
     cmd = [sys.executable, str(GRADER), "--pred", args.out, "--gold", args.questions,
