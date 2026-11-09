@@ -322,3 +322,17 @@ venv interpreter immediately after creation and exits with the supported
 range plus the PYTHON= override hint (that is how the laptop run succeeded:
 deadsnakes python3.13 + `PYTHON=python3.13`). README now states 3.10-3.13.
 No dependency or behavior change; the pinned set is unchanged.
+
+## 30. Eval-runner scoping fix: model-row runs crashed at HEAD (2026-11-09)
+
+- Bug: entry 28's key-failover commit added `key_fallback_rows` to the run
+  summary counters but not to `_iter_rows()`'s `nonlocal` declaration, so
+  ANY `answer_eval` run that produced a model-generated row died with
+  `UnboundLocalError` on the first LLM row. Introduced after the last full
+  dev run, so the recorded results are unaffected - but the documented
+  fresh-eval path was broken at HEAD.
+- Fix: one-line `nonlocal` addition in `policybook/answer_eval.py`.
+- Regression guard: `tests/test_eval_llm_row.py` runs the eval runner
+  end-to-end against a local stub gateway (no network, no key) and asserts
+  a model-generated row completes; it fails with the exact
+  `UnboundLocalError` on the pre-fix code. Full suite 47/47.

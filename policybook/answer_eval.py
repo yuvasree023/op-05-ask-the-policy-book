@@ -47,7 +47,7 @@ def main(argv=None) -> int:
     t0 = time.perf_counter()
 
     def _iter_rows():
-        nonlocal tok_in, tok_out, gen_calls, fallbacks, cost_total
+        nonlocal tok_in, tok_out, gen_calls, fallbacks, key_fallback_rows, cost_total
         for q in questions:
             # Quota policy: stop on the first rate/quota signal and report
             # partial evidence - no automatic retries, no silent fallback
