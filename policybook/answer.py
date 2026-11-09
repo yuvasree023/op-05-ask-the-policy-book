@@ -382,6 +382,33 @@ class Answerer:
                 res = finish(res)
                 res.debug["gen_usage"] = usage
                 return res
+            # EXPERIMENTAL (2026-11-09): one bounded retry when the model said
+            # INSUFFICIENT - dev runs show abstention is unstable run-to-run
+            # and costs judged rows the evidence pack supports. OFF by default
+            # (OP05_GEN_INSUFFICIENT_RETRY=1); eval path only - the live
+            # service keeps its single-attempt latency contract. Verification,
+            # the role guard and fabrication accounting gate the retried
+            # answer exactly like a first attempt.
+            if (out is None and not self.live
+                    and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
+                    and getattr(llm, "last_error", None) == "model said INSUFFICIENT"):
+                out = llm.generate(question, as_of, r.hits[:8], self._verify_quote,
+                                   meta=self._gen_meta(as_of),
+                                   one_attempt=self.live)
+                if out is not None:
+                    text, cit_dicts, usage = out
+                    usage = {**usage, "insufficient_retry_used": True}
+                    cost = (usage["input_tokens"] * self._price_in
+                            + usage["output_tokens"] * self._price_out) / 1e6
+                    res = AnswerResult(
+                        id=qid, status="answered", answer=text,
+                        citations=[Citation(**c) for c in cit_dicts],
+                        confidence=min(1.0, max(0.0, hits[0].score)),
+                        cost_usd=round(cost, 8),
+                        generator=f"llm:{self.gen_model or 'gateway-default'}")
+                    res = finish(res)
+                    res.debug["gen_usage"] = usage
+                    return res
             if out is None:
                 debug["gen_fallback_reason"] = getattr(llm, "last_error", None)
             # generation unavailable/unverifiable/INSUFFICIENT -> extractive

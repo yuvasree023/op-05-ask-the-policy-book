@@ -46,12 +46,6 @@ Rules:
 - Cite the passage(s) behind the facts. Each quote VERBATIM from the passage - exact characters, no paraphrase, no ellipsis, no merged non-adjacent sentences.
 - Derived results: when the answer computes or combines facts (arithmetic, date math, threshold checks, comparisons), cite the passage(s) stating the INPUT figures or rules you used, and show the derivation briefly in the answer (e.g. "X - Y = Z"). A quote backs the facts you used - never cite a passage as if it stated the computed result.
 - INSUFFICIENT is for ABSENT facts, not for work: if the evidence states the underlying rule, DO the required reasoning - arithmetic, date calculation, threshold checks, and comparing two passages or versions - and answer with it. Answer "INSUFFICIENT" (no citations) only when the facts needed are not in the evidence at all. Never guess.
-- Date-asking questions: when the question asks WHEN a rule, framework or requirement
-  was introduced, inserted, amended or takes effect, report the dated facts in the
-  evidence as dated facts - including a date later than the as-of date - and cite the
-  passage stating them. The as-of date still selects which version of a rule governs
-  for what-is-the-rule questions; it does not make a stated introduction or amendment
-  date unsayable.
 - JSON only: {{"answer": "...", "citations": [{{"doc_id": "...", "section": "...", "quote": "..."}}]}} or {{"answer": "INSUFFICIENT", "citations": []}}
 
 QUESTION (as of {as_of}):
@@ -59,6 +53,26 @@ QUESTION (as of {as_of}):
 
 EVIDENCE:
 {evidence}"""
+
+
+# EXPERIMENTAL (2026-11-09, DECISIONS 31): date-asking clause, OFF by default.
+# Enable with OP05_GEN_DATE_CLAUSE=1. Isolated after the v3 dev run showed the
+# clause fixes its target class (date-asking temporal rows) without breaking
+# as-of version controls but did not show controlled net benefit over the
+# baseline prompt on the full dev judged pass. Default prompt = v2 text.
+DATE_CLAUSE = """- Date-asking questions: when the question asks WHEN a rule, framework or requirement
+  was introduced, inserted, amended or takes effect, report the dated facts in the
+  evidence as dated facts - including a date later than the as-of date - and cite the
+  passage stating them. The as-of date still selects which version of a rule governs
+  for what-is-the-rule questions; it does not make a stated introduction or amendment
+  date unsayable.
+"""
+
+
+def _active_prompt():
+    if os.environ.get("OP05_GEN_DATE_CLAUSE") == "1":
+        return PROMPT.replace("- JSON only:", DATE_CLAUSE + "- JSON only:")
+    return PROMPT
 
 
 class QuotaExceeded(Exception):
@@ -263,7 +277,7 @@ def generate(question, as_of, hits, verify_quote, model=None,
         return None
     evidence = "\n\n".join(pack_evidence(hits, meta))
     messages = [{"role": "user",
-                 "content": PROMPT.format(as_of=as_of, question=question,
+                 "content": _active_prompt().format(as_of=as_of, question=question,
                                           evidence=evidence)}]
     usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0,
              "adaptations": []}

@@ -351,3 +351,26 @@ No dependency or behavior change; the pinned set is unchanged.
   unchanged in correctness. Substitute judge is diagnostic only; the full
   dev re-run + judged pass decides whether the change ships in the README
   numbers.
+
+## 32. Experimental status of the date-asking clause; INSUFFICIENT-retry (2026-11-09)
+
+- The v3 full dev judged pass (EXPERIMENT_LOG, 2026-11-09) did NOT show net
+  benefit for the clause on the aggregate (0.8235/0.6569 vs v2's
+  0.8403/0.7037), though its target class and all as-of version controls
+  passed. One run per arm confounds prompt, generation and judge variance,
+  so no causal claim either way - but the burden of evidence is on the
+  change, so the clause moves behind OP05_GEN_DATE_CLAUSE=1 (default OFF).
+  Default prompt = the v2 text exactly. Current main is therefore NOT
+  represented as an improvement over the October configuration.
+- New experimental lever for the chronic failure mode (9 rows abstained in
+  BOTH dev runs; ~15 more abstain in exactly one - the variable set):
+  OP05_GEN_INSUFFICIENT_RETRY=1 permits ONE bounded second generation
+  attempt after "model said INSUFFICIENT", eval path only, verification and
+  role guard unchanged. OFF by default; ships only on controlled
+  net-benefit evidence from a full dev judged pass.
+- tests/test_experimental_flags.py pins both flags' default-OFF behavior
+  and the retry bound (stub gateway, no network). Suite 52/52.
+- Both flags are dev-measurement instruments; the shipped configuration
+  stays v2-equivalent until a full judged pass at fresh quota (RPD resets
+  midnight Pacific = 13:30 IST, per Google's rate-limits doc) says
+  otherwise.
