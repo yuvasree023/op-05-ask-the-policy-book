@@ -286,3 +286,31 @@ History behind these numbers (measurement caveats, not score changes):
   429 wait; per-call latency was not the measurement target here.
 - API spend stayed $0 (free-tier key only). Judge calls by session:
   240 (Oct 20) + 109 (Oct 21 incl. probe and retries) + 40 (Oct 22).
+
+### Prompt iteration C: date-asking clause (2026-11-09)
+
+Failure review of the v2 dev run found 15 answerable rows without a model
+answer: 13 extractive fallbacks + 2 pipeline false refusals. A healthy
+15-row regeneration (results/raw/answers_dev_regen15_2026-11-09.jsonl, 2
+gen calls only) showed 11 rows fall back because the model says
+INSUFFICIENT, not because of the October endpoint stalls. Pack audit: gold
+section present in the model's evidence pack for 11 of 15 (rank 1-4).
+
+Systematic check: 10 dev rows (ALL tagged temporal_reasoning) have gold
+sections whose text references a year AFTER the row's as_of. Benchmark
+semantics: as_of scopes which version governs for what-is-the-rule
+questions; date-asking ("when was X introduced/amended") questions expect
+the dated fact, e.g. TMP_077 gold cites the 2023 CRA amendment at as_of
+2020. freshness_contract.md: "Historical questions may cite the historical
+source valid on their explicit date."
+
+Controlled experiment (n=17, one variable = the prompt clause): 9 target
+rows + 8 judged-correct controls. Variant converted TMP_071 and TMP_077 to
+substitute-judged CORRECT with SUPPORTED citations; controls stayed 8/8
+correct, no new abstentions. REG_138 still incorrect (soft-abstention
+answer). CON_061/CON_059 unsupported-citation pattern is pre-existing
+(October baseline identical), not variant drift. REG_184's regenerated
+answer lost citation support vs its October row (original prompt) -
+judge noise range, noted. Substitute judge (gemini-3.5-flash), diagnostic
+only. Judge subset report: /tmp not shipped; run artifacts in
+results/raw/ on the full re-run.

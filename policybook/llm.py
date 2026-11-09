@@ -46,6 +46,12 @@ Rules:
 - Cite the passage(s) behind the facts. Each quote VERBATIM from the passage - exact characters, no paraphrase, no ellipsis, no merged non-adjacent sentences.
 - Derived results: when the answer computes or combines facts (arithmetic, date math, threshold checks, comparisons), cite the passage(s) stating the INPUT figures or rules you used, and show the derivation briefly in the answer (e.g. "X - Y = Z"). A quote backs the facts you used - never cite a passage as if it stated the computed result.
 - INSUFFICIENT is for ABSENT facts, not for work: if the evidence states the underlying rule, DO the required reasoning - arithmetic, date calculation, threshold checks, and comparing two passages or versions - and answer with it. Answer "INSUFFICIENT" (no citations) only when the facts needed are not in the evidence at all. Never guess.
+- Date-asking questions: when the question asks WHEN a rule, framework or requirement
+  was introduced, inserted, amended or takes effect, report the dated facts in the
+  evidence as dated facts - including a date later than the as-of date - and cite the
+  passage stating them. The as-of date still selects which version of a rule governs
+  for what-is-the-rule questions; it does not make a stated introduction or amendment
+  date unsayable.
 - JSON only: {{"answer": "...", "citations": [{{"doc_id": "...", "section": "...", "quote": "..."}}]}} or {{"answer": "INSUFFICIENT", "citations": []}}
 
 QUESTION (as of {as_of}):

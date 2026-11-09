@@ -336,3 +336,18 @@ No dependency or behavior change; the pinned set is unchanged.
   end-to-end against a local stub gateway (no network, no key) and asserts
   a model-generated row completes; it fails with the exact
   `UnboundLocalError` on the pre-fix code. Full suite 47/47.
+
+## 31. Generator prompt: date-asking clause for temporal questions (2026-11-09)
+
+- IndiaFinBench temporal semantics verified before touching the prompt:
+  10 dev rows (all temporal_reasoning) cite gold sections whose text
+  references years after as_of; the freshness contract lets historical
+  questions cite the source valid on their explicit date. So a "when was X
+  introduced" question wants the dated fact even when it postdates as_of,
+  while what-is-the-rule questions keep as_of version selection. The clause
+  says exactly that - it does NOT relax version discipline.
+- Evidence for adoption: controlled n=17 dev experiment, TMP_071 + TMP_077
+  converted to judged-correct with supported citations, 8/8 controls
+  unchanged in correctness. Substitute judge is diagnostic only; the full
+  dev re-run + judged pass decides whether the change ships in the README
+  numbers.
