@@ -385,11 +385,13 @@ class Answerer:
             # EXPERIMENTAL (2026-11-09): one bounded retry when the model said
             # INSUFFICIENT - dev runs show abstention is unstable run-to-run
             # and costs judged rows the evidence pack supports. OFF by default
-            # (OP05_GEN_INSUFFICIENT_RETRY=1); eval path only - the live
-            # service keeps its single-attempt latency contract. Verification,
-            # the role guard and fabrication accounting gate the retried
-            # answer exactly like a first attempt.
-            if (out is None and not self.live
+            # (OP05_GEN_INSUFFICIENT_RETRY=1). The flag governs the SAME policy
+            # on eval and live paths so eval measurements can map to service
+            # behavior; with the flag ON, /ask also makes the second attempt,
+            # adding at most one bounded generation call to latency.
+            # Verification, the role guard and fabrication accounting gate the
+            # retried answer exactly like a first attempt.
+            if (out is None
                     and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
                     and getattr(llm, "last_error", None) == "model said INSUFFICIENT"):
                 out = llm.generate(question, as_of, r.hits[:8], self._verify_quote,

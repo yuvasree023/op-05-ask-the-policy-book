@@ -365,9 +365,14 @@ No dependency or behavior change; the pinned set is unchanged.
 - New experimental lever for the chronic failure mode (9 rows abstained in
   BOTH dev runs; ~15 more abstain in exactly one - the variable set):
   OP05_GEN_INSUFFICIENT_RETRY=1 permits ONE bounded second generation
-  attempt after "model said INSUFFICIENT", eval path only, verification and
-  role guard unchanged. OFF by default; ships only on controlled
-  net-benefit evidence from a full dev judged pass.
+  attempt after "model said INSUFFICIENT". The flag governs the SAME policy
+  on the eval and live /ask paths (a retry-flagged /ask adds at most one
+  bounded generation call to latency), so an eval measurement can map to
+  service behavior. Verification and role guard unchanged. OFF by default;
+  ships only on controlled net-benefit evidence from a full dev judged
+  pass PLUS real model-backed /ask latency at a contract-shaped workload -
+  stub timing is an overhead test, never live-latency evidence. Until both
+  exist, any measured gain is labeled eval-only.
 - tests/test_experimental_flags.py pins both flags' default-OFF behavior
   and the retry bound (stub gateway, no network). Suite 52/52.
 - Both flags are dev-measurement instruments; the shipped configuration
@@ -385,9 +390,12 @@ No dependency or behavior change; the pinned set is unchanged.
   environment exactly. 1.23.2 ships cp310-cp313 wheels, so the documented
   Python 3.10-3.13 range (DECISIONS 29) is fully covered, including the
   deadsnakes python3.13 on the Windows/WSL machine.
-- The local 1.24.2 edit on the laptop was only needed for Python 3.14,
-  which is now excluded by the reproduce.sh guard. Syncing the laptop to
-  main (fresh clone) therefore needs no dependency change and loses no
-  needed capability; re-measuring under 1.24.2 would only fork provenance.
+- The laptop's local 1.24.2 edit: motivation not established - we observed
+  the file content, not why it was made. What is established: 1.24.2 is not
+  needed for the documented 3.10-3.13 range (1.23.2 has cp310-cp313 wheels),
+  so syncing the laptop to main (fresh clone) loses no needed capability.
+  If the edit served something we have not seen, it stays a local change
+  until she says otherwise; re-measuring under 1.24.2 would only fork
+  provenance.
 - If a future Python (3.14+) must be supported, re-pin deliberately and
   re-run the full dev suite under the new pin before any numbers move.
