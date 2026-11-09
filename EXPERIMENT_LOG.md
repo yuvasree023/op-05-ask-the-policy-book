@@ -314,3 +314,30 @@ answer lost citation support vs its October row (original prompt) -
 judge noise range, noted. Substitute judge (gemini-3.5-flash), diagnostic
 only. Judge subset report: /tmp not shipped; run artifacts in
 results/raw/ on the full re-run.
+
+### v3 full dev re-run + judged pass (2026-11-09, commit 2b2af64)
+
+Config as v2 plus the date-asking prompt clause (DECISIONS 31); generation
+gemini-3.5-flash-lite (101 calls, 0 key failovers), judge gemini-3.5-flash-
+lite (the v2 pass instrument; 260 fresh verdicts, cache invalidated by the
+new pred file). Artifacts: results/raw/answers_dev_llm_v3_2026-11-09.jsonl,
+grader_dev_llm_v3_2026-11-09.{json,run.json,judged.json},
+judge_verdicts_v3_2026-11-09.jsonl. Substitute judge, DIAGNOSTIC ONLY.
+
+Deterministic gates hold (schema 1.0, verbatim 1.0, OOC 6/6, role 21/21,
+fabrications 0, answered-on-answerable 0.9832). Judged: accuracy 0.8235
+(v2: 0.8403), citation support 0.6569 (v2: 0.7037) - a regression on both.
+Negative controls (as-of version selection): TMP_058/007/003/010/009 all
+correct+supported - the clause did not weaken version discipline.
+Attribution of the 9 newly-incorrect rows: 7 abstention flips (model said
+INSUFFICIENT on rows v2 answered correctly), 2 answer drift (TMP_034 reads
+equivalent - judge-noise candidate). 7 v2-incorrect rows fixed, including
+the clause target TMP_071.
+
+Finding: INSUFFICIENT abstention is stochastic run-to-run (v2 lost 28 rows
+to fallback, v3 lost 16, different mix); both single-run aggregates are
+depressed by whichever rows abstained, and the 1.7pt accuracy delta sits
+inside that variance. Abstention instability - not any one prompt line -
+is the standing blocker for the 0.88 bar. Candidate next lever: one bounded
+INSUFFICIENT-retry before fallback (verification and role guard still gate;
+fabrication count measured). README numbers stay at the v2 recorded values.
