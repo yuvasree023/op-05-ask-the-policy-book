@@ -372,5 +372,22 @@ No dependency or behavior change; the pinned set is unchanged.
   and the retry bound (stub gateway, no network). Suite 52/52.
 - Both flags are dev-measurement instruments; the shipped configuration
   stays v2-equivalent until a full judged pass at fresh quota (RPD resets
-  midnight Pacific = 13:30 IST, per Google's rate-limits doc) says
+  midnight Pacific = 13:30 IST, per Google's rate-limits doc,
+  https://ai.google.dev/gemini-api/docs/rate-limits - seen via search
+  excerpt 2026-11-09; live fetch timed out) says
   otherwise.
+
+## 33. Dependency set settled: onnxruntime stays pinned at 1.23.2 (2026-11-09)
+
+- Decided on provenance grounds (no user preference conflicted): every
+  recorded dev measurement - October v2 and the 2026-11-09 v3 run - was
+  produced under onnxruntime 1.23.2, and the pin reproduces that
+  environment exactly. 1.23.2 ships cp310-cp313 wheels, so the documented
+  Python 3.10-3.13 range (DECISIONS 29) is fully covered, including the
+  deadsnakes python3.13 on the Windows/WSL machine.
+- The local 1.24.2 edit on the laptop was only needed for Python 3.14,
+  which is now excluded by the reproduce.sh guard. Syncing the laptop to
+  main (fresh clone) therefore needs no dependency change and loses no
+  needed capability; re-measuring under 1.24.2 would only fork provenance.
+- If a future Python (3.14+) must be supported, re-pin deliberately and
+  re-run the full dev suite under the new pin before any numbers move.
