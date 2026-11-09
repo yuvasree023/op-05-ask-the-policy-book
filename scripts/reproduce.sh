@@ -33,6 +33,17 @@ PYTHON="${PYTHON:-python3}"
 if [ ! -d .venv ]; then
   "$PYTHON" -m venv .venv
 fi
+
+# Pinned dependencies (numpy 2.2.6, onnxruntime 1.23.2) publish wheels for
+# Python 3.10-3.13 only; fail clearly instead of a source-build error.
+PY_VER="$(./.venv/bin/python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')"
+case "$PY_VER" in
+  3.10|3.11|3.12|3.13) ;;
+  *) echo "reproduce.sh: Python $PY_VER is not supported." >&2
+     echo "The pinned dependencies publish prebuilt packages for Python 3.10-3.13 only." >&2
+     echo "Install a supported version and re-run, e.g.: PYTHON=python3.13 $0 $*" >&2
+     exit 1 ;;
+esac
 if [ -d vendor/wheels ]; then
   ./.venv/bin/pip install -q --no-cache-dir --disable-pip-version-check \
     --no-index --find-links vendor/wheels -r requirements.txt

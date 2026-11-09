@@ -108,8 +108,12 @@ JUDGE=1 LLM_BASE_URL=... LLM_API_KEY=... JUDGE_MODEL=... ./scripts/reproduce.sh 
 ```
 
 `CORPUS_DIR` defaults to `./data/corpus` (bundled, see below), `INDEX_DIR`
-to `./.index`. Requirements: Python 3.10+ with `venv`, Linux, CPU only
-(pinned dependencies: numpy, onnxruntime, tokenizers). The script creates
+to `./.index`. Requirements: Python 3.10-3.13 with `venv`, Linux, CPU only
+(pinned dependencies: numpy, onnxruntime, tokenizers - no prebuilt
+packages exist for 3.14+, and `reproduce.sh` stops with a clear
+message on an unsupported interpreter; on a newer default Python,
+install a supported one alongside and run, e.g.,
+`PYTHON=python3.13 ./scripts/reproduce.sh`). The script creates
 `.venv`, installs pinned requirements, runs ingestion, then serves
 `POST /ask` with `GET /healthz` for readiness.
 

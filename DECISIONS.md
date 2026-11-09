@@ -311,3 +311,14 @@ and the limits that hold:
   two projects double the daily budget for OUR development and scoring
   runs only. Reviewers run on their own gateway and quota; submission
   behavior and claims are unchanged.
+
+## 29. Python 3.10-3.13 documented; reproduce.sh fails clearly outside the range (2026-11-09)
+
+Running the project on my Windows laptop (WSL Ubuntu 26.04, whose default
+python3 is 3.14) exposed that the README's "Python 3.10+" claim was wrong:
+numpy 2.2.6 and onnxruntime 1.23.2 publish no cp314 wheels, so pip fell
+back to a source build and failed cryptically. reproduce.sh now checks the
+venv interpreter immediately after creation and exits with the supported
+range plus the PYTHON= override hint (that is how the laptop run succeeded:
+deadsnakes python3.13 + `PYTHON=python3.13`). README now states 3.10-3.13.
+No dependency or behavior change; the pinned set is unchanged.
