@@ -1,0 +1,11 @@
+{
+  "requested_questions": 3,
+  "attempted": 3,
+  "successful": 2,
+  "stopped_early": true,
+  "concurrency": 1,
+  "pace_seconds": 20.0,
+  "automatic_client_retries": 0,
+  "latency_scope": "every attempted HTTP request, including failures; no recovery waits",
+  "tokens_and_cost": "require independent per-request service meter; not inferred from answers"
+}

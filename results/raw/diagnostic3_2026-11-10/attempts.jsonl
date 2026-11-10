@@ -1,0 +1,3 @@
+{"id": "indiafinbench_REG_188", "attempt": 1, "http_status": 200, "generator": "llm:gemini-3.5-flash-lite", "error_category": null, "elapsed_ms": 1815.036}
+{"id": "indiafinbench_CON_059", "attempt": 1, "http_status": 200, "generator": "llm:gemini-3.5-flash-lite", "error_category": null, "elapsed_ms": 5235.545}
+{"id": "indiafinbench_TMP_034", "attempt": 1, "http_status": 503, "generator": null, "error_category": "http_error", "retry_after": "5", "elapsed_ms": 1427.557}

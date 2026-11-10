@@ -1,0 +1,14 @@
+{
+  "commit": "cc802eea1e208449cd2442300d9ad536d338c803",
+  "purpose": "small error/usage instrumentation diagnostic, not quality or latency qualification",
+  "project_scope": "exact credential positively mapped to currently free-tier project before use; no key failover",
+  "model": "gemini-3.5-flash-lite",
+  "retry_flag": "1",
+  "date_clause": "unset",
+  "questions": "three previously failed first-pass rows; not random sample",
+  "outcome": "2 HTTP successes then 1 HTTP503; harness stopped without client retry",
+  "failure_category": "transient, confirmed by request-local service event; not quota for this diagnostic request",
+  "historical_v4A_errors": "still unclassified",
+  "cost": "2 successful calls reported 1972 input / 824 output tokens total; failed call usage unknown; no list-price configuration, cost incomplete",
+  "no_followup_generation": true
+}

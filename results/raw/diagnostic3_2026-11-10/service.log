@@ -1,0 +1,9 @@
+loading index /home/sandbox/op05/.index and corpus ./data/corpus ...
+generator: llm:gemini-3.5-flash-lite (explicitly enabled)
+OP-05 /ask service ready on port 8123
+{"event": "generation_usage", "request_id": "indiafinbench_REG_188", "meter": {"attempts": 1, "input_tokens": 940, "output_tokens": 306, "usage_unknown_attempts": 0, "errors": {}}, "cost_complete": false}
+/ask indiafinbench_REG_188: answered 1812ms generator=llm:gemini-3.5-flash-lite (total 1813ms)
+{"event": "generation_usage", "request_id": "indiafinbench_CON_059", "meter": {"attempts": 1, "input_tokens": 1032, "output_tokens": 518, "usage_unknown_attempts": 0, "errors": {}}, "cost_complete": false}
+/ask indiafinbench_CON_059: answered 5232ms generator=llm:gemini-3.5-flash-lite (total 5234ms)
+{"event": "generation_failure", "request_id": "indiafinbench_TMP_034", "category": "transient", "meter": {"attempts": 1, "input_tokens": 0, "output_tokens": 0, "usage_unknown_attempts": 1, "errors": {"transient": 1}}, "elapsed_ms": 1425.5}
+/ask indiafinbench_TMP_034: generator temporarily unavailable

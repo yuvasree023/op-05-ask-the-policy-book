@@ -393,3 +393,18 @@ outside the candidate eight (ranks 9,9,10,17,19), and NUM_107 beyond rank
 or that the gold is contract-consistent. The two OOC-gate refusals remain
 among the 13 evidence-present cases. Detailed per-row diagnostics:
 v4A_2026-11-10/offline_evidence_analysis.json. No thresholds changed.
+
+### Three-request instrumentation diagnostic (2026-11-10, cc802ee)
+
+After a non-disclosing exact-value comparison positively mapped the
+credential to a currently verified free-tier project, ran three previously
+failed rows with the new harness at 20-second pacing, no project failover.
+REG_188 and CON_059 returned 200; TMP_034 returned 503 and the harness
+stopped with no client retry. Safe service telemetry classifies this NEW
+failure as transient, not quota. It does not classify the 18 old v4A errors.
+Successful calls reported 1972 input/824 output tokens combined; failed
+call usage is unknown, explicitly counted (not zero). No list-price config,
+so cost_complete remains false. Diagnostic service stopped; no further
+model generation. This biased n=3 is an instrumentation check, not a
+reliability estimate, quality result, or deployable latency measurement.
+Artifacts: results/raw/diagnostic3_2026-11-10/.

@@ -1,0 +1,3 @@
+{"id": "indiafinbench_REG_188", "question": "Under Regulation 5(2) of SEBI Takeovers Regulations 2011, under what condition is an indirect acquisition treated as a direct acquisition for all purposes of the regulations?", "role": "legal", "as_of": "2020-01-01"}
+{"id": "indiafinbench_CON_059", "question": "Do the original definition of 'representative' and the 2020-amended definition of 'persons associated with investment advice' cover the same set of persons within an investment advisory firm?", "role": "ops", "as_of": "2020-01-01"}
+{"id": "indiafinbench_TMP_034", "question": "For the State Government securities auction covered in this revised press release, what is the sequence of key events from the announcement to settlement?", "role": "ops", "as_of": "2025-01-01"}
