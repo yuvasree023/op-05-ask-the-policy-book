@@ -467,3 +467,12 @@ No overall support rate is computed by dropping the unfinished cases.
 Known reported tokens: 7913 input/953 output; failed-call usage unknown.
 No retries after the503. Results and driver:
 results/raw/paired_citation_support_2026-11-10/.
+
+Offline preservation audit of all13 citation-span changes: answer/status
+and cited source-section sets unchanged; every original exact quote is
+retained in a derived exact raw-source substring. Aggregate added quote
+characters348, maximum increase205 per answer; maximum derived quote
+characters946 per answer. This is character counting, not token/cost
+measurement or semantic safety. Intervening source text can add irrelevant
+or conditional context and must still be reviewed. Audit:
+results/raw/citation_span_preservation_audit_2026-11-10.json.

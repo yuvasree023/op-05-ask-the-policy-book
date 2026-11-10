@@ -1,0 +1,153 @@
+{
+  "scope": "offline span preservation audit, not semantic support/role/temporal certification",
+  "changed_rows": 13,
+  "total_delta_quote_chars": 348,
+  "max_delta_quote_chars": 205,
+  "max_derived_quote_chars_per_answer": 946,
+  "rows": [
+    {
+      "id": "indiafinbench_CON_061",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 774,
+      "derived_quote_chars": 787,
+      "delta_chars": 13,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 366,
+      "derived_quote_chars": 379,
+      "delta_chars": 13,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_NUM_068",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 335,
+      "derived_quote_chars": 337,
+      "delta_chars": 2,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 889,
+      "derived_quote_chars": 902,
+      "delta_chars": 13,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 322,
+      "derived_quote_chars": 323,
+      "delta_chars": 1,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "old_citations": 3,
+      "derived_citations": 2,
+      "old_quote_chars": 590,
+      "derived_quote_chars": 795,
+      "delta_chars": 205,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_REG_082",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 172,
+      "derived_quote_chars": 173,
+      "delta_chars": 1,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 820,
+      "derived_quote_chars": 833,
+      "delta_chars": 13,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 435,
+      "derived_quote_chars": 436,
+      "delta_chars": 1,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "old_citations": 2,
+      "derived_citations": 1,
+      "old_quote_chars": 603,
+      "derived_quote_chars": 616,
+      "delta_chars": 13,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "old_citations": 3,
+      "derived_citations": 1,
+      "old_quote_chars": 877,
+      "derived_quote_chars": 946,
+      "delta_chars": 69,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "old_citations": 3,
+      "derived_citations": 1,
+      "old_quote_chars": 306,
+      "derived_quote_chars": 308,
+      "delta_chars": 2,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "old_citations": 3,
+      "derived_citations": 1,
+      "old_quote_chars": 233,
+      "derived_quote_chars": 235,
+      "delta_chars": 2,
+      "answer_status_source_set_unchanged": true,
+      "all_quotes_raw_substrings": true,
+      "all_original_quotes_retained": true
+    }
+  ],
+  "risk": "Intervening source text may introduce irrelevant or conditional context; identical source/role metadata does not prove semantic safety. Token counts and model effects unmeasured."
+}
