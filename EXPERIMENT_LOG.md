@@ -447,3 +447,23 @@ results/raw/answers_v4A_offline_citation_spans_UNJUDGED_2026-11-10.jsonl;
 structural-only report results/raw/citation_spans_structural_2026-11-10.json.
 Three offline tests verify contiguous spans, no missing-quote guesses and
 no cross-passage merge. Full suite 62 passed. Zero model/judge calls here.
+
+### Paired support comparison: STOPPED INCOMPLETE (2026-11-10)
+
+Bounded approval covered the 13 offline-changed citation rows, fixed answer
+text, same gemini-3.5-flash-lite judge and exact rubric B. Alternate arm
+order by row, 5s pacing, positively mapped free-tier project only, no key
+failover. Transport wrapper stops on the first error rather than allowing
+the ordinary judge client's retries. No generation/runtime/default change.
+
+Stopped at HTTP503 on attempt17: 16 verdicts completed, one failed attempt
+with unknown usage. Five complete pairs, one partial pair, seven rows not
+started. In the five complete pairs, the original quotes had at least one
+DOES_NOT_SUPPORT verdict, while each consolidated contiguous span was
+SUPPORTS. This is a promising citation-context hypothesis for further
+bounded testing, NOT an aggregate improvement: incomplete and selected
+small sample, one judge realization, no repeated-judge variance control.
+No overall support rate is computed by dropping the unfinished cases.
+Known reported tokens: 7913 input/953 output; failed-call usage unknown.
+No retries after the503. Results and driver:
+results/raw/paired_citation_support_2026-11-10/.

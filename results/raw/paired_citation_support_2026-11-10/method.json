@@ -1,0 +1,25 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "rubric": "unchanged B",
+  "rows": [
+    "indiafinbench_CON_061",
+    "indiafinbench_CON_043",
+    "indiafinbench_NUM_068",
+    "indiafinbench_CON_069",
+    "indiafinbench_REG_112",
+    "indiafinbench_NUM_007",
+    "indiafinbench_REG_082",
+    "indiafinbench_CON_062",
+    "indiafinbench_REG_156",
+    "indiafinbench_CON_070",
+    "indiafinbench_CON_059",
+    "indiafinbench_TMP_034",
+    "indiafinbench_NUM_096"
+  ],
+  "sample": "13 changed rows selected offline, not random",
+  "order": "alternate arm order per row",
+  "retries": 0,
+  "key": "positively mapped free-tier fallback project only, no key failover",
+  "answer_text": "identical per pair",
+  "outcome": "support only; no correctness/ready claim"
+}

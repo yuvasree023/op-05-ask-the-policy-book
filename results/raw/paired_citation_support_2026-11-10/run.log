@@ -1,0 +1,18 @@
+indiafinbench_CON_061 original 0 DOES_NOT_SUPPORT
+indiafinbench_CON_061 original 1 DOES_NOT_SUPPORT
+indiafinbench_CON_061 derived 0 SUPPORTS
+indiafinbench_CON_043 derived 0 SUPPORTS
+indiafinbench_CON_043 original 0 DOES_NOT_SUPPORT
+indiafinbench_CON_043 original 1 DOES_NOT_SUPPORT
+indiafinbench_NUM_068 original 0 DOES_NOT_SUPPORT
+indiafinbench_NUM_068 original 1 SUPPORTS
+indiafinbench_NUM_068 derived 0 SUPPORTS
+indiafinbench_CON_069 derived 0 SUPPORTS
+indiafinbench_CON_069 original 0 DOES_NOT_SUPPORT
+indiafinbench_CON_069 original 1 DOES_NOT_SUPPORT
+indiafinbench_REG_112 original 0 DOES_NOT_SUPPORT
+indiafinbench_REG_112 original 1 DOES_NOT_SUPPORT
+indiafinbench_REG_112 derived 0 SUPPORTS
+indiafinbench_NUM_007 derived 0 SUPPORTS
+STOP transport signal: HTTPError HTTP 503
+EXIT:1

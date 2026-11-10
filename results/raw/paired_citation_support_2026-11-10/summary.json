@@ -1,0 +1,79 @@
+{
+  "status": "INCOMPLETE_STOPPED_ON_HTTP503",
+  "planned_rows": 13,
+  "completed_verdicts": 16,
+  "http_attempts": 17,
+  "failed_attempts_with_unknown_usage": 1,
+  "completed_pairs": 5,
+  "partial_rows": 1,
+  "pairs": [
+    {
+      "id": "indiafinbench_CON_061",
+      "complete_pair": true,
+      "original": [
+        "DOES_NOT_SUPPORT",
+        "DOES_NOT_SUPPORT"
+      ],
+      "derived": [
+        "SUPPORTS"
+      ]
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "complete_pair": true,
+      "original": [
+        "DOES_NOT_SUPPORT",
+        "DOES_NOT_SUPPORT"
+      ],
+      "derived": [
+        "SUPPORTS"
+      ]
+    },
+    {
+      "id": "indiafinbench_NUM_068",
+      "complete_pair": true,
+      "original": [
+        "DOES_NOT_SUPPORT",
+        "SUPPORTS"
+      ],
+      "derived": [
+        "SUPPORTS"
+      ]
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "complete_pair": true,
+      "original": [
+        "DOES_NOT_SUPPORT",
+        "DOES_NOT_SUPPORT"
+      ],
+      "derived": [
+        "SUPPORTS"
+      ]
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "complete_pair": true,
+      "original": [
+        "DOES_NOT_SUPPORT",
+        "DOES_NOT_SUPPORT"
+      ],
+      "derived": [
+        "SUPPORTS"
+      ]
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "complete_pair": false,
+      "original": [],
+      "derived": [
+        "SUPPORTS"
+      ]
+    }
+  ],
+  "known_input_tokens": 7913,
+  "known_output_tokens": 953,
+  "cost_complete": false,
+  "no_retries": true,
+  "conclusion": "Partial selected-sample evidence only; no aggregate support/ready claim; do not drop incomplete row or 7 unstarted rows from reporting."
+}
