@@ -1,0 +1,192 @@
+{
+  "status": "DEFERRED_NOT_AUTHORIZED_TO_RUN_WITHOUT_NEW_RECOVERY_SIGNAL",
+  "original_verdict_file_sha256": "b35536c235356d5e8a40de90c5dd559c964dcbcbd56e3e618a9d9e0dcef36c0a",
+  "missing_verdicts": [
+    {
+      "id": "indiafinbench_NUM_007",
+      "arm": "derived",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "arm": "original",
+      "citation_index": 2
+    },
+    {
+      "id": "indiafinbench_REG_082",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_REG_082",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_REG_082",
+      "arm": "derived",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "arm": "derived",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "arm": "derived",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "arm": "derived",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "arm": "original",
+      "citation_index": 2
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "arm": "derived",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "arm": "derived",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_TMP_034",
+      "arm": "original",
+      "citation_index": 2
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "arm": "original",
+      "citation_index": 0
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "arm": "original",
+      "citation_index": 1
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "arm": "original",
+      "citation_index": 2
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "arm": "derived",
+      "citation_index": 0
+    }
+  ],
+  "repeat_subset": [
+    {
+      "id": "indiafinbench_CON_061",
+      "arm": "derived",
+      "citation_index": 0,
+      "repeat": "fresh independently recorded verdict; do not replace earlier verdict"
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "arm": "original",
+      "citation_index": 0,
+      "repeat": "fresh independently recorded verdict; do not replace earlier verdict"
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "arm": "original",
+      "citation_index": 1,
+      "repeat": "fresh independently recorded verdict; do not replace earlier verdict"
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "arm": "derived",
+      "citation_index": 0,
+      "repeat": "fresh independently recorded verdict; do not replace earlier verdict"
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "arm": "original",
+      "citation_index": 0,
+      "repeat": "fresh independently recorded verdict; do not replace earlier verdict"
+    },
+    {
+      "id": "indiafinbench_REG_112",
+      "arm": "original",
+      "citation_index": 1,
+      "repeat": "fresh independently recorded verdict; do not replace earlier verdict"
+    }
+  ],
+  "maximum_new_http_attempts": 34,
+  "constraints": [
+    "same model/rubric/answers/citation variants",
+    "separate output namespace; original incomplete run unchanged",
+    "fresh exact credential/free-tier verification before use",
+    "no transport retries/failover; stop on first error",
+    "repeat results estimate disagreement only, do not majority-vote away original failures"
+  ]
+}
