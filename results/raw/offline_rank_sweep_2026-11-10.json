@@ -1,0 +1,249 @@
+{
+  "scope": "published dev only; offline ranking/pack ablation, no model calls; refusals and role signals NOT re-measured; no runtime change",
+  "weights": {
+    "rrf_equal": [
+      1,
+      1
+    ],
+    "rrf_lexical_2x": [
+      1,
+      2
+    ],
+    "rrf_lexical_3x": [
+      1,
+      3
+    ],
+    "lexical_only": [
+      0,
+      1
+    ],
+    "vector_only": [
+      1,
+      0
+    ]
+  },
+  "counts": {
+    "rrf_equal": {
+      "n": 119,
+      "any_gold_top1": 64,
+      "any_gold_top3": 94,
+      "any_gold_top6": 106,
+      "any_gold_top8": 107,
+      "any_gold_top20": 117,
+      "any_gold_in_pack": 101,
+      "all_gold_in_pack": 101,
+      "pack_chars_total": 277761
+    },
+    "rrf_lexical_2x": {
+      "n": 119,
+      "any_gold_top1": 72,
+      "any_gold_top3": 96,
+      "any_gold_top6": 104,
+      "any_gold_top8": 111,
+      "any_gold_top20": 117,
+      "any_gold_in_pack": 101,
+      "all_gold_in_pack": 101,
+      "pack_chars_total": 277448
+    },
+    "rrf_lexical_3x": {
+      "n": 119,
+      "any_gold_top1": 75,
+      "any_gold_top3": 96,
+      "any_gold_top6": 107,
+      "any_gold_top8": 113,
+      "any_gold_top20": 118,
+      "any_gold_in_pack": 101,
+      "all_gold_in_pack": 101,
+      "pack_chars_total": 277893
+    },
+    "lexical_only": {
+      "n": 119,
+      "any_gold_top1": 78,
+      "any_gold_top3": 99,
+      "any_gold_top6": 110,
+      "any_gold_top8": 112,
+      "any_gold_top20": 118,
+      "any_gold_in_pack": 102,
+      "all_gold_in_pack": 102,
+      "pack_chars_total": 276675
+    },
+    "vector_only": {
+      "n": 119,
+      "any_gold_top1": 53,
+      "any_gold_top3": 83,
+      "any_gold_top6": 95,
+      "any_gold_top8": 100,
+      "any_gold_top20": 110,
+      "any_gold_in_pack": 89,
+      "all_gold_in_pack": 89,
+      "pack_chars_total": 270674
+    }
+  },
+  "per_question_pack_presence_changes": {
+    "rrf_equal": [],
+    "rrf_lexical_2x": [
+      {
+        "id": "indiafinbench_REG_180",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_176",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_177",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_151",
+        "pack_gold_present": true
+      }
+    ],
+    "rrf_lexical_3x": [
+      {
+        "id": "indiafinbench_REG_180",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_176",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_177",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_112",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_CON_030",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_151",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_164",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_NUM_010",
+        "pack_gold_present": false
+      }
+    ],
+    "lexical_only": [
+      {
+        "id": "indiafinbench_REG_169",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_073",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_180",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_176",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_177",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_NUM_124",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_112",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_186",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_CON_030",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_151",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_164",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_REG_082",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_NUM_040",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_NUM_033",
+        "pack_gold_present": true
+      },
+      {
+        "id": "indiafinbench_NUM_010",
+        "pack_gold_present": false
+      }
+    ],
+    "vector_only": [
+      {
+        "id": "indiafinbench_REG_111",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_CON_061",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_NUM_113",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_078",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_154",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_NUM_119",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_018",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_128",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_197",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_097",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_NUM_096",
+        "pack_gold_present": false
+      },
+      {
+        "id": "indiafinbench_REG_161",
+        "pack_gold_present": false
+      }
+    ]
+  }
+}

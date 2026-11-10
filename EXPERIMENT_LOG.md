@@ -408,3 +408,18 @@ so cost_complete remains false. Diagnostic service stopped; no further
 model generation. This biased n=3 is an instrumentation check, not a
 reliability estimate, quality result, or deployable latency measurement.
 Artifacts: results/raw/diagnostic3_2026-11-10/.
+
+### Offline retrieval-weight ablation (2026-11-10)
+
+Published answerable dev rows only (n=119), no provider calls; original
+role/as_of filtering and the same 2600-character pack. Equal RRF put gold
+in 101/119 packs. Doubling or tripling lexical rank weight still put gold
+in 101/119 packs, despite improved rank-1 recall (64 -> 72/75). Lexical-only
+put gold in 102/119 packs but swapped 15 rows' presence and would need full
+refusal/role/quality measurement; not a demonstrated net benefit.
+Vector-only worsened pack presence to 89/119. No runtime weighting changed.
+This argues against treating rank-1 gains alone as answer improvements;
+context packing is a distinct bottleneck. Reproducible offline script:
+scripts/offline_rank_sweep.py; counts and per-row changes in
+results/raw/offline_rank_sweep_2026-11-10.json. This is dev exploration,
+not held-out evidence or a passing result.
