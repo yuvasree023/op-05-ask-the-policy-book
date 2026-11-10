@@ -44,10 +44,11 @@ def main(argv=None) -> int:
     rows, lat = [], []
     tok_in = tok_out = gen_calls = fallbacks = key_fallback_rows = 0
     cost_total = 0.0
+    unknown_usage_attempts = 0
     t0 = time.perf_counter()
 
     def _iter_rows():
-        nonlocal tok_in, tok_out, gen_calls, fallbacks, key_fallback_rows, cost_total
+        nonlocal tok_in, tok_out, gen_calls, fallbacks, key_fallback_rows, cost_total, unknown_usage_attempts
         for q in questions:
             # Quota policy: stop on the first rate/quota signal and report
             # partial evidence - no automatic retries, no silent fallback
@@ -65,11 +66,18 @@ def main(argv=None) -> int:
                                           and not res.generator.startswith("llm:"))
             rows.append(row)
             cost_total += res.cost_usd
+            meter = res.debug.get("generation_meter", {})
+            if meter.get("attempts"):
+                tok_in += meter["input_tokens"]
+                tok_out += meter["output_tokens"]
+                gen_calls += meter["attempts"]
+                unknown_usage_attempts += meter["usage_unknown_attempts"]
             if res.generator.startswith("llm:"):
                 u = res.debug.get("gen_usage", {})
-                tok_in += u.get("input_tokens", 0)
-                tok_out += u.get("output_tokens", 0)
-                gen_calls += u.get("calls", 0)
+                if not meter.get("attempts"):
+                    tok_in += u.get("input_tokens", 0)
+                    tok_out += u.get("output_tokens", 0)
+                    gen_calls += u.get("calls", 0)
                 # Key-level quota failover (LLM_API_KEY_FALLBACK): count the
                 # rows generated after the primary key 429'd. Same model and
                 # endpoint throughout - only the quota project changes - but
@@ -122,6 +130,11 @@ def main(argv=None) -> int:
                       if ans.gen_backend != "extractive"
                       else "extractive (deterministic, 0 API tokens)"),
         "gen_api_calls": gen_calls,
+        "usage_unknown_attempts": unknown_usage_attempts,
+        "cost_complete": (unknown_usage_attempts == 0 and
+                          bool(os.environ.get("OP05_PRICE_IN_PER_M")) and
+                          bool(os.environ.get("OP05_PRICE_OUT_PER_M"))),
+        "cost_note": "Known reported tokens only; failed attempts without usage remain unknown.",
         "tokens": {"input": tok_in, "output": tok_out,
                    "avg_input_per_llm_answer": round(tok_in / max(1, sum(
                        1 for r in rows if r["status"] == "answered")), 1),

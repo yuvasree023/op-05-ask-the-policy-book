@@ -33,6 +33,8 @@ Design constraints carried from the challenge contract:
 from __future__ import annotations
 
 import json
+from contextvars import ContextVar
+from contextlib import contextmanager
 import os
 import time
 import urllib.error
@@ -79,10 +81,63 @@ class QuotaExceeded(Exception):
     """The provider refused the call on rate/quota grounds (HTTP 429)."""
 
 
-last_error = None  # why the last generate() returned None (debug visibility)
+last_error = None  # legacy single-thread debug view; never use for decisions
+_error = ContextVar("generation_error", default=None)
+_meter = ContextVar("generation_meter", default=None)
+
+
+def _set_error(value):
+    global last_error
+    last_error = value
+    _error.set(value)
+
+
+def get_last_error():
+    return _error.get()
+
+
+@contextmanager
+def request_context():
+    """Isolate request state and meter every HTTP attempt, including failures.
+
+    No prompts, response text, provider details or credentials enter this meter.
+    Provider errors may omit usage, so unknown usage is counted, never zeroed.
+    """
+    meter = {"attempts": 0, "input_tokens": 0, "output_tokens": 0,
+             "usage_unknown_attempts": 0, "errors": {}}
+    mt = _meter.set(meter)
+    et = _error.set(None)
+    try:
+        yield meter
+    finally:
+        _error.reset(et)
+        _meter.reset(mt)
 
 
 def _post(base_url, api_key, payload, timeout=90):
+    meter = _meter.get()
+    if meter is not None:
+        meter["attempts"] += 1
+    try:
+        data = _post_impl(base_url, api_key, payload, timeout)
+    except Exception as exc:
+        if meter is not None:
+            meter["usage_unknown_attempts"] += 1
+            category = ("quota" if isinstance(exc, QuotaExceeded) else
+                        "transient" if isinstance(exc, TransientUnavailable) else
+                        "other")
+            meter["errors"][category] = meter["errors"].get(category, 0) + 1
+        raise
+    if meter is not None:
+        u = data.get("usage") or {}
+        if "prompt_tokens" not in u or "completion_tokens" not in u:
+            meter["usage_unknown_attempts"] += 1
+        meter["input_tokens"] += u.get("prompt_tokens", 0)
+        meter["output_tokens"] += u.get("completion_tokens", 0)
+    return data
+
+
+def _post_impl(base_url, api_key, payload, timeout=90):
     """One HTTP attempt under a single wall-clock budget: `timeout` covers
     connect + request + response headers + response body together, not each
     phase separately. The connect phase keeps the socket timeout as its own
@@ -266,14 +321,14 @@ def generate(question, as_of, hits, verify_quote, model=None,
     degrading into a silent extractive fallback.
     """
     global last_error
-    last_error = None
+    _set_error(None)
     model = (model or os.environ.get("OP05_GEN_MODEL")
              or os.environ.get("LLM_MODEL", ""))
     base_url = base_url or os.environ.get("LLM_BASE_URL", "")
     api_key = api_key if api_key is not None else os.environ.get("LLM_API_KEY", "")
     fallback_key = os.environ.get("LLM_API_KEY_FALLBACK", "")
     if not base_url:
-        last_error = "not configured"
+        _set_error("not configured")
         return None
     evidence = "\n\n".join(pack_evidence(hits, meta))
     messages = [{"role": "user",
@@ -301,10 +356,10 @@ def generate(question, as_of, hits, verify_quote, model=None,
         except TransientUnavailable:
             if one_attempt:
                 raise  # live path: temporary error, never silent fallback
-            last_error = "temporarily unavailable"
+            _set_error("temporarily unavailable")
             return None
         except Exception as e:  # noqa: BLE001 - a flaky API must not end the run
-            last_error = f"{type(e).__name__}: {e}"[:300]
+            _set_error(f"{type(e).__name__}: {e}"[:300])
             return None
         usage["calls"] += 1
         usage["adaptations"] = sorted(set(usage["adaptations"]) | set(adaptations))
@@ -315,14 +370,14 @@ def generate(question, as_of, hits, verify_quote, model=None,
             text = data["choices"][0]["message"]["content"] or ""
             obj = json.loads(text[text.index("{"):text.rindex("}") + 1])
         except (KeyError, IndexError, ValueError):
-            last_error = "unparseable response"
+            _set_error("unparseable response")
             return None
         answer = obj.get("answer", "")
         if not isinstance(answer, str) or not answer.strip():
-            last_error = "empty answer"
+            _set_error("empty answer")
             return None
         if answer.strip().upper() == "INSUFFICIENT":
-            last_error = "model said INSUFFICIENT"
+            _set_error("model said INSUFFICIENT")
             return None
         cits, dropped = [], 0
         for c in obj.get("citations") or []:
@@ -335,7 +390,7 @@ def generate(question, as_of, hits, verify_quote, model=None,
                 dropped += 1
         if cits or attempt == 2:
             if not cits:
-                last_error = "no verifiable citations after retry"
+                _set_error("no verifiable citations after retry")
                 return None
             return answer, cits, usage
         messages.append({"role": "assistant", "content": text})

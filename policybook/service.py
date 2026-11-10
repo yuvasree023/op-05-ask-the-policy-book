@@ -99,10 +99,15 @@ class Handler(BaseHTTPRequestHandler):
         t0 = time.perf_counter()
         try:
             res = _State.answerer.answer(qid, question, role, as_of)
-        except (TransientUnavailable, QuotaExceeded):
+        except (TransientUnavailable, QuotaExceeded) as exc:
             # Model path temporary failure (timeout/stall/provider 503/quota):
             # generic temporary error + Retry-After, never a silent
             # extractive fallback. No internals or corpus text leak.
+            print(json.dumps({"event": "generation_failure", "request_id": qid,
+                              "category": "quota" if isinstance(exc, QuotaExceeded) else "transient",
+                              "meter": getattr(exc, "generation_meter", None),
+                              "elapsed_ms": round((time.perf_counter() - t0) * 1000, 1)}),
+                  file=sys.stderr, flush=True)
             print(f"/ask {qid}: generator temporarily unavailable", file=sys.stderr)
             self._send(503, {"error": "generator temporarily unavailable"},
                        headers={"Retry-After": "5"})
@@ -111,6 +116,10 @@ class Handler(BaseHTTPRequestHandler):
             print(f"/ask {qid}: unhandled error", file=sys.stderr)
             self._send(500, {"error": "internal error"})
             return
+        print(json.dumps({"event": "generation_usage", "request_id": qid,
+                          "meter": res.debug.get("generation_meter"),
+                          "cost_complete": res.debug.get("cost_complete")}),
+              file=sys.stderr, flush=True)
         # Every served answer names its generator, so an extractive
         # offline-fallback answer is never indistinguishable from a model one.
         self._send(200, res.public_dict(), headers={"X-Generator": res.generator})

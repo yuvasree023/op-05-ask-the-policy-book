@@ -399,3 +399,23 @@ No dependency or behavior change; the pinned set is unchanged.
   provenance.
 - If a future Python (3.14+) must be supported, re-pin deliberately and
   re-run the full dev suite under the new pin before any numbers move.
+
+## 34. Request-local generation state and complete-attempt metering (2026-11-10)
+
+- Experimental retry remains OFF. Code inspection during v4A found a
+  concurrency gap: retry decisions read module-global last_error. Decisions
+  now use request-local ContextVar state, covered by a 12-thread barrier
+  test. The legacy last_error debug view remains but cannot steer retries.
+- Every outgoing HTTP attempt is counted at the transport boundary, even
+  INSUFFICIENT, citation-repair calls, adaptations and failures. Known
+  input/output usage accumulates across attempts; errors without provider
+  token usage increment usage_unknown_attempts rather than becoming zero.
+  Price configuration must also be present for cost_complete to be true.
+- /ask logs safe per-request meter events and distinct quota/transient
+  categories internally. Error bodies remain generic. Provider response
+  text, credentials, prompts and evidence never enter these events.
+- Offline regression tests count both rejected and accepted generations,
+  fallback-only usage, unknown failed-attempt usage, and request-local
+  state across 12 threads. Full suite: 56 tests passed.
+- v4A ran at bc3f0ed before this fix. Its original outputs/logs are preserved
+  unchanged and cannot retroactively acquire complete token accounting.

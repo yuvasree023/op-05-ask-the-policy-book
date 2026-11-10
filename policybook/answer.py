@@ -308,6 +308,23 @@ class Answerer:
 
     # -- main entry ----------------------------------------------------------
     def answer(self, qid, question, role, as_of) -> AnswerResult:
+        from . import llm
+        with llm.request_context() as meter:
+            try:
+                result = self._answer(qid, question, role, as_of)
+            except Exception as exc:
+                exc.generation_meter = dict(meter)
+                raise
+            result.debug["generation_meter"] = dict(meter)
+            if meter["attempts"]:
+                result.cost_usd = round((meter["input_tokens"] * self._price_in
+                                        + meter["output_tokens"] * self._price_out) / 1e6, 8)
+                result.debug["cost_complete"] = (not meter["usage_unknown_attempts"]
+                    and bool(os.environ.get("OP05_PRICE_IN_PER_M"))
+                    and bool(os.environ.get("OP05_PRICE_OUT_PER_M")))
+            return result
+
+    def _answer(self, qid, question, role, as_of) -> AnswerResult:
         import time
         t0 = time.perf_counter()
         if role not in ROLE_RANK:
@@ -393,7 +410,7 @@ class Answerer:
             # retried answer exactly like a first attempt.
             if (out is None
                     and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
-                    and getattr(llm, "last_error", None) == "model said INSUFFICIENT"):
+                    and llm.get_last_error() == "model said INSUFFICIENT"):
                 out = llm.generate(question, as_of, r.hits[:8], self._verify_quote,
                                    meta=self._gen_meta(as_of),
                                    one_attempt=self.live)
@@ -412,7 +429,7 @@ class Answerer:
                     res.debug["gen_usage"] = usage
                     return res
             if out is None:
-                debug["gen_fallback_reason"] = getattr(llm, "last_error", None)
+                debug["gen_fallback_reason"] = llm.get_last_error()
             # generation unavailable/unverifiable/INSUFFICIENT -> extractive
 
         picked = self._best_window(question, hits)
