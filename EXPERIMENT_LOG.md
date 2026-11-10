@@ -476,3 +476,16 @@ characters946 per answer. This is character counting, not token/cost
 measurement or semantic safety. Intervening source text can add irrelevant
 or conditional context and must still be reviewed. Audit:
 results/raw/citation_span_preservation_audit_2026-11-10.json.
+
+Offline condition review of all13 added-span contexts: five add only the
+PassageB label, six add whitespace only, CON_059 additionally restores the
+30-09-2020 amended-version label, and NUM_007 adds a substantive increased
+settlement-amount condition for delayed filing. NUM_007's fixed answer
+addresses the maximum deadline and omits the fee effect; flag that rather
+than calling the added context harmless. No new condition was identified
+as reversing an existing exception, but this is not semantic/temporal
+certification. Review: citation_span_condition_review_2026-11-10.json.
+Deferred test manifest pins the original verdict file hash and enumerates
+28 missing verdicts plus6 fresh repeat verdicts on two completed pairs
+(max34 new HTTP attempts). It is a recovery pointer, NOT an instruction to
+restart without a new signal and renewed bounded operational decision.

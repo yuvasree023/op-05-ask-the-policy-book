@@ -1,0 +1,27 @@
+{
+  "scope": "all13 offline-changed spans inspected against original quotes and fixed answers; not a legal opinion or independent support score",
+  "cases": {
+    "NUM_007": {
+      "new_context": "Delayed filing after sixty calendar days beyond the initial period increases the settlement amount under Schedule-II.",
+      "assessment": "Substantive additional fee condition, not a new deadline. Existing answer discusses the maximum filing deadline but omits this fee effect. Does not contradict 60+120 arithmetic, but should remain explicitly flagged for review rather than called harmless. Other cited section retains whichever-is-earlier hearing limit; no attempt to merge different source sections."
+    },
+    "CON_059": {
+      "new_context": "Regulation2(1)(r) amended-version label and effective date30-09-2020.",
+      "assessment": "Relevant temporal annotation for explicit old/new comparison; preserves existing client-facing inclusion and clerical exclusion. Does not resolve as_of-vs-question ambiguity."
+    },
+    "CON_061_CON_043_CON_069_CON_062_CON_070": {
+      "new_context": "PassageB label and separating whitespace only.",
+      "assessment": "Existing old/new rule conditions and exceptions retained verbatim; no newly inserted substantive condition."
+    },
+    "NUM_068_REG_112_REG_082_REG_156_TMP_034_NUM_096": {
+      "new_context": "Whitespace only between existing quotes.",
+      "assessment": "No newly introduced substantive condition; existing temporal/answer issues unchanged."
+    }
+  },
+  "conclusions": [
+    "No added text was identified as reversing an original exception or replacing a cited version.",
+    "NUM_007 substantive fee condition and CON_059 effective-date annotation deserve explicit review in later semantic testing.",
+    "Source scope and role sets are unchanged, but this does not certify semantic role safety or temporal-contract correctness.",
+    "All variants remain offline-only and unjudged except the limited incomplete paired verdicts."
+  ]
+}
