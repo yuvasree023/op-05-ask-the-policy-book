@@ -434,3 +434,18 @@ No dependency or behavior change; the pinned set is unchanged.
 - No further model generation until quota/error ambiguity is resolved.
   Offline error-classification, request isolation and full-attempt metering
   work can proceed. Original v4A evidence cannot be repaired after the fact.
+
+## 36. Service measurement harness preserves failures (2026-11-10)
+
+- scripts/measure_service.py sends only id/question/role/as_of, captures
+  X-Generator correctly, and checkpoints every HTTP attempt with elapsed
+  time, status and a safe error category. No automatic client retries.
+- Any 429 or 503 stops further submissions; already in-flight requests are
+  recorded. The harness does not guess whether a generic 503 means quota
+  or a temporary error. Original evidence files are never overwritten.
+- Concurrency and pacing are explicit (defaults 1 and 4 seconds), so a
+  sequential rehearsal cannot silently become a concurrency-12 claim.
+  Token/cost claims still require independent service attempt telemetry.
+- Three offline HTTP-fixture tests cover 12 concurrent requests, provenance
+  headers, gold exclusion, stop-on-503 and no-overwrite. Suite 59 passed.
+  These test the harness, not live-model service latency or quota.
