@@ -423,3 +423,27 @@ context packing is a distinct bottleneck. Reproducible offline script:
 scripts/offline_rank_sweep.py; counts and per-row changes in
 results/raw/offline_rank_sweep_2026-11-10.json. This is dev exploration,
 not held-out evidence or a passing result.
+
+### Offline citation-span diagnostic (2026-11-10, UNJUDGED)
+
+V4A has 49 unsupported citations: 36 on model responses and 13 on extractive
+responses. Seventeen answers are judged correct but at least one citation
+unsupported. Rubric B tests each quoted passage alone against the whole
+answer; split quotes can each omit a fact needed by a multi-fact answer.
+Example CON_061 cites old/new rules from the SAME source section separately.
+
+Offline derived variant consolidates repeated citations ONLY to the same
+source section, using the shortest contiguous raw-source span containing
+all existing exact quotes and ALL intervening text. No fabricated joins,
+ellipses, cross-source merge, answer rewriting, or source deletion. This
+changed 13/146 rows. Structural check: schema/verbatim 1.0 and role violation
+count 0; correctness/support and semantic role safety are unmeasured for
+the derived variant. No runtime behavior/default changed. This is a
+citation-context hypothesis, not a score improvement or a reason to change
+the published rubric. Original artifacts remain unchanged.
+
+Reproduce: scripts/offline_citation_spans.py; derived file
+results/raw/answers_v4A_offline_citation_spans_UNJUDGED_2026-11-10.jsonl;
+structural-only report results/raw/citation_spans_structural_2026-11-10.json.
+Three offline tests verify contiguous spans, no missing-quote guesses and
+no cross-passage merge. Full suite 62 passed. Zero model/judge calls here.
