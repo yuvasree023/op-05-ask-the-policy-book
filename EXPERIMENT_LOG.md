@@ -341,3 +341,55 @@ inside that variance. Abstention instability - not any one prompt line -
 is the standing blocker for the 0.88 bar. Candidate next lever: one bounded
 INSUFFICIENT-retry before fallback (verification and role guard still gate;
 fabrication count measured). README numbers stay at the v2 recorded values.
+
+### v4A live-service experiment (2026-11-10, generation commit bc3f0ed)
+
+Retry ON, date clause OFF; real gemini-3.5-flash-lite service calls. Single
+sequential client with 4-second pacing, NOT contract concurrency 12. The
+first pass produced 128 successes and 18 HTTP 503 failures (87.67% initial
+HTTP success). All 18 later succeeded on client re-drive. Judged answers
+combine those two passes: recovered-answer quality, not initial reliability.
+The original service hid both quota and transient errors behind 503, so
+cause is unresolved. No further generation was launched after this finding.
+
+Substitute judge gemini-3.5-flash-lite, diagnostic only: 262 fresh verdicts,
+0 judge errors. Accuracy 0.8151, citation support 0.6475, both below the
+0.88/0.82 bars, October v2 (0.8403/0.7037) and v3 (0.8235/0.6569). No
+activation or score replacement follows. Schema/verbatim/OOC/role-refusal
+rates 1.0, fabricated count 0, structural role violations 0; semantic role
+review remains incomplete. Contradiction accuracy 1.0 (n=8), temporal
+0.8947 (n=19). All five as-of version-selection controls remain correct;
+TMP_010 citation support failed. Retry and date flags stay default OFF.
+
+Latency: successful requests only, sequential, including recovered
+successes: p95 7042.2ms. Failed-attempt elapsed times and client recovery
+waits are not measured; this is NOT end-to-end or contract workload p95.
+Original generation call/token accounting is incomplete. 97 responses
+were model-generated and 49 extractive (from original service logs).
+
+Artifacts: results/raw/answers_dev_llm_v4A_2026-11-10.jsonl,
+grader_dev_llm_v4A_2026-11-10.judged.json,
+judge_verdicts_v4A_2026-11-10.jsonl,
+service_v4A_2026-11-10_latencies.json, and v4A_2026-11-10/ containing original
+drivers/logs, reconstructed attempts, limitations and hashes. Original
+outputs are unchanged. Metering/thread-safety fixes in a623793 postdate
+this run and cannot retrospectively repair its evidence.
+
+Correction to earlier v3 interpretation: different abstention sets across
+single runs do NOT establish stochastic abstention as the root cause, or
+bound variance at 1.7 points. Prompt, transport and judge changes are
+confounded. Likewise post-as_of gold expectations do not independently
+establish contract semantics. The experimental clause stays isolated OFF.
+The fresh v4A result does not show a retry benefit; no causality claim.
+
+Offline v4A failure split (published dev labels only; no model calls): of
+22 judged-incorrect answerable rows, 16 were extractive responses and 6
+model responses. Gold supporting section(s) were present in the exact
+model evidence pack for 13 errors, absent for 9. The 9 missing-pack cases
+split into 3 excluded by the character budget despite ranking within the
+first eight (REG_176 rank 5, REG_151 rank 5, REG_172 rank 7), 5 ranked
+outside the candidate eight (ranks 9,9,10,17,19), and NUM_107 beyond rank
+20. Gold section presence is a diagnostic, not proof the model can answer
+or that the gold is contract-consistent. The two OOC-gate refusals remain
+among the 13 evidence-present cases. Detailed per-row diagnostics:
+v4A_2026-11-10/offline_evidence_analysis.json. No thresholds changed.

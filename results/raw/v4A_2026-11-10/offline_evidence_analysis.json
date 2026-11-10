@@ -1,0 +1,1426 @@
+[
+  {
+    "id": "indiafinbench_REG_004",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_084",
+    "judged_correct": true,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_142",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_098",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      17
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_111",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "not_in_corpus",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_061",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_103",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_174",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_169",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      9
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_073",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_061",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_115",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_188",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_009",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_059",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_043",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_034",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_058",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_130",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_079",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_153",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_178",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_040",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_080",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_036",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_095",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_114",
+    "judged_correct": false,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_002",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_065",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_184",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_137",
+    "judged_correct": false,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_114",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_068",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_180",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_176",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      5
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_113",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_181",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_177",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_124",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      12
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_067",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_108",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_074",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_064",
+    "judged_correct": true,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_069",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_007",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_094",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "internal-004",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      20
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_006",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_023",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_112",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_071",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_183",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_078",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_070",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_102",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_086",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      14
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_007",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_074",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_154",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_058",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_186",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_030",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      5
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_119",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_151",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      5
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_007",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      10
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_164",
+    "judged_correct": false,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      9
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_173",
+    "judged_correct": false,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_101",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_109",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_018",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_120",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_029",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_089",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_128",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_016",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_008",
+    "judged_correct": false,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_197",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "not_in_corpus",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_082",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      13
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_097",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_035",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_093",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_040",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_165",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      6
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_138",
+    "judged_correct": true,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_063",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_033",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      9
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_090",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_010",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      4
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_003",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_069",
+    "judged_correct": true,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_062",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_010",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "internal-009",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_089",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_038",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_168",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_107",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_132",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_134",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_167",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      19
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_077",
+    "judged_correct": true,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_156",
+    "judged_correct": false,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_017",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_022",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_079",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_039",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_049",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_080",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_055",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_172",
+    "judged_correct": false,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 0,
+    "gold_ranks_top20": [
+      7
+    ],
+    "evidence_class": "no_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_066",
+    "judged_correct": true,
+    "generator": "extractive",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_096",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_161",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      3
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_NUM_098",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      2
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_009",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_070",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_CON_070",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_REG_148",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  },
+  {
+    "id": "indiafinbench_TMP_078",
+    "judged_correct": true,
+    "generator": "llm:gemini-3.5-flash-lite",
+    "status": "answered",
+    "gold_sections": 1,
+    "gold_sections_in_pack": 1,
+    "gold_ranks_top20": [
+      1
+    ],
+    "evidence_class": "all_gold_sections_packed"
+  }
+]

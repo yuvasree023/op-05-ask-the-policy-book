@@ -419,3 +419,18 @@ No dependency or behavior change; the pinned set is unchanged.
   state across 12 threads. Full suite: 56 tests passed.
 - v4A ran at bc3f0ed before this fix. Its original outputs/logs are preserved
   unchanged and cannot retroactively acquire complete token accounting.
+
+## 35. v4A does not justify activating retry (2026-11-10)
+
+- Recovered-answer judged accuracy/support 0.8151/0.6475, below required
+  0.88/0.82 and previous records. Retry and date flags stay OFF.
+- Full provenance and initial failures remain visible in EXPERIMENT_LOG
+  and results/raw/v4A_2026-11-10/. Successful re-drive does not erase the
+  18/146 initial failures or turn sequential latency into contract p95.
+- Earlier claims that abstention randomness explained the regression, or
+  that benchmark gold proved temporal contract semantics, were too strong.
+  Those hypotheses remain unresolved; controlled repeated policy comparisons
+  and authoritative contract clarification would be needed.
+- No further model generation until quota/error ambiguity is resolved.
+  Offline error-classification, request isolation and full-attempt metering
+  work can proceed. Original v4A evidence cannot be repaired after the fact.

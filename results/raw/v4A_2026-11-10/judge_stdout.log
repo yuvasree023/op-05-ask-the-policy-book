@@ -1,0 +1,35 @@
+{
+  "grader_version": "2.0",
+  "n": 146,
+  "judge_calls": 262,
+  "judge_enabled": true,
+  "judge_errors": 0,
+  "judge_key_fallback_used": false,
+  "schema_valid_rate": 1.0,
+  "answer_accuracy": 0.8151,
+  "citation_verbatim_rate": 1.0,
+  "citation_support_rate": 0.6475,
+  "answered_rate_on_answerable": 0.9832,
+  "ooc_refusal_rate": 1.0,
+  "fabricated_count": 0,
+  "fabrication_review_complete": true,
+  "not_permitted_rate": 1.0,
+  "role_violations": 0,
+  "role_semantic_review_complete": false,
+  "cost_per_question_usd": null,
+  "latency_p95_ms": null,
+  "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+  "slices": {
+    "contradiction": {
+      "n": 8,
+      "answer_accuracy": 1.0
+    },
+    "temporal": {
+      "n": 19,
+      "answer_accuracy": 0.8947
+    }
+  },
+  "judge_verdicts_reused": 0,
+  "judge_verdicts_path": "results/raw/judge_verdicts_v4A_2026-11-10.jsonl"
+}
+EXIT:0

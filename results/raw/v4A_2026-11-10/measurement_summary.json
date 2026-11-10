@@ -1,0 +1,15 @@
+{
+  "requests": 164,
+  "first_attempt_successes": 128,
+  "first_attempt_failures": 18,
+  "first_attempt_success_rate": 0.8767123287671232,
+  "successful_recoveries": 18,
+  "success_latency_p95_ms": 7042.2,
+  "latency_scope": "successful client attempts at sequential concurrency 1, including recovery successes; failed elapsed times and recovery waits unknown",
+  "contract_concurrency_12": "unverified",
+  "internal_attempts_and_tokens": "unmetered in original service; cannot recover",
+  "generator_counts": {
+    "extractive": 49,
+    "llm:gemini-3.5-flash-lite": 97
+  }
+}

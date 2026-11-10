@@ -1,0 +1,148 @@
+1/146 indiafinbench_REG_004 753ms answered
+2/146 indiafinbench_REG_084 4556ms answered
+3/146 indiafinbench_REG_142 3841ms answered
+4/146 indiafinbench_NUM_012 10ms not_permitted
+5/146 indiafinbench_REG_098 5905ms answered
+6/146 indiafinbench_REG_111 9ms not_in_corpus
+7/146 ooc-009 8ms not_in_corpus
+8/146 indiafinbench_NUM_131 10ms not_permitted
+9/146 indiafinbench_REG_061 3539ms answered
+10/146 indiafinbench_NUM_136 12ms not_permitted
+11/146 ooc-014 6ms not_in_corpus
+12/146 ooc-006 7ms not_in_corpus
+13/146 indiafinbench_CON_072 12ms not_permitted
+14/146 indiafinbench_NUM_103 3593ms answered
+15/146 indiafinbench_REG_174 7042ms answered
+16/146 indiafinbench_REG_169 3856ms answered
+17/146 indiafinbench_REG_073 3750ms answered
+18/146 indiafinbench_CON_061 3507ms answered
+19/146 indiafinbench_NUM_115 7140ms answered
+20/146 indiafinbench_REG_188 ERROR HTTP Error 503: Service Unavailable
+21/146 indiafinbench_NUM_009 1643ms answered
+22/146 indiafinbench_TMP_013 10ms not_permitted
+23/146 indiafinbench_CON_059 ERROR HTTP Error 503: Service Unavailable
+24/146 indiafinbench_CON_043 5776ms answered
+25/146 indiafinbench_TMP_034 ERROR HTTP Error 503: Service Unavailable
+26/146 indiafinbench_TMP_058 3755ms answered
+27/146 indiafinbench_REG_130 4016ms answered
+28/146 indiafinbench_REG_104 9ms not_permitted
+29/146 indiafinbench_NUM_079 4595ms answered
+30/146 indiafinbench_REG_153 ERROR HTTP Error 503: Service Unavailable
+31/146 indiafinbench_REG_178 6841ms answered
+32/146 indiafinbench_TMP_040 5303ms answered
+33/146 indiafinbench_NUM_080 ERROR HTTP Error 503: Service Unavailable
+34/146 indiafinbench_CON_036 6616ms answered
+35/146 indiafinbench_REG_095 3376ms answered
+36/146 indiafinbench_NUM_114 4091ms answered
+37/146 indiafinbench_TMP_002 ERROR HTTP Error 503: Service Unavailable
+38/146 indiafinbench_REG_065 1208ms answered
+39/146 indiafinbench_REG_184 1747ms answered
+40/146 indiafinbench_REG_137 ERROR HTTP Error 503: Service Unavailable
+41/146 indiafinbench_REG_114 ERROR HTTP Error 503: Service Unavailable
+42/146 indiafinbench_NUM_068 1799ms answered
+43/146 indiafinbench_REG_180 1416ms answered
+44/146 indiafinbench_REG_176 1519ms answered
+45/146 indiafinbench_NUM_113 1612ms answered
+46/146 indiafinbench_REG_181 3734ms answered
+47/146 indiafinbench_REG_177 4034ms answered
+48/146 indiafinbench_NUM_124 10680ms answered
+49/146 indiafinbench_NUM_067 ERROR HTTP Error 503: Service Unavailable
+50/146 indiafinbench_NUM_108 6633ms answered
+51/146 indiafinbench_REG_106 10ms not_permitted
+52/146 indiafinbench_REG_074 1092ms answered
+53/146 indiafinbench_TMP_064 1404ms answered
+54/146 indiafinbench_CON_069 1956ms answered
+55/146 indiafinbench_TMP_007 20272ms answered
+56/146 indiafinbench_REG_094 1035ms answered
+57/146 indiafinbench_REG_127 9ms not_permitted
+58/146 internal-004 1023ms answered
+59/146 indiafinbench_REG_118 10ms not_permitted
+60/146 indiafinbench_REG_006 1231ms answered
+61/146 indiafinbench_REG_023 1917ms answered
+62/146 ooc-010 8ms not_in_corpus
+63/146 indiafinbench_REG_112 1870ms answered
+64/146 indiafinbench_TMP_071 ERROR HTTP Error 503: Service Unavailable
+65/146 indiafinbench_REG_183 15318ms answered
+66/146 indiafinbench_REG_078 4263ms answered
+67/146 indiafinbench_NUM_070 1079ms answered
+68/146 indiafinbench_TMP_047 10ms not_permitted
+69/146 indiafinbench_REG_102 1271ms answered
+70/146 indiafinbench_REG_086 5598ms answered
+71/146 indiafinbench_NUM_007 1844ms answered
+72/146 indiafinbench_NUM_074 4615ms answered
+73/146 indiafinbench_REG_154 ERROR HTTP Error 503: Service Unavailable
+74/146 ooc-011 7ms not_in_corpus
+75/146 indiafinbench_NUM_077 10ms not_permitted
+76/146 indiafinbench_NUM_135 14ms not_permitted
+77/146 indiafinbench_REG_058 948ms answered
+78/146 indiafinbench_REG_186 6233ms answered
+79/146 indiafinbench_CON_030 8116ms answered
+80/146 indiafinbench_NUM_119 5238ms answered
+81/146 indiafinbench_REG_151 1740ms answered
+82/146 indiafinbench_CON_052 9ms not_permitted
+83/146 indiafinbench_REG_007 1455ms answered
+84/146 indiafinbench_REG_164 924ms answered
+85/146 indiafinbench_REG_173 1759ms answered
+86/146 indiafinbench_NUM_101 1027ms answered
+87/146 indiafinbench_REG_109 1344ms answered
+88/146 indiafinbench_REG_018 1420ms answered
+89/146 indiafinbench_REG_120 ERROR HTTP Error 503: Service Unavailable
+90/146 indiafinbench_NUM_087 12ms not_permitted
+91/146 indiafinbench_NUM_085 10ms not_permitted
+92/146 indiafinbench_TMP_029 1540ms answered
+93/146 indiafinbench_NUM_089 1313ms answered
+94/146 indiafinbench_REG_128 1205ms answered
+95/146 indiafinbench_REG_016 1138ms answered
+96/146 indiafinbench_TMP_008 1074ms answered
+97/146 indiafinbench_REG_197 9ms not_in_corpus
+98/146 indiafinbench_CON_077 12ms not_permitted
+99/146 indiafinbench_REG_082 1182ms answered
+100/146 indiafinbench_REG_097 2961ms answered
+101/146 indiafinbench_TMP_004 10ms not_permitted
+102/146 indiafinbench_NUM_035 1860ms answered
+103/146 indiafinbench_NUM_093 2698ms answered
+104/146 indiafinbench_NUM_040 4336ms answered
+105/146 indiafinbench_REG_165 3759ms answered
+106/146 indiafinbench_REG_138 1499ms answered
+107/146 indiafinbench_REG_063 1182ms answered
+108/146 indiafinbench_REG_194 13ms not_permitted
+109/146 indiafinbench_NUM_033 3447ms answered
+110/146 indiafinbench_REG_090 1215ms answered
+111/146 indiafinbench_NUM_010 2999ms answered
+112/146 indiafinbench_TMP_003 1719ms answered
+113/146 indiafinbench_TMP_069 4540ms answered
+114/146 indiafinbench_CON_062 1760ms answered
+115/146 indiafinbench_TMP_010 ERROR HTTP Error 503: Service Unavailable
+116/146 internal-006 8ms not_permitted
+117/146 internal-009 873ms answered
+118/146 indiafinbench_REG_089 2171ms answered
+119/146 indiafinbench_TMP_038 5955ms answered
+120/146 indiafinbench_REG_168 4193ms answered
+121/146 indiafinbench_NUM_107 ERROR HTTP Error 503: Service Unavailable
+122/146 indiafinbench_TMP_086 9ms not_permitted
+123/146 indiafinbench_NUM_132 ERROR HTTP Error 503: Service Unavailable
+124/146 indiafinbench_REG_134 5005ms answered
+125/146 ooc-000 7ms not_in_corpus
+126/146 indiafinbench_REG_167 2381ms answered
+127/146 indiafinbench_TMP_077 1617ms answered
+128/146 indiafinbench_REG_156 9135ms answered
+129/146 indiafinbench_REG_017 ERROR HTTP Error 503: Service Unavailable
+130/146 indiafinbench_REG_022 4143ms answered
+131/146 indiafinbench_TMP_079 2393ms answered
+132/146 indiafinbench_NUM_039 9546ms answered
+133/146 indiafinbench_TMP_049 1300ms answered
+134/146 indiafinbench_REG_080 862ms answered
+135/146 indiafinbench_REG_055 1142ms answered
+136/146 indiafinbench_REG_172 1681ms answered
+137/146 internal-008 8ms not_permitted
+138/146 indiafinbench_TMP_066 5979ms answered
+139/146 indiafinbench_NUM_096 ERROR HTTP Error 503: Service Unavailable
+140/146 indiafinbench_REG_161 1684ms answered
+141/146 indiafinbench_NUM_098 1906ms answered
+142/146 indiafinbench_TMP_009 ERROR HTTP Error 503: Service Unavailable
+143/146 indiafinbench_REG_070 1132ms answered
+144/146 indiafinbench_CON_070 1614ms answered
+145/146 indiafinbench_REG_148 3864ms answered
+146/146 indiafinbench_TMP_078 1377ms answered
+DRIVER DONE
+EXIT:0

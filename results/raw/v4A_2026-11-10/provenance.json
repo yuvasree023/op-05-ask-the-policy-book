@@ -1,0 +1,33 @@
+{
+  "commit": "bc3f0ed7f881c5abda42aff78e0564368e11e6ba",
+  "generation_flags": {
+    "OP05_GEN_INSUFFICIENT_RETRY": "1",
+    "OP05_GEN_DATE_CLAUSE": "unset",
+    "OP05_GEN_MODEL": "gemini-3.5-flash-lite"
+  },
+  "judge_model": "gemini-3.5-flash-lite",
+  "workload": "sequential client; not concurrency-12 contract workload",
+  "first_pass": {
+    "requests": 146,
+    "successes": 128,
+    "http_503": 18
+  },
+  "recovery_pass": {
+    "requests": 18,
+    "successes": 18
+  },
+  "quality_file": "recovered-answer set, not first-attempt reliability",
+  "limitations": [
+    "Service hides both quota and transient provider exceptions behind 503. Exact cause of the 18 failures is unverified.",
+    "Generator returned in X-Generator response header; original driver incorrectly read JSON generator field, so use service log for provenance.",
+    "Latency file includes successful first-pass requests only; no end-to-end recovery timing.",
+    "Failed INSUFFICIENT calls lose usage accounting; reported successful generation costs are incomplete.",
+    "Global llm.last_error is shared across threads, so concurrency-12 retry decisions need thread-safety correction and tests."
+  ],
+  "generation_commit": "bc3f0ed",
+  "judge_started_at_ist": "2026-11-10T14:16:44+05:30",
+  "judge_exit": 0,
+  "judge_verdicts": 262,
+  "default_activation": "none; retry and date flags remain off",
+  "comparison_limits": "Single runs differ in policy, date, service transport behavior and judge outputs; not controlled causal evidence."
+}
