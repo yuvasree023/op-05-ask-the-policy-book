@@ -1,0 +1,509 @@
+{
+  "generated_at": "2026-11-11",
+  "scope": "offline taxonomy of the v4A recovered-answer dev run; no model calls and no held-out tuning",
+  "basis": "published dev gold, v4A judged report, and existing offline evidence-pack reconstruction",
+  "source_files": {
+    "data/questions_dev.jsonl": "c415eee5664b4488cba460759c29add0280ef09f07edf7083dc2d6158b9b436f",
+    "results/raw/answers_dev_llm_v4A_2026-11-10.jsonl": "de19195db0c152e0962ee784a41ff4501ca9561189a22020488df2659adb7619",
+    "results/raw/grader_dev_llm_v4A_2026-11-10.judged.json": "0994cabbbfe698244c075a5bb3b994ae5a6a38d337b51c0bf330e8f697110b74",
+    "results/raw/v4A_2026-11-10/offline_evidence_analysis.json": "0da2308cac5f1e5012bb0652ac0e156cb046bbab836ab0512bef9550ea391f65",
+    "results/raw/v4A_2026-11-10/service_v4A.log": "e7d9b2af6aa285533693470a96dec92b33623a1c0960e87fb7dcea5daf8b1c19"
+  },
+  "summary": {
+    "answerable_rows": 119,
+    "answer_accuracy": 0.8151,
+    "citation_support_rate": 0.6475,
+    "incorrect_answerable_rows": 22,
+    "incorrect_by_generator": {
+      "extractive": 16,
+      "llm:gemini-3.5-flash-lite": 6
+    },
+    "unsupported_citations": 49,
+    "answerable_rows_with_any_unsupported_citation": 33,
+    "correct_answer_rows_with_unsupported_citation": 17,
+    "incorrect_answer_rows_with_unsupported_citation": 16,
+    "gold_evidence_pack_for_incorrect_rows": {
+      "all_gold_sections_packed": 13,
+      "no_gold_sections_packed": 9,
+      "absent_breakdown_from_prior_offline_analysis": {
+        "excluded_by_character_budget_ranks_5_5_7": 3,
+        "ranked_outside_candidate_eight_ranks_9_9_10_17_19": 5,
+        "beyond_rank_20": 1
+      }
+    },
+    "by_category": {
+      "contradiction_detection": {
+        "n": 8,
+        "incorrect": 0,
+        "rows_with_any_unsupported_citation": 6,
+        "generators": {
+          "llm:gemini-3.5-flash-lite": 8
+        }
+      },
+      "internal_policy": {
+        "n": 2,
+        "incorrect": 0,
+        "rows_with_any_unsupported_citation": 0,
+        "generators": {
+          "llm:gemini-3.5-flash-lite": 2
+        }
+      },
+      "numerical_reasoning": {
+        "n": 27,
+        "incorrect": 6,
+        "rows_with_any_unsupported_citation": 10,
+        "generators": {
+          "llm:gemini-3.5-flash-lite": 22,
+          "extractive": 5
+        }
+      },
+      "regulatory_interpretation": {
+        "n": 63,
+        "incorrect": 14,
+        "rows_with_any_unsupported_citation": 13,
+        "generators": {
+          "llm:gemini-3.5-flash-lite": 51,
+          "extractive": 12
+        }
+      },
+      "temporal_reasoning": {
+        "n": 19,
+        "incorrect": 2,
+        "rows_with_any_unsupported_citation": 4,
+        "generators": {
+          "llm:gemini-3.5-flash-lite": 14,
+          "extractive": 5
+        }
+      }
+    }
+  },
+  "per_question": [
+    {
+      "id": "indiafinbench_REG_098",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        17
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "What restriction does SEBI (Mutual Funds) Regulations, 1996 impose on the Chairman of an asset management company?",
+      "gold_answer": "The Chairman of the asset management company is not a trustee of any mutual fund"
+    },
+    {
+      "id": "indiafinbench_REG_111",
+      "category": "regulatory_interpretation",
+      "status": "not_in_corpus",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        4
+      ],
+      "failure_classes": [
+        "false_refusal_with_gold_evidence_available",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "What is the consequence for an SFB that fails to meet the dividend eligibility criteria under the RBI SFB Dividend Directions, 2026?",
+      "gold_answer": "No special dispensation will be given for declaration of dividend for that period"
+    },
+    {
+      "id": "indiafinbench_REG_169",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": true,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        9
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation"
+      ],
+      "question": "How long is a certificate of registration granted to a credit rating agency under SEBI (CRA) Regulations, 1999 valid?",
+      "gold_answer": "Under Regulation 8(2), the certificate of registration is valid unless it is suspended or cancelled by the Board \u2014 it has no fixed expiry date."
+    },
+    {
+      "id": "indiafinbench_NUM_080",
+      "category": "numerical_reasoning",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        2
+      ],
+      "failure_classes": [
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "In the GoI securities issuance calendar for H1 FY2026-27, what is the combined amount to be auctioned in the first two auction weeks (April 01-03 and April 06-10, 2026)?",
+      "gold_answer": "\u20b963,000 crore. Calculation: \u20b929,000 (Week 1) + \u20b934,000 (Week 2) = \u20b963,000 crore."
+    },
+    {
+      "id": "indiafinbench_NUM_114",
+      "category": "numerical_reasoning",
+      "status": "answered",
+      "generator": "llm:gemini-3.5-flash-lite",
+      "correct": false,
+      "support_ok": true,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        1
+      ],
+      "failure_classes": [
+        "model_reasoning_or_answer_selection"
+      ],
+      "question": "An investment adviser gave clients a sell recommendation on Bond X on April 1. On April 14, the adviser issues a revised assessment to clients. On April 16, the adviser wants to buy Bond X for its own account (contrary to the original sell recommendation). Is the April 16 transaction permissible?",
+      "gold_answer": "The 15-day prohibition window runs from April 1 to April 15 (inclusive). April 16 falls outside the 15-day prohibition window, so the adviser may freely enter the contrary own-account buy transaction on April 16 without the need to invoke the revised-assessment exception. The transaction on April 16 is permissible. (Note: the revised assessment on April 14 was not strictly necessary for transacting on April 16, as the prohibition expired on April 15.)"
+    },
+    {
+      "id": "indiafinbench_REG_137",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "llm:gemini-3.5-flash-lite",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        2
+      ],
+      "failure_classes": [
+        "model_reasoning_or_answer_selection",
+        "citation_context_or_selection"
+      ],
+      "question": "Under SEBI IA Regulations, 2013, what dual threshold triggers the mandatory transition of an individual investment adviser to non-individual status, and what must the IA do upon breaching the threshold?",
+      "gold_answer": "An individual investment adviser must transition to non-individual status when either: (i) the number of clients exceeds 300 at any point of time, OR (ii) the fee collected during the financial year exceeds Rs 3 crore \u2014 whichever occurs earlier. Upon breaching the threshold, the IA must immediately intimate the Administration and Supervisory Body and initiate the transition process, and must apply for in-principle approval for non-individual registration within 3 months from the date the threshold is reached."
+    },
+    {
+      "id": "indiafinbench_REG_176",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        5
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "What disclosure obligations about rating definitions and rationale must a credit rating agency comply with under SEBI (CRA) Regulations, 1999?",
+      "gold_answer": "Under Regulation 18, a CRA must: (1) make public the definitions of the concerned rating with the symbol, and must state that ratings do not constitute recommendations to buy, hold, or sell any securities; and (2) make available to the general public information on the rationale of its ratings, which must cover both factors justifying a favourable assessment and factors constituting a risk."
+    },
+    {
+      "id": "indiafinbench_TMP_071",
+      "category": "temporal_reasoning",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        1
+      ],
+      "failure_classes": [
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "What change did the SEBI (AIF) (Third Amendment) Regulations, 2025 make to how the 1,000-investor cap is calculated for an AIF scheme?",
+      "gold_answer": "The SEBI (Alternative Investment Funds) (Third Amendment) Regulations, 2025 (w.e.f. 19-11-2025) amended Regulation 10(f) to exclude accredited investors from the computation of the 1,000-investor cap. Prior to this amendment, all investors (including accredited investors) were counted toward the 1,000-investor limit. After the 2025 amendment, accredited investors are not counted \u2014 only non-accredited investors are subject to the 1,000-investor ceiling. This effectively allows AIF schemes to have more than 1,000 total investors provided the excess consists of accredited investors."
+    },
+    {
+      "id": "indiafinbench_REG_183",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": true,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        2
+      ],
+      "failure_classes": [
+        "extractive_fallback_wrong_evidence_or_no_derivation"
+      ],
+      "question": "Under SEBI (CRA) Regulations, 1999 (as amended), can an entity provide ESG ratings without registration? What transitional period was provided to existing ESG rating providers?",
+      "gold_answer": "No. Under Regulation 28C, no person may act as an ESG rating provider without obtaining a certificate from the Board. Existing ESG rating providers operating before the regulation came into force were provided a transitional period of six months (or such other period as specified by the Board) to continue operations. If they filed an application for registration within the six-month period, they could continue until the disposal of their application."
+    },
+    {
+      "id": "indiafinbench_REG_151",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        5
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "Under SEBI AIF Regulations 2012, what can an AIF that has received in-principle approval (but not yet full registration) do in terms of fundraising, and what is it prohibited from doing?",
+      "gold_answer": "Under Regulation 6(5), an AIF that has been granted in-principle approval may accept commitments from investors. However, it shall not accept any monies (actual cash) until it is granted the full certificate of registration. The AIF must also comply with any remaining eligibility conditions (under Reg 4(c) or (d)) within six months from the date of in-principle approval to obtain full registration."
+    },
+    {
+      "id": "indiafinbench_REG_007",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        10
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "Under SEBI Takeover Regulations 2011, at what threshold of voting rights does an acquirer become obligated to make a public announcement of an open offer?",
+      "gold_answer": "Twenty-five per cent or more of the voting rights"
+    },
+    {
+      "id": "indiafinbench_REG_164",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "llm:gemini-3.5-flash-lite",
+      "correct": false,
+      "support_ok": true,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        9
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "model_reasoning_or_answer_selection"
+      ],
+      "question": "Under SEBI AIF Regulations, 2012, what investor approval is required before an AIF can invest in its associate companies or in units of other AIFs managed by the same manager or sponsor?",
+      "gold_answer": "Under Regulation 15(1)(e), an AIF requires the approval of 75% of investors by value of their investment before investing in: (a) its associates, or (b) units of AIFs managed or sponsored by its Manager, Sponsor, or their associates."
+    },
+    {
+      "id": "indiafinbench_REG_173",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "llm:gemini-3.5-flash-lite",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        1
+      ],
+      "failure_classes": [
+        "model_reasoning_or_answer_selection",
+        "citation_context_or_selection"
+      ],
+      "question": "What must a written agreement between a credit rating agency and its client contain under SEBI (CRA) Regulations, 1999?",
+      "gold_answer": "Under Regulation 14, the written agreement must include: (a) the rights and liabilities of each party; (b) the fee to be charged; (c) an obligation on the client to co-operate for periodic review of the rating during the tenure of the rated instrument; (d) an obligation on the client to provide true, adequate, and timely information; (e) an obligation on the CRA to disclose the rating assigned to the client's securities through regular methods of dissemination, even if the rating is not accepted by the client; and (f) an obligation on the client to disclose in the offer document all ratings assigned in the last three years and any ratings by other CRAs not accepted by the client."
+    },
+    {
+      "id": "indiafinbench_TMP_008",
+      "category": "temporal_reasoning",
+      "status": "answered",
+      "generator": "llm:gemini-3.5-flash-lite",
+      "correct": false,
+      "support_ok": true,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        1
+      ],
+      "failure_classes": [
+        "model_reasoning_or_answer_selection"
+      ],
+      "question": "Under SEBI AIF Regulations 2012, how long could funds registered under the earlier SEBI Venture Capital Funds Regulations, 1996 continue to be governed by those older regulations before being required to migrate?",
+      "gold_answer": "Five years from the commencement of the SEBI (AIF) Regulations, 2012"
+    },
+    {
+      "id": "indiafinbench_REG_197",
+      "category": "regulatory_interpretation",
+      "status": "not_in_corpus",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        3
+      ],
+      "failure_classes": [
+        "false_refusal_with_gold_evidence_available",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "What is the key independence requirement for the manager to the open offer under Regulation 12(1) of SEBI Takeovers Regulations 2011?",
+      "gold_answer": "The manager to the open offer must be a SEBI-registered merchant banker who is not an associate of the acquirer."
+    },
+    {
+      "id": "indiafinbench_NUM_040",
+      "category": "numerical_reasoning",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        2
+      ],
+      "failure_classes": [
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "Under the original SEBI (Issue and Listing of Debt Securities by Municipalities) Regulations 2015 (as in force before the 2019 Amendment), if the issue closed on 1 January 2018, what was the latest date by which the trust deed had to be executed?",
+      "gold_answer": "By 1 April 2018 (three months from the closure of the issue on 1 January 2018)"
+    },
+    {
+      "id": "indiafinbench_NUM_010",
+      "category": "numerical_reasoning",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        4
+      ],
+      "failure_classes": [
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "Under SEBI LODR Regulations 2015, if a listed entity holds its first board meeting on 1 April of a financial year, by what latest date must the second board meeting be held?",
+      "gold_answer": "By 29 July of the same year (1 April + 120 days = 29 July)"
+    },
+    {
+      "id": "indiafinbench_NUM_107",
+      "category": "numerical_reasoning",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "An investment adviser provides investment advice to a client on November 15, 2023. Under SEBI IA Regulations, 2013, what is the earliest date on which the records related to this advice may lawfully be destroyed?",
+      "gold_answer": "Under Regulation 19(2), records must be preserved for a minimum of 5 years from the date of the advice. From November 15, 2023, adding 5 years gives November 15, 2028. The records must be preserved at least until November 15, 2028 (i.e., the minimum preservation period ends on November 15, 2028). The earliest date on which they may be destroyed is November 16, 2028."
+    },
+    {
+      "id": "indiafinbench_NUM_132",
+      "category": "numerical_reasoning",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        1
+      ],
+      "failure_classes": [
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "An acquirer holds 28% voting rights in a listed company with 10 crore total shares outstanding. What is the maximum number of additional shares they can acquire in financial year 2024-25 without triggering a mandatory open offer under Regulation 3(2)?",
+      "gold_answer": "5% of 10 crore = 50 lakh shares."
+    },
+    {
+      "id": "indiafinbench_REG_167",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        19
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation",
+        "citation_context_or_selection"
+      ],
+      "question": "Who are the eligible categories of promoters for a credit rating agency under SEBI (CRA) Regulations, 1999?",
+      "gold_answer": "Under Regulation 4, a credit rating agency must be promoted by one of the following: (a) a public financial institution; (b) a scheduled commercial bank in the RBI's second schedule; (c) a foreign bank operating in India with RBI approval; (d) a foreign CRA incorporated in a FATF member jurisdiction, recognised under their law, with at least five years' experience in rating securities; or (e) any company or body corporate with a continuous net worth of at least Rs 100 crore per audited accounts for the previous five years."
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "llm:gemini-3.5-flash-lite",
+      "correct": false,
+      "support_ok": false,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 1,
+      "gold_ranks_top20": [
+        3
+      ],
+      "failure_classes": [
+        "model_reasoning_or_answer_selection",
+        "citation_context_or_selection"
+      ],
+      "question": "What is the maximum number of investors permitted in a single scheme of an Alternative Investment Fund under SEBI AIF Regulations, 2012? Are accredited investors counted toward this limit?",
+      "gold_answer": "Under Regulation 10(f), no scheme of an AIF shall have more than one thousand investors. Accredited investors are explicitly excluded from the computation of this investor count \u2014 meaning the 1,000-investor cap applies only to non-accredited investors."
+    },
+    {
+      "id": "indiafinbench_REG_172",
+      "category": "regulatory_interpretation",
+      "status": "answered",
+      "generator": "extractive",
+      "correct": false,
+      "support_ok": true,
+      "gold_sections": 1,
+      "gold_sections_in_pack": 0,
+      "gold_ranks_top20": [
+        7
+      ],
+      "failure_classes": [
+        "retrieval_or_context_pack_miss",
+        "extractive_fallback_wrong_evidence_or_no_derivation"
+      ],
+      "question": "What restrictions apply to the activities a credit rating agency may undertake under SEBI (CRA) Regulations, 1999?",
+      "gold_answer": "Under Regulation 9(f), a CRA shall not carry out any activity other than the rating of securities that are listed or proposed to be listed on a stock exchange recognized by SEBI. Two exceptions apply: (1) the CRA may carry out any other activity as may be specified by the Board; and (2) the CRA may carry out rating of financial instruments under the purview of any other financial sector regulator or authority as specified by the Board."
+    }
+  ],
+  "limits": [
+    "The v4A answer set combines first-pass successes and later recovered rows; it is not first-attempt reliability evidence.",
+    "Gold-section presence diagnoses retrieval and packing only; it does not prove the model would answer correctly.",
+    "The substitute judge is diagnostic and not the official pinned judge.",
+    "Single-run comparisons are confounded by prompt, transport, abstention and judge variability."
+  ]
+}

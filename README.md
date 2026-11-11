@@ -119,7 +119,7 @@ install a supported one alongside and run, e.g.,
 
 **Bundled corpus:** `data/corpus/` is the published OP-05 corpus
 (IndiaFinBench, CC BY 4.0, redistributable; provenance in
-`data/corpus/manifest.json`). It is an input, not part of the solution:
+`data/corpus/manifest.jsonl`). It is an input, not part of the solution:
 `CORPUS_DIR` swaps it, which is exactly what the freshness update pack
 does at review time.
 
@@ -138,18 +138,22 @@ Two kinds of measurement, kept strictly separate:
   coverage, refusal correctness, role violations, fabrication counts. These
   need no judge and are exact.
 - **Judged quality metrics** (answer accuracy, citation support): measured
-  on the dev split with a stand-in judge (gemini-3.5-flash) in place of the
+  on the dev split with a stand-in judge (gemini-3.5-flash-lite) in place of the
   pinned judge (gpt-4.1-mini-2025-04-14), which has no $0 route. These are
   diagnostic only - evidence about answer quality, never an official score.
-  The stand-in is the same model family as the dev generator
-  (gemini-3.5-flash-lite), and self-family judging inflates agreement, so
-  the real result under the official judge could land higher or lower.
+  The stand-in is the same model as the dev generator
+  (gemini-3.5-flash-lite), and self-judging can inflate agreement, so the
+  real result under the official judge could land higher or lower.
 
 All tuning used the 146 published dev questions only. The held-out set was
 run exactly once, after tuning froze, as a dress rehearsal with
 deterministic checks.
 
 ### Dev split (146 questions, vendored published grader 2.0)
+
+Best completed dev measurement to date (v2, 2026-10-21/22). Later v3 and
+v4A judged runs did not improve on it; see below. All judged numbers remain
+substitute-judge diagnostics, not official scores.
 
 | bar | target | measured |
 |---|---|---|
@@ -167,6 +171,12 @@ deterministic checks.
 judge_errors = 0 across 253 evaluations; fabrication review complete with
 0 fabricated. Full history, including judge request-shape fixes and quota
 handling, is in EXPERIMENT_LOG.md.
+
+Latest completed judged check (v4A, 2026-11-10): accuracy 0.8151 and citation
+support 0.6475, below both bars and below the v2 table. Its answer set mixes
+first-pass successes with later recovered rows and is not first-attempt
+reliability evidence. No readiness claim follows from either run; the current
+failure taxonomy is FAILURE_ANALYSIS.md.
 
 ### Retrieval (dev split)
 
@@ -271,11 +281,12 @@ data/questions_dev.jsonl   published dev questions (tuning evidence only)
 models/all-MiniLM-L6-v2/   vendored quantized embedding model
 scripts/reproduce.sh   one-command reproduction (serve, or --selfcheck to evaluate)
 tools/op05_grader/     vendored published grader + rubric (hash-verified, self-check only)
-tests/                 unit tests (44)
+tests/                 unit tests (62)
 results/               ingest/retrieval/grader reports, dev + held-out answers
 DECISIONS.md           design decision log with alternatives considered
 EXPERIMENT_LOG.md      measurement history, including failed and superseded runs
 MEMO.md                one-page brief for a compliance head
+FAILURE_ANALYSIS.md    current dev failure taxonomy and intervention history
 LANDSCAPE.md           ecosystem survey and what was kept from it
 ```
 
@@ -283,5 +294,5 @@ LANDSCAPE.md           ecosystem survey and what was kept from it
 
 ```bash
 python3 -m venv .venv && ./.venv/bin/pip install -q -r requirements.txt
-./.venv/bin/python -m unittest discover -s tests    # 44 tests
+./.venv/bin/python -m unittest discover -s tests    # 62 tests
 ```

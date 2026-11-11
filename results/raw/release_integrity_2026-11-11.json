@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-11-11",
+  "source_url": "https://raw.githubusercontent.com/Deployment-inc/Deployment.inc-Hiring-Problems/main/RELEASE_MANIFEST.json",
+  "release": "season-1-2026-09-07",
+  "all_matched": true,
+  "core_files": [
+    {
+      "release_path": "references/OP-05/corpus/manifest.jsonl",
+      "local_path": "data/corpus/manifest.jsonl",
+      "expected_sha256": "1aae4cb1247648f408dedbe6ac17ee889eae36d2af9a5d50566fd9fcb6374dd0",
+      "actual_sha256": "1aae4cb1247648f408dedbe6ac17ee889eae36d2af9a5d50566fd9fcb6374dd0",
+      "match": true
+    },
+    {
+      "release_path": "references/OP-05/corpus/passages.jsonl",
+      "local_path": "data/corpus/passages.jsonl",
+      "expected_sha256": "7074da689baae73607e632c844888d09206703d80254141fe8f876a6ae89da9a",
+      "actual_sha256": "7074da689baae73607e632c844888d09206703d80254141fe8f876a6ae89da9a",
+      "match": true
+    },
+    {
+      "release_path": "references/OP-05/questions_dev.jsonl",
+      "local_path": "data/questions_dev.jsonl",
+      "expected_sha256": "c415eee5664b4488cba460759c29add0280ef09f07edf7083dc2d6158b9b436f",
+      "actual_sha256": "c415eee5664b4488cba460759c29add0280ef09f07edf7083dc2d6158b9b436f",
+      "match": true
+    },
+    {
+      "release_path": "references/OP-05/grader.py",
+      "local_path": "tools/op05_grader/grader.original.py",
+      "expected_sha256": "8c3fcf3068e9940c130e7c54200d7f82bdcd1120bef60599918ee0998a718b80",
+      "actual_sha256": "8c3fcf3068e9940c130e7c54200d7f82bdcd1120bef60599918ee0998a718b80",
+      "match": true
+    },
+    {
+      "release_path": "references/OP-05/rubric.md",
+      "local_path": "tools/op05_grader/rubric.md",
+      "expected_sha256": "c6645365a7abc6aa628e2e6a7010d35e9fd2588c2b85d0e13f9fa4fb012f6592",
+      "actual_sha256": "c6645365a7abc6aa628e2e6a7010d35e9fd2588c2b85d0e13f9fa4fb012f6592",
+      "match": true
+    }
+  ],
+  "corpus_text_files": {
+    "count": 34,
+    "mismatches": []
+  }
+}

@@ -133,7 +133,218 @@
         "fabrication_review_complete": true,
         "note": "Official judge measurement still required for any claimed correctness/support score."
       }
+    },
+    {
+      "run_id": "heldout-dress-rehearsal-2026-10-25",
+      "model": "gemini-3.5-flash-lite plus labeled extractive fallback rows",
+      "status": "completed structural gold-free rehearsal; no judged metrics available without held-out gold",
+      "timestamp": "2026-10-25",
+      "config": {
+        "generator_mix_all": {
+          "llm:gemini-3.5-flash-lite": 174,
+          "extractive": 98
+        },
+        "checks": "structural gold-free checks (vendored grader refuses unlabeled gold by design)"
+      },
+      "metrics": {
+        "rows": 272,
+        "status_distribution": {
+          "answered": 197,
+          "not_permitted": 62,
+          "not_in_corpus": 13
+        },
+        "citation_verbatim_grader_compatible_normalized": 1.0,
+        "role_violations_hierarchical": 0,
+        "latency_ms": {
+          "p50": 1267.8,
+          "p95": 5286.2,
+          "max": 11636.5
+        },
+        "answer_accuracy": null,
+        "citation_support_rate": null
+      },
+      "raw": {
+        "answers_heldout.jsonl": {
+          "path": "results/answers_heldout.jsonl",
+          "sha256": "29d440d615e78b088ff3041a77147aa352fe8fd78a0c96a2ec4f13cdb05ab0b6"
+        },
+        "heldout_structural_report.json": {
+          "path": "results/heldout_structural_report.json",
+          "sha256": "ce97a4f469a8464502a54fa70b61e836f1bdde4d017af1c45ad1c36255347c2f"
+        }
+      }
+    },
+    {
+      "run_id": "dev-llm-v3-date-clause-2026-11-09",
+      "model": "gemini-3.5-flash-lite generator; gemini-3.5-flash-lite substitute judge (diagnostic only)",
+      "status": "completed; judged quality regressed vs v2; date clause remains default OFF",
+      "timestamp": "2026-11-09",
+      "config": {
+        "generator": "llm:gemini-3.5-flash-lite",
+        "OP05_GEN_DATE_CLAUSE": "1",
+        "retrieval": "RRF k=60 BM25+MiniLM, PassageStore npz/json",
+        "judge": "gemini-3.5-flash-lite substitute judge, not official"
+      },
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 260,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8235,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.6569,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 0.875
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.9474
+          }
+        },
+        "judge_verdicts_reused": 0,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v3_2026-11-09.jsonl"
+      },
+      "tokens": {
+        "generation_input": 123229,
+        "generation_output": 29826,
+        "note": "generation usage only; judge usage and failed-attempt usage are not complete in this artifact"
+      },
+      "cost_usd_at_list_price": null,
+      "raw": {
+        "answers_dev_llm_v3_2026-11-09.jsonl": {
+          "path": "results/raw/answers_dev_llm_v3_2026-11-09.jsonl",
+          "sha256": "49d187beb604fb9bfd5461af2268a97e52991e28a75348aec3dbf429e01b5f3a"
+        },
+        "grader_dev_llm_v3_2026-11-09.json": {
+          "path": "results/raw/grader_dev_llm_v3_2026-11-09.json",
+          "sha256": "72a511649f7fd049953d39d2e7988afd249a21f614927f8f55d3b4202ed7a41b"
+        },
+        "grader_dev_llm_v3_2026-11-09.judged.json": {
+          "path": "results/raw/grader_dev_llm_v3_2026-11-09.judged.json",
+          "sha256": "4e84f9e577d6f42d20996dfbfd7c03a7d54f7bdd887025b2b2d8683188458aed"
+        },
+        "grader_dev_llm_v3_2026-11-09.run.json": {
+          "path": "results/raw/grader_dev_llm_v3_2026-11-09.run.json",
+          "sha256": "8087e11f307d51ed0b90b50560e72143205aa8449f65ef9a04287d2d61616d3f"
+        },
+        "judge_verdicts_v3_2026-11-09.jsonl": {
+          "path": "results/raw/judge_verdicts_v3_2026-11-09.jsonl",
+          "sha256": "b36bd956731a3cd6163aa3c1c3b38aceba20fff3c34f2301072396456fde21b3"
+        }
+      }
+    },
+    {
+      "run_id": "dev-llm-v4A-insufficient-retry-2026-11-10",
+      "model": "gemini-3.5-flash-lite generator; gemini-3.5-flash-lite substitute judge (diagnostic only)",
+      "status": "completed recovered-answer measurement; quality regressed vs v2 and v3; retry remains default OFF",
+      "timestamp": "2026-11-10",
+      "config": {
+        "generation_commit": "bc3f0ed7f881c5abda42aff78e0564368e11e6ba",
+        "OP05_GEN_INSUFFICIENT_RETRY": "1",
+        "OP05_GEN_DATE_CLAUSE": "unset",
+        "workload": "sequential client, 4-second pacing, not concurrency-12 contract load"
+      },
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 262,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8151,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.6475,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 1.0
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.8947
+          }
+        },
+        "judge_verdicts_reused": 0,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v4A_2026-11-10.jsonl"
+      },
+      "reliability": {
+        "requests": 164,
+        "first_attempt_successes": 128,
+        "first_attempt_failures": 18,
+        "first_attempt_success_rate": 0.8767123287671232,
+        "successful_recoveries": 18,
+        "success_latency_p95_ms": 7042.2,
+        "latency_scope": "successful client attempts at sequential concurrency 1, including recovery successes; failed elapsed times and recovery waits unknown",
+        "contract_concurrency_12": "unverified",
+        "internal_attempts_and_tokens": "unmetered in original service; cannot recover",
+        "generator_counts": {
+          "extractive": 49,
+          "llm:gemini-3.5-flash-lite": 97
+        }
+      },
+      "tokens": {
+        "generation_input": null,
+        "generation_output": null,
+        "note": "original service metering was incomplete; failed INSUFFICIENT/503 attempts cannot be reconstructed"
+      },
+      "cost_usd_at_list_price": null,
+      "raw": {
+        "answers_dev_llm_v4A_2026-11-10.jsonl": {
+          "path": "results/raw/answers_dev_llm_v4A_2026-11-10.jsonl",
+          "sha256": "de19195db0c152e0962ee784a41ff4501ca9561189a22020488df2659adb7619"
+        },
+        "grader_dev_llm_v4A_2026-11-10.judged.json": {
+          "path": "results/raw/grader_dev_llm_v4A_2026-11-10.judged.json",
+          "sha256": "0994cabbbfe698244c075a5bb3b994ae5a6a38d337b51c0bf330e8f697110b74"
+        },
+        "judge_verdicts_v4A_2026-11-10.jsonl": {
+          "path": "results/raw/judge_verdicts_v4A_2026-11-10.jsonl",
+          "sha256": "6ff85fd24d1cc07c6fc2f1abb7019cf035ca4efde8cfe00271468fb29611fdd7"
+        },
+        "service_v4A_2026-11-10_latencies.json": {
+          "path": "results/raw/service_v4A_2026-11-10_latencies.json",
+          "sha256": "f758086bdfed612b113eddd690ba0ed113028d4d87424bd4021447990df40252"
+        },
+        "provenance.json": {
+          "path": "results/raw/v4A_2026-11-10/provenance.json",
+          "sha256": "8a707444815186c1d2843152f07e4afdf0dec08b5422fe2aba30c34dcd11203a"
+        },
+        "measurement_summary.json": {
+          "path": "results/raw/v4A_2026-11-10/measurement_summary.json",
+          "sha256": "4f8cd0751d0f616523587e0c42061aaef74874a1ad13b0b1064eff65f2c054b5"
+        },
+        "sha256.json": {
+          "path": "results/raw/v4A_2026-11-10/sha256.json",
+          "sha256": "9ba4120ee51dd93d43971f5631303b43dd4aefc9910b4a8763486603f53d556b"
+        }
+      }
     }
   ],
-  "note": "Raw outputs for every run live in results/raw/ with SHA-256 below; canonical working copies stay in results/. v2 judged artifacts are appended after the substitute-judge pass."
+  "note": "Raw outputs for every run live in results/raw/ with SHA-256 below; canonical working copies stay in results/. Judged generator scores are substitute-judge diagnostics only. v3/v4A postdate the best v2 numbers and did not justify activation."
 }

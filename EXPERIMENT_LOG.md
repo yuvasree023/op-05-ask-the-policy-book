@@ -489,3 +489,26 @@ Deferred test manifest pins the original verdict file hash and enumerates
 28 missing verdicts plus6 fresh repeat verdicts on two completed pairs
 (max34 new HTTP attempts). It is a recovery pointer, NOT an instruction to
 restart without a new signal and renewed bounded operational decision.
+
+## 2026-11-11 - Offline contract and reproducibility audit
+
+No model calls, provider polling or deferred paired-test restart. Rechecked
+the pinned release inputs against RELEASE_MANIFEST.json: corpus manifest,
+passages, all 34 corpus text files, dev questions, grader.py and rubric.md
+all match their published SHA-256 values. Evidence:
+results/raw/release_integrity_2026-11-11.json.
+
+Clean-clone check on Python 3.10.12: pinned install completed, all 62 unit
+tests passed, and `scripts/reproduce.sh --selfcheck` exited 0 with the same
+deterministic gates (schema 1.0, verbatim 1.0, coverage 0.9832, OOC 1.0,
+role-blocked 1.0, role violations 0). The self-check rewrote working result
+files during the run; those generated diffs were restored, leaving the
+historical evidence untouched.
+
+Added a current v4A failure taxonomy (`FAILURE_ANALYSIS.md` and
+`results/failure_analysis_dev_v4A_2026-11-10.json`) and updated
+`results/manifest.json` to account for the held-out structural rehearsal,
+v3 and v4A runs. This is submission-evidence cleanup only: judged quality
+remains below the 0.88/0.82 bars, semantic role review, freshness pack,
+official judge, independent cost and concurrency-12 latency remain
+unverified, and LICENSE/private-reviewer/submission decisions remain held.
