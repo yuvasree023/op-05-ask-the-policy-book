@@ -540,3 +540,28 @@ tested), and v2 and v4A are being re-judged under the identical config
 so v5 comparisons are apples-to-apples. Substitute judge remains
 diagnostic only, never an official score. Judged comparison to be
 appended when the three passes complete.
+
+## 2026-11-23 (contd) - Same-config judged comparison: v4A vs v5
+
+Both passes judged under the identical low-effort substitute-judge config
+(gemini-3.5-flash-lite, JUDGE_REASONING_EFFORT=low; verdict sidecars
+results/raw/judge_verdicts_{v4A,v5_2026-11-23}_loweffort_2026-11-23.jsonl;
+reports results/raw/grader_dev_llm_*_loweffort_2026-11-23.report.json).
+Diagnostic only, never an official score.
+
+                  accuracy   support   verbatim   temporal   contradiction
+v4A:              0.8319     0.6619    1.0        0.9474     1.0
+v5 + review-2:    0.8319     0.7405    1.0        0.8421     1.0
+
+Accuracy identical (99/119 each); citation support +7.9 points for v5;
+temporal slice -2 rows (16/19 vs 18/19) - flagged for failure analysis.
+Refusals 1.0/1.0 both, 0 fabrications, 0 role violations both. Verdict:
+KEEP (DECISIONS 39). Both miss the official 0.88/0.82 bars; older
+thinking-judge numbers (v2 0.8403/0.7037, v4A 0.8151/0.6475) are a
+different judge config and not comparable.
+
+Operational: three mid-run stalls traced to sandbox suspension during
+idle gaps plus at least one genuine hung HTTPS read; a supervisor with
+an mtime watchdog (kill+resume on >150s staleness) and keeping the box
+active restored full speed. Concurrency (4 parallel streams) made
+things worse, not better - single-stream only on this egress path.

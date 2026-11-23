@@ -511,3 +511,19 @@ fell out as follows.
   signals preserved; all 15 comparable deterministic grader metrics
   identical pre/post; the 73 changed answer texts are the now-live
   multi-sentence contiguous quotes, all still verbatim-verified.
+
+## 39. Keep v5 + review-2 changes: same-config judged comparison (2026-11-23)
+
+- Under the identical low-effort substitute-judge config, v5 + review-2
+  ties v4A on answer accuracy (0.8319 = 99/119 both) and improves
+  citation support by 7.9 points (0.6619 -> 0.7405), with verbatim 1.0,
+  refusals 1.0/1.0, zero fabrications and zero role violations on both.
+- The temporal slice regresses 2 rows (16/19 vs 18/19); logged for
+  failure analysis, not large enough to outweigh the support gain.
+- Decision: KEEP the v5 evidence-pack/prompt changes and the review-2
+  correctness fixes. The review-2 items are bug fixes (dead expansion
+  condition, abbreviation splits, role-title leak, key persistence, live
+  timeout) that would stay on correctness grounds alone.
+- All judged numbers here are substitute-judge diagnostics, never
+  official scores; comparisons across judge configurations are invalid
+  and the thinking-mode numbers are retained only as history.
