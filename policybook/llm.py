@@ -45,13 +45,17 @@ PROMPT = """Answer the QUESTION using ONLY the EVIDENCE passages below.
 Rules:
 - No outside knowledge; every fact must come from the evidence.
 - Be concise but complete: every fact asked for (numbers, dates, thresholds, conditions, rule names). If the evidence says a rule is conditional, has an exception, or is superseded/withdrawn as of the as-of date, say so.
-- Cite the passage(s) behind the facts. Each quote VERBATIM from the passage - exact characters, no paraphrase, no ellipsis, no merged non-adjacent sentences.
-- Derived results: when the answer computes or combines facts (arithmetic, date math, threshold checks, comparisons), cite the passage(s) stating the INPUT figures or rules you used, and show the derivation briefly in the answer (e.g. "X - Y = Z"). A quote backs the facts you used - never cite a passage as if it stated the computed result.
+- Numbers, dates and derived results: copy exact figures - never approximate; when several numbers appear, state which rule each belongs to. Show any arithmetic or date math (e.g. "X - Y = Z") and cite the passage(s) stating the INPUT figures or rules used - never cite a passage as if it stated the computed result.
+- Temporal questions: follow the DOCUMENT TIMELINE below; answer from the version in force on the as-of date.
+- Contradiction questions: name both rules and their scopes first, then state which governs as of the as-of date.
+- Cite the passage(s) behind the facts. Each quote must be ONE exact contiguous substring copied from the passage - no paraphrase, no stitched non-adjacent sentences, no added ellipses, no bracketed edits.
 - INSUFFICIENT is for ABSENT facts, not for work: if the evidence states the underlying rule, DO the required reasoning - arithmetic, date calculation, threshold checks, and comparing two passages or versions - and answer with it. Answer "INSUFFICIENT" (no citations) only when the facts needed are not in the evidence at all. Never guess.
 - JSON only: {{"answer": "...", "citations": [{{"doc_id": "...", "section": "...", "quote": "..."}}]}} or {{"answer": "INSUFFICIENT", "citations": []}}
 
 QUESTION (as of {as_of}):
 {question}
+
+{timeline}
 
 EVIDENCE:
 {evidence}"""
@@ -287,20 +291,52 @@ def _evidence_block(h, meta):
     return f"{head}\n{h.text}"
 
 
-def pack_evidence(hits, meta, char_budget=None, min_passages=3):
+def _timeline_block(hits_used, meta, as_of):
+    """Explicit temporal frame for the prompt (DECISIONS 37): one line per
+    packed document with its in-force date and supersession edges, then the
+    as-of selection rule. Temporal rows failed when the model mixed versions
+    whose raw text sat side by side in the pack; the timeline makes the
+    version graph explicit instead of leaving it in per-passage headers."""
+    lines, seen = [], set()
+    for h in hits_used:
+        if h.doc_id in seen:
+            continue
+        seen.add(h.doc_id)
+        m = (meta or {}).get(h.doc_id, {})
+        line = f"- {h.doc_id}:"
+        if m.get("effective_date"):
+            line += f" in force {m['effective_date']}"
+        else:
+            line += " dates unavailable"
+        if m.get("supersedes"):
+            line += f"; supersedes {', '.join(m['supersedes'])}"
+        lines.append(line)
+    lines.append(f"As-of date: {as_of} - a rule governs only if in force on or "
+                 "before this date and not superseded by another rule also in "
+                 "force on or before it.")
+    return "DOCUMENT TIMELINE:\n" + "\n".join(lines)
+
+
+def pack_evidence(hits, meta, char_budget=None, min_passages=3, return_hits=False):
     """Budget-fill: include ranked passages whole until the character budget
     is exhausted (cost bar 8 caps input tokens/question; dropping the weakest
     passage beats truncating a passage mid-rule). Always keeps at least
-    min_passages when available. Budget from OP05_GEN_EV_CHAR_BUDGET."""
+    min_passages when available. Budget from OP05_GEN_EV_CHAR_BUDGET.
+    return_hits=True also returns the hits actually packed, so the caller can
+    build prompt scaffolding (the document timeline) over exactly the shown
+    documents."""
     if char_budget is None:
-        char_budget = int(os.environ.get("OP05_GEN_EV_CHAR_BUDGET", "2600"))
-    blocks, used = [], 0
+        char_budget = int(os.environ.get("OP05_GEN_EV_CHAR_BUDGET", "3000"))
+    blocks, used, hits_used = [], 0, []
     for i, h in enumerate(hits):
         b = _evidence_block(h, meta)
         if blocks and used + len(b) > char_budget and len(blocks) >= min_passages:
             break
         blocks.append(b)
         used += len(b)
+        hits_used.append(h)
+    if return_hits:
+        return blocks, hits_used
     return blocks
 
 
@@ -330,10 +366,12 @@ def generate(question, as_of, hits, verify_quote, model=None,
     if not base_url:
         _set_error("not configured")
         return None
-    evidence = "\n\n".join(pack_evidence(hits, meta))
+    blocks, hits_used = pack_evidence(hits, meta, return_hits=True)
+    evidence = "\n\n".join(blocks)
+    timeline = _timeline_block(hits_used, meta, as_of)
     messages = [{"role": "user",
                  "content": _active_prompt().format(as_of=as_of, question=question,
-                                          evidence=evidence)}]
+                                          timeline=timeline, evidence=evidence)}]
     usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0,
              "adaptations": []}
     for attempt in (1, 2):
@@ -396,5 +434,6 @@ def generate(question, as_of, hits, verify_quote, model=None,
         messages.append({"role": "assistant", "content": text})
         messages.append({"role": "user", "content":
                          f"{dropped} citation quote(s) were not verbatim substrings of the "
-                         "cited passage. Copy quotes exactly and reply again as JSON."})
+                         "cited passage. Copy each quote as ONE exact contiguous substring "
+                         "of the passage and reply again as JSON."})
     return None

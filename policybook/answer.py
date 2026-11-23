@@ -296,7 +296,8 @@ class Answerer:
         version taking effect after the as-of date."""
         meta = {}
         for d, m in self.corpus.docs.items():
-            entry = {"title": m.title, "effective_date": m.effective_date}
+            entry = {"title": m.title, "effective_date": m.effective_date,
+                     "supersedes": list(m.supersedes)}
             fut = [(nd, eff) for nd, eff in self._superseded_by.get(d, [])
                    if eff > as_of]
             if fut:
@@ -333,13 +334,19 @@ class Answerer:
         # blocked-evidence signal scans to k=10 so a denied document that
         # would have ranked 7-10 still flips the refusal to not_permitted.
         # Only the boolean is used - denied text never leaves the signal.
-        r = self.retr.retrieve(question, role, as_of, k=10)
+        # The retrieval pool itself is fetched to k=12 (evidence widening,
+        # DECISIONS 37): the model sees up to 12 candidates while the
+        # refusal signal stays pinned at the dev-tuned depth of 10.
+        r = self.retr.retrieve(question, role, as_of, k=12, signal_k=10)
         hits = r.hits[:6]
         # Iteration B (approved lever: context assembly): top-6 starved some
         # questions whose supporting passage ranked 7-10 (measured 2026-10-23:
         # 3 of 25 INSUFFICIENT fallbacks), so the MODEL sees a wider pool;
-        # the char budget bounds prompt size. The extractive path keeps the
-        # original top-6 so its deterministic baseline is undisturbed.
+        # the char budget bounds prompt size. Widened to top-12 on 2026-11-23
+        # after the v4A failure analysis showed gold passages ranked 9-10
+        # excluded from the candidate eight (DECISIONS 37); the extractive
+        # path keeps the original top-6 so its deterministic baseline is
+        # undisturbed.
         debug = {"blocked_evidence": r.blocked_evidence, "allowed_pool": r.allowed_pool,
                  "top_cosine": r.top_cosine, "top_bm25": r.top_bm25,
                  "top_score": hits[0].score if hits else 0.0}
@@ -371,7 +378,7 @@ class Answerer:
         if self.gen_backend == "openai":
             from . import llm
             try:
-                out = llm.generate(question, as_of, r.hits[:8], self._verify_quote,
+                out = llm.generate(question, as_of, r.hits[:12], self._verify_quote,
                                    meta=self._gen_meta(as_of),
                                    one_attempt=self.live)
             except llm.TransientUnavailable:
@@ -411,7 +418,7 @@ class Answerer:
             if (out is None
                     and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
                     and llm.get_last_error() == "model said INSUFFICIENT"):
-                out = llm.generate(question, as_of, r.hits[:8], self._verify_quote,
+                out = llm.generate(question, as_of, r.hits[:12], self._verify_quote,
                                    meta=self._gen_meta(as_of),
                                    one_attempt=self.live)
                 if out is not None:

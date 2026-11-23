@@ -107,9 +107,15 @@ class Retriever:
                 allowed.add(d)
         return allowed, above
 
-    def retrieve(self, question: str, role: str, as_of: str, k: int = 10) -> Retrieval:
+    def retrieve(self, question: str, role: str, as_of: str, k: int = 10,
+                 signal_k: int | None = None) -> Retrieval:
+        """k bounds the returned evidence hits; signal_k separately bounds the
+        blocked-evidence scan, so the evidence pool can widen without moving
+        the dev-tuned refusal signal (default: the signal scans the same k)."""
         if role not in ROLE_RANK:
             raise ValueError(f"unknown role {role!r}")
+        if signal_k is None:
+            signal_k = k
         allowed, above = self._eligible_docs(role, as_of)
         allowed_idx = [i for i, m in enumerate(self.metas) if m["doc_id"] in allowed]
 
@@ -140,7 +146,7 @@ class Retriever:
         blocked = False
         if blocked_idx:
             fused_all = _fuse(allowed_idx + blocked_idx, vec, lex)
-            top_all = sorted(fused_all, key=lambda i: (-fused_all[i], self.ids[i]))[:k]
+            top_all = sorted(fused_all, key=lambda i: (-fused_all[i], self.ids[i]))[:signal_k]
             blocked = any(i in blocked_idx for i in top_all)
 
         top_cosine = float(max((vec[i] for i in allowed_idx), default=0.0))

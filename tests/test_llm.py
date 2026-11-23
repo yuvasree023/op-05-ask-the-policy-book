@@ -339,3 +339,48 @@ class ReadBoundedTests(unittest.TestCase):
         with self.assertRaises(llm.TransientUnavailable):
             llm._read_bounded(resp, deadline=0.6)
         self.assertLess(time.monotonic() - t0, 2.0)  # bounded, not hung
+
+
+class TimelineTests(unittest.TestCase):
+    def test_pack_evidence_return_hits(self):
+        class H:
+            def __init__(self, i):
+                self.doc_id, self.section = f"D{i}", f"D{i}#s00000"
+                self.text = f"Rule text number {i}."
+        hits = [H(i) for i in range(6)]
+        blocks, used = llm.pack_evidence(hits, None, char_budget=200, return_hits=True)
+        self.assertEqual(len(blocks), len(used))
+        self.assertEqual([h.doc_id for h in used], [h.doc_id for h in hits[:len(used)]])
+
+    def test_timeline_block_in_prompt(self):
+        seen = {}
+
+        class TimelineStub(Stub):
+            def do_POST(self):
+                body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+                seen["prompt"] = body["messages"][0]["content"]
+                obj = {"answer": "INSUFFICIENT", "citations": []}
+                out = json.dumps({"choices": [{"message": {"content": json.dumps(obj)}}]}).encode()
+                self.send_response(200)
+                self.send_header("Content-Length", str(len(out)))
+                self.end_headers()
+                self.wfile.write(out)
+        srv = HTTPServer(("127.0.0.1", 0), TimelineStub)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            llm.generate("q", "2023-06-01", [Hit()], verify_quote=lambda *a: True,
+                         model="m", base_url=f"http://127.0.0.1:{srv.server_address[1]}",
+                         api_key="k",
+                         meta={"D": {"title": "Master Circular", "effective_date": "2023-01-01",
+                                     "supersedes": ["OLD_D"],
+                                     "later_version": "Master Circular 2",
+                                     "later_date": "2024-01-01"}})
+        finally:
+            srv.shutdown()
+        prompt = seen["prompt"]
+        self.assertIn("DOCUMENT TIMELINE:", prompt)
+        self.assertIn("- D: in force 2023-01-01", prompt)
+        self.assertIn("supersedes OLD_D", prompt)
+        self.assertIn("later version in force 2024-01-01", prompt)
+        self.assertIn("As-of date: 2023-06-01", prompt)
+        self.assertIn("ONE exact contiguous substring", prompt)

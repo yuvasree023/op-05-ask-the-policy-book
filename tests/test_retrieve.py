@@ -103,3 +103,30 @@ class RetrievalTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SignalDepthTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._td = tempfile.TemporaryDirectory()
+        root = Path(cls._td.name)
+        write_corpus(root / "corpus")
+        rc = ingest_run(["--corpus-dir", str(root / "corpus"),
+                         "--index-dir", str(root / "index2"),
+                         "--report", str(root / "report2.json")])
+        assert rc == 0
+        cls.retr = Retriever(root / "index2", MODEL_DIR)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._td.cleanup()
+
+    def test_signal_k_decoupled_from_evidence_k(self):
+        q, role, as_of = "litigation hold procedure", "public", "2023-01-01"
+        base = self.retr.retrieve(q, role, as_of, k=10)
+        wide = self.retr.retrieve(q, role, as_of, k=12, signal_k=10)
+        # Widening the evidence pool must not move the refusal signal.
+        self.assertEqual(base.blocked_evidence, wide.blocked_evidence)
+        # Default keeps the old behavior: the signal scans the same k.
+        same = self.retr.retrieve(q, role, as_of, k=12)
+        self.assertEqual(len(same.hits), len(wide.hits))

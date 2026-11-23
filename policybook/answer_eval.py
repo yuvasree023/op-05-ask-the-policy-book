@@ -39,6 +39,7 @@ def main(argv=None) -> int:
     index_dir = os.environ.get("INDEX_DIR", str(REPO_ROOT / ".index"))
     model_dir = os.environ.get("MODEL_DIR", str(REPO_ROOT / "models" / "all-MiniLM-L6-v2"))
     questions = [json.loads(l) for l in open(args.questions) if l.strip()]
+    all_questions = list(questions)
     ans = Answerer(index_dir, model_dir, corpus_dir)
 
     rows, lat = [], []
@@ -72,6 +73,11 @@ def main(argv=None) -> int:
                 tok_out += meter["output_tokens"]
                 gen_calls += meter["attempts"]
                 unknown_usage_attempts += meter["usage_unknown_attempts"]
+            # Checkpoint-only token columns (prefixed, stripped from the
+            # final answers file) so a resumed run keeps honest token/cost
+            # accounting for cost-bar 8 across the interruption.
+            row["_gen_in"] = meter.get("input_tokens", 0)
+            row["_gen_out"] = meter.get("output_tokens", 0)
             if res.generator.startswith("llm:"):
                 u = res.debug.get("gen_usage", {})
                 if not meter.get("attempts"):
@@ -91,9 +97,27 @@ def main(argv=None) -> int:
     # .checkpoint.jsonl sidecar immediately, so a killed/hung run still
     # leaves inspectable partial evidence (the old code wrote only at the
     # very end - a 90-minute run could die with nothing on disk).
+    # OP05_EVAL_RESUME=1 continues an interrupted run: rows already in the
+    # checkpoint are loaded and skipped, new rows append in question order,
+    # and the final outputs are rebuilt from the union. Judge verdicts resume
+    # independently through the grader's content-keyed verdict cache.
     checkpoint_path = Path(args.out).with_suffix(".checkpoint.jsonl")
+    resume = os.environ.get("OP05_EVAL_RESUME") == "1" and checkpoint_path.exists()
+    if resume:
+        with open(checkpoint_path) as f:
+            for line in f:
+                if line.strip():
+                    rows.append(json.loads(line))
+        done_ids = {r["id"] for r in rows}
+        questions = [q for q in questions if q["id"] not in done_ids]
+        for r in rows:
+            tok_in += r.get("_gen_in", 0)
+            tok_out += r.get("_gen_out", 0)
+            cost_total += r.get("cost_usd", 0.0)
+        print(f"Resuming: {len(done_ids)} rows already checkpointed, "
+              f"{len(questions)} remaining.", file=sys.stderr)
     try:
-        with open(checkpoint_path, "w") as checkpoint:
+        with open(checkpoint_path, "a" if resume else "w") as checkpoint:
             for row in _iter_rows():
                 checkpoint.write(json.dumps(row) + "\n")
                 checkpoint.flush()
@@ -115,10 +139,11 @@ def main(argv=None) -> int:
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     with open(args.out, "w") as f:
         for r in rows:
-            f.write(json.dumps(r) + "\n")
+            f.write(json.dumps({k: v for k, v in r.items()
+                                if not k.startswith("_")}) + "\n")
 
     by_status = {}
-    for q, r in zip(questions, rows):
+    for q, r in zip(all_questions, rows):
         key = (q["expected_status"], r["status"])
         by_status[key] = by_status.get(key, 0) + 1
     run_summary = {

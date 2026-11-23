@@ -157,3 +157,28 @@ class AnswerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ModelPoolWiringTests(unittest.TestCase):
+    def test_model_pool_widened_signal_pinned(self):
+        # The LLM candidate pool is retrieved to k=12 while the
+        # blocked-evidence signal stays pinned at the dev-tuned depth of 10.
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            write_corpus(root / "corpus")
+            assert ingest_run(["--corpus-dir", str(root / "corpus"),
+                               "--index-dir", str(root / "index"),
+                               "--report", str(root / "report.json")]) == 0
+            with mock.patch.dict(os.environ, {"OP05_GEN_BACKEND": "extractive"}):
+                ans = Answerer(root / "index", MODEL_DIR, root / "corpus")
+            seen = {}
+            real = ans.retr.retrieve
+
+            def spy(question, role, as_of, k=10, signal_k=None):
+                seen["k"], seen["signal_k"] = k, signal_k
+                return real(question, role, as_of, k=k, signal_k=signal_k)
+
+            with mock.patch.object(ans.retr, "retrieve", side_effect=spy):
+                ans.answer("T1", "anchor investor mutual funds fraction", "legal", "2023-01-01")
+            self.assertEqual(seen["k"], 12)
+            self.assertEqual(seen["signal_k"], 10)

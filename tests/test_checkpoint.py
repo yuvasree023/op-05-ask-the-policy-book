@@ -52,3 +52,47 @@ class CheckpointTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ResumeTests(unittest.TestCase):
+    def test_resume_completes_interrupted_run(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            corpus = td / "corpus"
+            write_corpus(corpus)
+            index = td / "index"
+            ingest_run(["--corpus-dir", str(corpus), "--index-dir", str(index), "--report", str(td / "ingest_report.json")])
+            qs = td / "qs.jsonl"
+            rows = [
+                {"id": "q1", "question": "What fraction is reserved for mutual funds?",
+                 "role": "public", "expected_status": "answered"},
+                {"id": "q2", "question": "Who is the CEO of Mars?",
+                 "role": "public", "expected_status": "refused_out_of_corpus"},
+            ]
+            qs.write_text("".join(json.dumps(r) + "\n" for r in rows))
+            out = td / "answers.jsonl"
+            env = {"CORPUS_DIR": str(corpus), "INDEX_DIR": str(index),
+                   "MODEL_DIR": str(MODEL_DIR), "OP05_GEN_BACKEND": "extractive"}
+            old = os.environ.copy()
+            os.environ.update(env)
+            try:
+                rc = answer_eval.main(["--questions", str(qs), "--out", str(out),
+                                       "--report", str(td / "report.json")])
+                checkpoint = out.with_suffix(".checkpoint.jsonl")
+                # Simulate a kill after row 1: keep only the first checkpoint row.
+                first = checkpoint.read_text().splitlines()[:1]
+                checkpoint.write_text("\n".join(first) + "\n")
+                out.unlink()
+                os.environ["OP05_EVAL_RESUME"] = "1"
+                rc = answer_eval.main(["--questions", str(qs), "--out", str(out),
+                                       "--report", str(td / "report.json")])
+            finally:
+                os.environ.clear()
+                os.environ.update(old)
+            self.assertIn(rc, (0, 1))
+            final = [json.loads(l) for l in out.read_text().splitlines()]
+            self.assertEqual([r["id"] for r in final], ["q1", "q2"])
+            # Internal token columns never reach the graded answers file.
+            self.assertFalse(any(k.startswith("_") for r in final for k in r))
+            ck_rows = [json.loads(l) for l in checkpoint.read_text().splitlines()]
+            self.assertEqual([r["id"] for r in ck_rows], ["q1", "q2"])
