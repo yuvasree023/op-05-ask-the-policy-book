@@ -1,0 +1,65 @@
+{
+  "questions": 51,
+  "seconds": 1481.49,
+  "latency_ms": {
+    "p50": 20428.4,
+    "p95": 59150.0,
+    "max": 90130.5
+  },
+  "status_confusion_expected_vs_got": {
+    "answered->answered": 43,
+    "answered->not_in_corpus": 1,
+    "not_in_corpus->not_in_corpus": 1,
+    "not_permitted->not_permitted": 6
+  },
+  "generator": "llm:gemini-3.5-flash-lite via openai",
+  "gen_api_calls": 123,
+  "usage_unknown_attempts": 81,
+  "cost_complete": false,
+  "cost_note": "Known reported tokens only; failed attempts without usage remain unknown.",
+  "tokens": {
+    "input": 52299,
+    "output": 6059,
+    "avg_input_per_llm_answer": 1216.3,
+    "avg_output_per_llm_answer": 140.9
+  },
+  "cost_usd_at_list_price": 0.030837,
+  "reference_tokens_per_question": {
+    "input": 1005,
+    "output": 743
+  },
+  "extractive_fallbacks": 23,
+  "key_fallback_rows": 0,
+  "grader_stdout": {
+    "grader_version": "2.0",
+    "n": 51,
+    "judge_calls": 0,
+    "judge_enabled": false,
+    "judge_errors": 0,
+    "judge_key_fallback_used": false,
+    "schema_valid_rate": 1.0,
+    "answer_accuracy": null,
+    "citation_verbatim_rate": 1.0,
+    "citation_support_rate": null,
+    "answered_rate_on_answerable": 0.9773,
+    "ooc_refusal_rate": 1.0,
+    "fabricated_count": 0,
+    "fabrication_review_complete": false,
+    "not_permitted_rate": 1.0,
+    "role_violations": 0,
+    "role_semantic_review_complete": false,
+    "cost_per_question_usd": null,
+    "latency_p95_ms": null,
+    "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+    "slices": {
+      "contradiction": {
+        "n": 2,
+        "answer_accuracy": null
+      },
+      "temporal": {
+        "n": 11,
+        "answer_accuracy": null
+      }
+    }
+  }
+}

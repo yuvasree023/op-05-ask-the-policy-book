@@ -624,3 +624,21 @@ not the only difference.
 - Setup requires pinned Python dependencies (network unless wheels provided).
   Generic encoder weights ship; old index/results are not needed. Missing
   gateway credentials select offline extraction, not our model-scored mode.
+
+## 2026-11-24 judged runs: v5b2600 and v6 (substitute judge, diagnostic only)
+
+Judge: gemini-3.5-flash-lite, low effort. Not the official gpt-4.1-mini judge.
+
+| Run | Accuracy | Citation support | Notes |
+|---|---|---|---|
+| v5 | 0.8319 | 0.7405 | baseline |
+| v5b2600 (pack 2600, v5 prompt) | 0.8151 | 0.8047 | verbatim 1.0, coverage 0.9832, contradiction 1.0, temporal 0.8947, ~1047 in-tokens/q |
+| v6 (new prompt rules + pack 2200 + insufficient-retry) | 0.7815 | 0.7638 | verbatim 1.0, coverage 0.9832, contradiction 0.75, temporal 0.9474; 86 llm / 31 extractive answered rows; ~1118 in / 170 out tokens/q (checkpoint sums, retries included) |
+
+v6 is worse than v5b2600 on both bars-relevant metrics and misses the 1005 input-token bar.
+v6 changed three things at once (prompt, pack size, retry), so the regression is
+confounded. It also produced more extractive fallbacks (31 vs 17). Minimal
+bisect for fresh quota: v6 prompt on the 2600 pack without retry.
+Operational note: judge runs hit network stalls; a watchdog restarted them and
+the grader HTTP timeout became configurable (JUDGE_HTTP_TIMEOUT, default 90,
+no scoring effect). Two timeout-induced ERROR verdicts were re-judged.

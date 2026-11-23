@@ -566,3 +566,7 @@ fell out as follows.
   (schema 1.0, verbatim 1.0, coverage 0.9832, composition 117/21/8) -
   the prompt rules touch only the llm path; offline extractive output is
   byte-stable. Judged validation is queued for the post-quota-reset run.
+
+- v6 (prompt rules + 2200 pack + insufficient-retry) judged 0.7815 / 0.7638:
+  worse than v5b2600 (0.8151 / 0.8047). Not adopted as the best config. Keep
+  v5b2600 settings as the reference until a bisect isolates which change hurt.

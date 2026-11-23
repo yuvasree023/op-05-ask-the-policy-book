@@ -198,7 +198,7 @@ class Judge:
             time.sleep(delay)
         for attempt in range(3):
             try:
-                with urllib.request.urlopen(req, timeout=90) as r:
+                with urllib.request.urlopen(req, timeout=int(os.environ.get("JUDGE_HTTP_TIMEOUT","90"))) as r:
                     data = json.load(r)
                 break
             except urllib.error.HTTPError as e:
