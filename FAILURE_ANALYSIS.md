@@ -1,5 +1,39 @@
 # Failure analysis - OP-05 dev set
 
+## Latest: v5 (2026-11-23)
+
+Same-config substitute-judge diagnostics: 99/119 correct (0.8319), citation
+support 0.7405. There are 20 incorrect answers and 34 unsupported citations
+on 24 rows. These are not official scores. See the row-level artifact
+`results/failure_analysis_dev_v5_2026-11-23.json` for all 20 IDs, questions,
+gold answers, answer excerpts and citations.
+
+| Manual cause hypothesis | Incorrect rows |
+|---|---:|
+| Extractive fallback chooses wrong passage or insufficient rule | 9 |
+| Refusal on answerable question | 2 |
+| Model answer incomplete, missing condition, period or computation | 5 |
+| Gold/as-of tension, kept as-of behavior | 2 |
+| Threshold interpretation error | 1 |
+| Judge disagreement, answer matches gold wording | 1 |
+
+Unsupported citations cluster around six comparison rows (12 citations),
+wrong-passage fallback (5), and calculation, quote coverage or temporal
+scope issues on the remaining rows (17). These are row-level hypotheses,
+not proof that a specific prompt change fixes the grader verdict.
+Comparison questions legitimately need historical versions, so the prompt
+must label their scopes, not ban historical citations. The updated prompt
+asks for complete conditions and calculations and separates historical
+comparison evidence from current-rule support. The existing bounded
+INSUFFICIENT retry is an experimental arm, OFF by default. Earlier retry
+experiments regressed, so it is not a proven fix. A score cutoff on the
+extractive fallback was rejected because correct and incorrect score
+ranges overlap. Accuracy/support gain remains unmeasured until quota
+resets; no target-clearing result is claimed.
+
+## Historical v4A analysis
+
+
 This is the current offline taxonomy for the v4A dev run (2026-11-10). It uses
 published dev labels and stored run artifacts only. It does not tune held-out
 rows, call a model, or replace the official judge.

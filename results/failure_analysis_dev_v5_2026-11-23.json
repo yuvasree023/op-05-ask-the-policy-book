@@ -1,0 +1,1040 @@
+{
+  "incorrect": [
+    {
+      "id": "indiafinbench_REG_098",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "What restriction does SEBI (Mutual Funds) Regulations, 1996 impose on the Chairman of an asset management company?",
+      "role": "ops",
+      "as_of": "2020-01-01",
+      "gold_answer": "The Chairman of the asset management company is not a trustee of any mutual fund",
+      "answer": "According to Securities and exchange board of india mutual funds reg (in force since 1996-01-01): \"The original Regulation 47 of SEBI (Mutual Funds) Regulations required: 'Every mutual fund shall ensure that the asset management company computes and carries out valuation of investments made by its scheme(s) in accordance with the investment valuation norms specified in the Eighth Schedule.' This o",
+      "citations": [
+        {
+          "doc_id": "SEBI_1996_securities_and_exchange_board_of_india_mutual_funds_reg_087",
+          "section": "SEBI_1996_securities_and_exchange_board_of_india_mutual_funds_reg_087#s66732",
+          "quote": "The original Regulation 47 of SEBI (Mutual Funds) Regulations required: 'Every mutual fund shall ensure that the asset management company computes and carries out valuation of investments made by its scheme(s) in accordance with the investment valuation norms specified in the Eighth Schedule.' This obligation was subsequently moved to Regulation 25(19) and Regulation 47 was substituted by the SEBI (Mutual Funds) (Amendment) Regulations, 2023."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_REG_111",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "RBI"
+      ],
+      "status": "not_in_corpus",
+      "question": "What is the consequence for an SFB that fails to meet the dividend eligibility criteria under the RBI SFB Dividend Directions, 2026?",
+      "role": "legal",
+      "as_of": "2025-01-01",
+      "gold_answer": "No special dispensation will be given for declaration of dividend for that period",
+      "answer": "Not in the corpus. The policy book as supplied does not contain material that answers this question at the given as-of date. No answer is inferred or fabricated; check the source documents or escalate.",
+      "citations": [],
+      "generator": "extractive",
+      "cause": "refusal_on_answerable"
+    },
+    {
+      "id": "indiafinbench_NUM_114",
+      "tags": [
+        "numerical_reasoning",
+        "hard",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "An investment adviser gave clients a sell recommendation on Bond X on April 1. On April 14, the adviser issues a revised assessment to clients. On April 16, the adviser wants to buy Bond X for its own account (contrary to the original sell recommendation). Is the April 16 transaction permissible?",
+      "role": "ops",
+      "as_of": "2020-01-01",
+      "gold_answer": "The 15-day prohibition window runs from April 1 to April 15 (inclusive). April 16 falls outside the 15-day prohibition window, so the adviser may freely enter the contrary own-account buy transaction on April 16 without the need to invoke the revised-assessment exception. The transaction on April 16 is permissible. (Note: the revised assessment on April 14 was not strictly necessary for transacting on April 16, as the prohibition expired on April 15.)",
+      "answer": "Yes, the April 16 transaction is permissible. Under Regulation 15(7), an investment adviser is generally prohibited from entering into transactions on its own account contrary to its advice to clients for a period of fifteen days from the day of such advice. Here, the advice was given on April 1 (April 1 + 15 days = April 16). However, the rule provides an exception: if the adviser is of the opini",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s59985",
+          "quote": "An investment advisor shall not enter into transactions on its own account which is contrary to its advice given to clients for a period of fifteen days from the day of such advice. Provided that during the period of such fifteen days, if the investment adviser is of the opinion that the situation has changed, then it may enter into such a transaction on its own account after giving such revised assessment to the client at least 24 hours in advance of entering into such transaction."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "incomplete_answer"
+    },
+    {
+      "id": "indiafinbench_TMP_002",
+      "tags": [
+        "temporal_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Which lock-in regime for minimum promoters' contribution applied before 13 August 2021 \u2014 three years or eighteen months?",
+      "role": "ops",
+      "as_of": "2023-01-01",
+      "gold_answer": "Three years from the date of commencement of commercial production or date of allotment, whichever is later",
+      "answer": "Before 13 August 2021, the minimum promoters' contribution lock-in regime was originally set at three years, which was subsequently replaced by eighteen months starting 13 August 2021.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_issue_of_capital_063",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_issue_of_capital_063#s23825",
+          "quote": "The minimum promoters' contribution lock-in was originally set at three years from the date of commencement of commercial production or allotment, whichever is later. This was subsequently substituted by the SEBI (Issue of Capital and Disclosure Requirements) (Third Amendment) Regulations, 2021, w.e.f. 13.08.2021, replacing the three-year lock-in with eighteen months from the date of allotment in the initial public offer (except where proceeds are used for capital expenditure)."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "incomplete_answer"
+    },
+    {
+      "id": "indiafinbench_REG_176",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "What disclosure obligations about rating definitions and rationale must a credit rating agency comply with under SEBI (CRA) Regulations, 1999?",
+      "role": "public",
+      "as_of": "2020-01-01",
+      "gold_answer": "Under Regulation 18, a CRA must: (1) make public the definitions of the concerned rating with the symbol, and must state that ratings do not constitute recommendations to buy, hold, or sell any securities; and (2) make available to the general public information on the rationale of its ratings, which must cover both factors justifying a favourable assessment and factors constituting a risk.",
+      "answer": "According to Securities and exchange board of india credit rating ag (in force since 1999-01-01): \"Regulation 16(2): If the client does not co-operate with the credit rating agency so as to enable the credit rating agency to comply with its obligations under regulation 15, the credit rating agency shall carry out the review on the basis of the best available information or in the manner as specifi",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s79100",
+          "quote": "Regulation 16(2): If the client does not co-operate with the credit rating agency so as to enable the credit rating agency to comply with its obligations under regulation 15, the credit rating agency shall carry out the review on the basis of the best available information or in the manner as specified by the Board from time to time. Provided that if owing to such lack of co-operation, a rating has been based on the best available information, the credit rating agency shall disclose to the investors the fact that the rating is so based. (3) A credit rating agency shall not withdraw a rating so long as the obligations under the security rated by it are outstanding, except where the company whose security is rated is wound up or merged or amalgamated with another company."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_NUM_124",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "A foreign credit rating agency was incorporated in its home country in January 2018 and began actively rating securities in its home jurisdiction from July 2019. It applies to promote a new CRA in India in December 2025. Does it meet the 'minimum of five years' experience in rating securities' requirement under SEBI (CRA) Regulations, 1999?",
+      "role": "public",
+      "as_of": "2020-01-01",
+      "gold_answer": "The foreign CRA began rating securities from July 2019. By December 2025, it has had 6 years and 5 months of rating experience (July 2019 to December 2025). This exceeds the minimum five-year experience requirement. Yes, the foreign CRA meets the five-year experience requirement.",
+      "answer": "According to Securities and exchange board of india credit rating ag (in force since 1999-01-01): \"Regulation 15(1) (pre-2018): Every credit rating agency shall, during the lifetime of securities rated by it continuously monitor the rating of such securities. Regulation 15(1) (as substituted by SEBI (CRA) (Amendment) Regulations, 2018, w.e.f. 30-05-2018): Every credit rating agency shall, during t",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s24704",
+          "quote": "Regulation 15(1) (pre-2018): Every credit rating agency shall, during the lifetime of securities rated by it continuously monitor the rating of such securities. Regulation 15(1) (as substituted by SEBI (CRA) (Amendment) Regulations, 2018, w.e.f. 30-05-2018): Every credit rating agency shall, during the lifetime of securities rated by it continuously monitor the rating of such securities, unless the rating is withdrawn, subject to the provisions of regulation 16(3)."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_REG_023",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Under SEBI Stock Exchanges and Clearing Corporations Regulations 2018, what is the maximum shareholding percentage a single entity can hold in a recognised stock exchange without prior written approval of the Board?",
+      "role": "public",
+      "as_of": "2023-01-01",
+      "gold_answer": "Five per cent of the paid-up equity share capital",
+      "answer": "Under the SEBI Stock Exchanges and Clearing Corporations Regulations 2018, the maximum shareholding percentage a single entity can hold in a recognised stock exchange without prior written approval of the Board is more than five per cent (5%), with a limit of fifteen per cent (15%) in the case of stock exchanges, depositories, banking companies, insurance companies, and public financial institutio",
+      "citations": [
+        {
+          "doc_id": "SEBI_2018_securities_contracts_regulation_stock_exchanges_and_cle_065",
+          "section": "SEBI_2018_securities_contracts_regulation_stock_exchanges_and_cle_065#s19698",
+          "quote": "A recognised stock exchange shall not be eligible for recognition if any person, individually or together with persons acting in concert with such person, acquires or holds or controls more than five per cent of the paid-up equity share capital of the recognised stock exchange, unless the prior written approval of the Board has been obtained. Provided that the limit of five per cent shall be fifteen per cent in the case of stock exchanges, depositories, banking companies, insurance companies, and public financial institutions."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "wrong_threshold_interpretation"
+    },
+    {
+      "id": "indiafinbench_TMP_071",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "What change did the SEBI (AIF) (Third Amendment) Regulations, 2025 make to how the 1,000-investor cap is calculated for an AIF scheme?",
+      "role": "ops",
+      "as_of": "2020-01-01",
+      "gold_answer": "The SEBI (Alternative Investment Funds) (Third Amendment) Regulations, 2025 (w.e.f. 19-11-2025) amended Regulation 10(f) to exclude accredited investors from the computation of the 1,000-investor cap. Prior to this amendment, all investors (including accredited investors) were counted toward the 1,000-investor limit. After the 2025 amendment, accredited investors are not counted \u2014 only non-accredited investors are subject to the 1,000-investor ceiling. This effectively allows AIF schemes to have more than 1,000 total investors provided the excess consists of accredited investors.",
+      "answer": "As of 2020-01-01, the SEBI (AIF) (Third Amendment) Regulations, 2025 were not in force (having taken effect on 19-11-2025), so no such change had been made as of the as-of date.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s85569",
+          "quote": "Regulation 10(f) (as amended by SEBI (AIF) (Third Amendment) Regulations, 2025, w.e.f. 19-11-2025): no scheme of the Alternative Investment Fund shall have more than one thousand investors: Provided that accredited investors shall be excluded while computing the number of investors in a scheme of an Alternative Investment Fund. [Prior to this amendment, all investors including accredited investors were counted toward the 1,000 cap.]"
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "gold_as_of_tension"
+    },
+    {
+      "id": "indiafinbench_REG_183",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Under SEBI (CRA) Regulations, 1999 (as amended), can an entity provide ESG ratings without registration? What transitional period was provided to existing ESG rating providers?",
+      "role": "legal",
+      "as_of": "2020-01-01",
+      "gold_answer": "No. Under Regulation 28C, no person may act as an ESG rating provider without obtaining a certificate from the Board. Existing ESG rating providers operating before the regulation came into force were provided a transitional period of six months (or such other period as specified by the Board) to continue operations. If they filed an application for registration within the six-month period, they could continue until the disposal of their application.",
+      "answer": "According to Securities and exchange board of india credit rating ag (in force since 1999-01-01): \"Chapter IVA (ESG Rating Providers) inserted by SEBI (CRA) (Amendment) Regulations, 2023, w.e.f. 4.07.2023. Regulation 28C: no person shall act as an ESG rating provider unless it has obtained a certificate from the Board.\"",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s27714",
+          "quote": "Chapter IVA (ESG Rating Providers) inserted by SEBI (CRA) (Amendment) Regulations, 2023, w.e.f. 4.07.2023. Regulation 28C: no person shall act as an ESG rating provider unless it has obtained a certificate from the Board."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_REG_151",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Under SEBI AIF Regulations 2012, what can an AIF that has received in-principle approval (but not yet full registration) do in terms of fundraising, and what is it prohibited from doing?",
+      "role": "ops",
+      "as_of": "2020-01-01",
+      "gold_answer": "Under Regulation 6(5), an AIF that has been granted in-principle approval may accept commitments from investors. However, it shall not accept any monies (actual cash) until it is granted the full certificate of registration. The AIF must also comply with any remaining eligibility conditions (under Reg 4(c) or (d)) within six months from the date of in-principle approval to obtain full registration.",
+      "answer": "According to Securities and exchange board of india alternative inve (in force since 2012-01-01): \"Funds registered as venture capital funds under the Securities and Exchange Board of India (Venture Capital Funds) Regulations, 1996 shall be governed by the said regulations for a period of five years from the commencement of the SEBI (AIF) Regulations, 2012, provided that the existing fund shall no",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s21039",
+          "quote": "Funds registered as venture capital funds under the Securities and Exchange Board of India (Venture Capital Funds) Regulations, 1996 shall be governed by the said regulations for a period of five years from the commencement of the SEBI (AIF) Regulations, 2012, provided that the existing fund shall not increase the targeted corpus of the fund."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_REG_164",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Under SEBI AIF Regulations, 2012, what investor approval is required before an AIF can invest in its associate companies or in units of other AIFs managed by the same manager or sponsor?",
+      "role": "ops",
+      "as_of": "2020-01-01",
+      "gold_answer": "Under Regulation 15(1)(e), an AIF requires the approval of 75% of investors by value of their investment before investing in: (a) its associates, or (b) units of AIFs managed or sponsored by its Manager, Sponsor, or their associates.",
+      "answer": "As of 2020-01-01, under Regulation 15(1)(e) (pre-2021), an AIF shall not invest in associates except with the approval of 75% of investors.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s56198",
+          "quote": "Regulation 15(1)(e) (pre-2021): AIF shall not invest in associates except with approval of 75% of investors."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "incomplete_answer"
+    },
+    {
+      "id": "indiafinbench_TMP_029",
+      "tags": [
+        "temporal_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "status": "answered",
+      "question": "Among the five circulars superseded by the RBI Master Direction on Unique Identifiers 2026, which was the most recently issued before the Master Direction?",
+      "role": "public",
+      "as_of": "2025-01-01",
+      "gold_answer": "CO.FMRD.MIOD.No.8/11.01.057/2025-26 dated February 18, 2026, which is the most recent of the five superseded circulars.",
+      "answer": "Among the five circulars superseded by the RBI Master Direction on Unique Identifiers 2026, the dates of issuance are: (1) June 01, 2017; (2) November 29, 2018; (3) April 26, 2019; (4) March 27, 2020; and (5) February 18, 2026. Comparing these dates, February 18, 2026 is the most recently issued circular.",
+      "citations": [
+        {
+          "doc_id": "RBI_Master_Dir_master_direction_-_reserve_bank_of_india_unique_identif_084",
+          "section": "RBI_Master_Dir_master_direction_-_reserve_bank_of_india_unique_identif_084#s22661",
+          "quote": "List of circulars superseded: (1) FMRD.FMID No.14/11.01.007/2016-17 dated June 01, 2017; (2) dated November 29, 2018; (3) dated April 26, 2019; (4) dated March 27, 2020; (5) dated February 18, 2026."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "incomplete_answer"
+    },
+    {
+      "id": "indiafinbench_REG_197",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "status": "not_in_corpus",
+      "question": "What is the key independence requirement for the manager to the open offer under Regulation 12(1) of SEBI Takeovers Regulations 2011?",
+      "role": "legal",
+      "as_of": "2020-01-01",
+      "gold_answer": "The manager to the open offer must be a SEBI-registered merchant banker who is not an associate of the acquirer.",
+      "answer": "Not in the corpus. The policy book as supplied does not contain material that answers this question at the given as-of date. No answer is inferred or fabricated; check the source documents or escalate.",
+      "citations": [],
+      "generator": "extractive",
+      "cause": "refusal_on_answerable"
+    },
+    {
+      "id": "indiafinbench_NUM_010",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Under SEBI LODR Regulations 2015, if a listed entity holds its first board meeting on 1 April of a financial year, by what latest date must the second board meeting be held?",
+      "role": "legal",
+      "as_of": "2020-01-01",
+      "gold_answer": "By 29 July of the same year (1 April + 120 days = 29 July)",
+      "answer": "According to Securities and exchange board of india listing obligati (in force since 2015-01-01): \"The SEBI (LODR) Regulations, 2015 were published in the Official Gazette on 2nd September 2015, and shall come into force on the ninetieth day from the date of their publication: Provided that the provisions of sub-regulation (4) of regulation 23 and regulation 31A shall come into force on the date o",
+      "citations": [
+        {
+          "doc_id": "SEBI_2015_securities_and_exchange_board_of_india_listing_obligati_067",
+          "section": "SEBI_2015_securities_and_exchange_board_of_india_listing_obligati_067#s05455",
+          "quote": "The SEBI (LODR) Regulations, 2015 were published in the Official Gazette on 2nd September 2015, and shall come into force on the ninetieth day from the date of their publication: Provided that the provisions of sub-regulation (4) of regulation 23 and regulation 31A shall come into force on the date of notification of these regulations. The definition of 'mainstream media' was inserted by the SEBI (LODR) (Second Amendment) Regulations, 2023 w.e.f. 15.7.2023."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_NUM_107",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "An investment adviser provides investment advice to a client on November 15, 2023. Under SEBI IA Regulations, 2013, what is the earliest date on which the records related to this advice may lawfully be destroyed?",
+      "role": "public",
+      "as_of": "2020-01-01",
+      "gold_answer": "Under Regulation 19(2), records must be preserved for a minimum of 5 years from the date of the advice. From November 15, 2023, adding 5 years gives November 15, 2028. The records must be preserved at least until November 15, 2028 (i.e., the minimum preservation period ends on November 15, 2028). The earliest date on which they may be destroyed is November 16, 2028.",
+      "answer": "According to Securities and exchange board of india investment advis (in force since 2013-01-01): \"Regulation 21(1) (original, pre-2023): An investment adviser shall redress client grievances promptly. [As amended by SEBI (Facilitation of Grievance Redressal Mechanism) (Amendment) Regulations, 2023, w.e.f. 18-08-2023]: The Investment Adviser shall redress investor grievances promptly but not later",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s61227",
+          "quote": "Regulation 21(1) (original, pre-2023): An investment adviser shall redress client grievances promptly. [As amended by SEBI (Facilitation of Grievance Redressal Mechanism) (Amendment) Regulations, 2023, w.e.f. 18-08-2023]: The Investment Adviser shall redress investor grievances promptly but not later than twenty-one calendar days from the date of receipt of the grievance and in such manner as may be specified by the Board."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_NUM_132",
+      "tags": [
+        "numerical_reasoning",
+        "easy",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "An acquirer holds 28% voting rights in a listed company with 10 crore total shares outstanding. What is the maximum number of additional shares they can acquire in financial year 2024-25 without triggering a mandatory open offer under Regulation 3(2)?",
+      "role": "legal",
+      "as_of": "2020-01-01",
+      "gold_answer": "5% of 10 crore = 50 lakh shares.",
+      "answer": "As of the as-of date of 2020-01-01, under Regulation 3(2), an acquirer holding 28% (which is 25% or more but less than the maximum permissible non-public shareholding) cannot acquire within any financial year additional shares or voting rights entitling them to exercise more than 5% of the voting rights without making an open offer. Given 10 crore total shares outstanding, 5% of the voting rights ",
+      "citations": [
+        {
+          "doc_id": "SEBI_2011_securities_and_exchange_board_of_india_substantial_acqu_073",
+          "section": "SEBI_2011_securities_and_exchange_board_of_india_substantial_acqu_073#s52663",
+          "quote": "Regulation 3(2): No acquirer who together with persons acting in concert holds 25% or more but less than the maximum permissible non-public shareholding, shall acquire within any financial year additional shares or voting rights entitling them to exercise more than five per cent of the voting rights, unless an open offer is made."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "incomplete_answer"
+    },
+    {
+      "id": "indiafinbench_REG_167",
+      "tags": [
+        "regulatory_interpretation",
+        "medium",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Who are the eligible categories of promoters for a credit rating agency under SEBI (CRA) Regulations, 1999?",
+      "role": "public",
+      "as_of": "2020-01-01",
+      "gold_answer": "Under Regulation 4, a credit rating agency must be promoted by one of the following: (a) a public financial institution; (b) a scheduled commercial bank in the RBI's second schedule; (c) a foreign bank operating in India with RBI approval; (d) a foreign CRA incorporated in a FATF member jurisdiction, recognised under their law, with at least five years' experience in rating securities; or (e) any company or body corporate with a continuous net worth of at least Rs 100 crore per audited accounts for the previous five years.",
+      "answer": "According to Securities and exchange board of india credit rating ag (in force since 1999-01-01): \"Regulation 2(h) \u2014 definition of 'credit rating agency' (pre-2021): rating of securities offered by way of public or rights issue. [Amended by SEBI (CRA) (Amendment) Regulations, 2021 w.e.f. 03-08-2021]: rating of securities that are listed or proposed to be listed on a stock exchange recognized by th",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s41491",
+          "quote": "Regulation 2(h) \u2014 definition of 'credit rating agency' (pre-2021): rating of securities offered by way of public or rights issue. [Amended by SEBI (CRA) (Amendment) Regulations, 2021 w.e.f. 03-08-2021]: rating of securities that are listed or proposed to be listed on a stock exchange recognized by the Board."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "What is the maximum number of investors permitted in a single scheme of an Alternative Investment Fund under SEBI AIF Regulations, 2012? Are accredited investors counted toward this limit?",
+      "role": "legal",
+      "as_of": "2020-01-01",
+      "gold_answer": "Under Regulation 10(f), no scheme of an AIF shall have more than one thousand investors. Accredited investors are explicitly excluded from the computation of this investor count \u2014 meaning the 1,000-investor cap applies only to non-accredited investors.",
+      "answer": "As of 2020-01-01, no scheme of the Alternative Investment Fund shall have more than one thousand investors, and all investors including accredited investors were counted toward this limit.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s85569",
+          "quote": "Prior to this amendment, all investors including accredited investors were counted toward the 1,000 cap."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s51862",
+          "quote": "No scheme of the Alternative Investment Fund shall have more than one thousand investors."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "gold_as_of_tension"
+    },
+    {
+      "id": "indiafinbench_REG_017",
+      "tags": [
+        "regulatory_interpretation",
+        "easy",
+        "SEBI"
+      ],
+      "status": "answered",
+      "question": "Under SEBI Mutual Funds Regulations, what is the maximum exit load that an open-ended mutual fund scheme can charge investors?",
+      "role": "legal",
+      "as_of": "2031-01-01",
+      "gold_answer": "Three per cent of the applicable net asset value",
+      "answer": "Under SEBI (Mutual Funds) Regulations, as of 2031-01-01, the exit load of an open-ended mutual fund scheme shall not exceed three per cent of the applicable net asset value.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2026_securities_and_exchange_board_of_india_mutual_funds_reg_050",
+          "section": "SEBI_2026_securities_and_exchange_board_of_india_mutual_funds_reg_050#s43617",
+          "quote": "The exit load of an open-ended mutual fund scheme shall not exceed three per cent of the applicable net asset value."
+        }
+      ],
+      "generator": "llm:gemini-3.5-flash-lite",
+      "cause": "judge_disagreement_answer_matches_gold"
+    },
+    {
+      "id": "indiafinbench_NUM_098",
+      "tags": [
+        "numerical_reasoning",
+        "medium",
+        "RBI"
+      ],
+      "status": "answered",
+      "question": "Under the RBI SFB Dividend Directions, 2026, what are the permitted dividend percentages of Adjusted PAT for an SFB in Bucket B1 (Tier 1 ratio \u22647.5%) versus Bucket B10 (Tier 1 ratio >19.5%)?",
+      "role": "public",
+      "as_of": "2025-01-01",
+      "gold_answer": "Bucket B1: 0 per cent of Adjusted PAT; Bucket B10: 100 per cent of Adjusted PAT",
+      "answer": "According to RBI Reserve Ba reserve bank of india small finance banks prudential no (in force since 2020-01-01): \"Passage A:\nBucket B1: Tier 1 Capital Ratio as at the end of previous FY: Up to 7.5% \u2014 Dividend allowed as a % of adjusted PAT for the period: 0.\"",
+      "citations": [
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s26536",
+          "quote": "Passage A:\nBucket B1: Tier 1 Capital Ratio as at the end of previous FY: Up to 7.5% \u2014 Dividend allowed as a % of adjusted PAT for the period: 0."
+        }
+      ],
+      "generator": "extractive",
+      "cause": "extractive_wrong_passage"
+    }
+  ],
+  "unsupported": [
+    {
+      "id": "indiafinbench_NUM_103",
+      "question": "All schemes of a mutual fund together hold 9.5% of ABC Limited's paid-up capital carrying voting rights. May they acquire a further 1%?",
+      "answer": "No. Under Seventh Schedule, paragraph 2, \"No mutual fund under all its schemes should own more than ten per cent of any company's paid up capital carrying voting rights\". Since current holding = 9.5% and proposed acquisition = 1%, the total would be ",
+      "citations": [
+        {
+          "doc_id": "SEBI_1996_securities_and_exchange_board_of_india_mutual_funds_reg_087",
+          "section": "SEBI_1996_securities_and_exchange_board_of_india_mutual_funds_reg_087#s51907",
+          "quote": "No mutual fund under all its schemes should own more than ten per cent of any company's paid up capital carrying voting rights or ten per cent of units of REITs issued by a single issuer, as the case may be."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "question": "Do the pre-2024 and post-2024 versions of Regulation 16(1)(c) permit the same scope of borrowing by Category I AIFs?",
+      "answer": "As of the 2020-01-01 as-of date, only the pre-2024 version of Regulation 16(1)(c) is in force, which states that Category I Alternative Investment Funds \"shall not borrow funds directly or indirectly or engage in any leverage except for meeting tempo",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s54641",
+          "quote": "Regulation 16(1)(c) (pre-2024): Category I Alternative Investment Funds shall not borrow funds directly or indirectly or engage in any leverage except for meeting temporary funding requirements for not more than thirty days, on not more than four occasions in a year and not more than ten percent of the investable funds."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s54641",
+          "quote": "Regulation 16(1)(c) (as substituted w.e.f. 07-08-2024): Category I Alternative Investment Funds shall not borrow funds directly or indirectly or engage in any leverage for the purpose of making investments or otherwise, except for borrowing funds to meet temporary funding requirements and day-to-day operational requirements for not more than thirty days, on not more than four occasions in a year and not more than ten percent of the investable funds."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_061",
+      "question": "Do the pre-2024 and post-2024 versions of Regulation 16(1)(c) permit the same scope of borrowing by Category I AIFs?",
+      "answer": "As of the 2020-01-01 as-of date, only the pre-2024 version of Regulation 16(1)(c) is in force, which states that Category I Alternative Investment Funds \"shall not borrow funds directly or indirectly or engage in any leverage except for meeting tempo",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s54641",
+          "quote": "Regulation 16(1)(c) (pre-2024): Category I Alternative Investment Funds shall not borrow funds directly or indirectly or engage in any leverage except for meeting temporary funding requirements for not more than thirty days, on not more than four occasions in a year and not more than ten percent of the investable funds."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s54641",
+          "quote": "Regulation 16(1)(c) (as substituted w.e.f. 07-08-2024): Category I Alternative Investment Funds shall not borrow funds directly or indirectly or engage in any leverage for the purpose of making investments or otherwise, except for borrowing funds to meet temporary funding requirements and day-to-day operational requirements for not more than thirty days, on not more than four occasions in a year and not more than ten percent of the investable funds."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "question": "Do the original definition of 'representative' and the 2020-amended definition of 'persons associated with investment advice' cover the same set of persons within an investment advisory firm?",
+      "answer": "No, they do not cover the same set of persons. The original definition of 'representative' covers \"an employee or an agent of an investment adviser who renders investment advice on behalf of that investment adviser\". In contrast, the 2020-amended def",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s52001",
+          "quote": "'representative' means an employee or an agent of an investment adviser who renders investment advice on behalf of that investment adviser."
+        },
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s52001",
+          "quote": "'persons associated with investment advice' shall mean any member, partner, officer, director or employee or any sales staff of such investment adviser including any person occupying a similar status or performing a similar function irrespective of the nature of association with the investment adviser who is engaged in providing investment advisory services to the clients of the investment adviser."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_059",
+      "question": "Do the original definition of 'representative' and the 2020-amended definition of 'persons associated with investment advice' cover the same set of persons within an investment advisory firm?",
+      "answer": "No, they do not cover the same set of persons. The original definition of 'representative' covers \"an employee or an agent of an investment adviser who renders investment advice on behalf of that investment adviser\". In contrast, the 2020-amended def",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s52001",
+          "quote": "'representative' means an employee or an agent of an investment adviser who renders investment advice on behalf of that investment adviser."
+        },
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s52001",
+          "quote": "'persons associated with investment advice' shall mean any member, partner, officer, director or employee or any sales staff of such investment adviser including any person occupying a similar status or performing a similar function irrespective of the nature of association with the investment adviser who is engaged in providing investment advisory services to the clients of the investment adviser."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "question": "Do the definitions of 'independent research analyst' and 'part-time research analyst' under SEBI (Research Analysts) Regulations 2014 describe the same type of professional?",
+      "answer": "No, they do not describe the same type of professional. An \"independent research analyst\" is defined as a person whose only business activity is research analysis or preparation and/or publication of research report. In contrast, a \"part-time researc",
+      "citations": [
+        {
+          "doc_id": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070",
+          "section": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070#s79282",
+          "quote": "\"independent research analyst\" means a person whose only business activity is research analysis or preparation and/or publication of research report."
+        },
+        {
+          "doc_id": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070",
+          "section": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070#s79282",
+          "quote": "\"part-time research analyst\" means an individual or a partnership firm who for consideration, is engaged in the business of providing research services and is also engaged in any other business activity or employment."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_043",
+      "question": "Do the definitions of 'independent research analyst' and 'part-time research analyst' under SEBI (Research Analysts) Regulations 2014 describe the same type of professional?",
+      "answer": "No, they do not describe the same type of professional. An \"independent research analyst\" is defined as a person whose only business activity is research analysis or preparation and/or publication of research report. In contrast, a \"part-time researc",
+      "citations": [
+        {
+          "doc_id": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070",
+          "section": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070#s79282",
+          "quote": "\"independent research analyst\" means a person whose only business activity is research analysis or preparation and/or publication of research report."
+        },
+        {
+          "doc_id": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070",
+          "section": "SEBI_2014_securities_and_exchange_board_of_india_research_analyst_070#s79282",
+          "quote": "\"part-time research analyst\" means an individual or a partnership firm who for consideration, is engaged in the business of providing research services and is also engaged in any other business activity or employment."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_113",
+      "question": "An individual investment adviser collected fees of Rs 2.65 crore in the first eight months of the financial year. In the ninth month they collected Rs 0.22 crore and in the tenth month Rs 0.18 crore. At the end of which month is the fee-based transition threshold breached, and what is the total fee at that point?",
+      "answer": "Under Regulation 13(e) of SEBI (Investment Advisers) Regulations, 2013, the fee-based transition threshold is three crore rupees. For an individual investment adviser who collected Rs 2.65 crore in the first eight months and Rs 0.22 crore in the nint",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s91121",
+          "quote": "Regulation 13(e): individuals registered as investment advisers whose number of clients exceed three hundred at any point of time or the fee collected during the financial year exceeds three crore rupees, whichever is earlier shall \u2014 (i) immediately intimate the Administration and Supervisory Body and initiate the process of transition from individual to non-individual investment adviser; and (ii) apply for grant of in-principle approval for registration as non-individual investment adviser within 3 months from the date on which the threshold is reached."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_067",
+      "question": "Using the formula for Adjusted PAT, calculate the Adjusted PAT for a Small Finance Bank with PAT of \u20b917,000 crore and Net NPA of \u20b96,500 crore.",
+      "answer": "Adjusted PAT = PAT - 50% of Net NPA = \u20b917,000 crore - 50% of \u20b96,500 crore = \u20b917,000 crore - \u20b93,250 crore = \u20b913,750 crore (cited from [RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s76076] and [RBI_Reserve_Ba_reserve_bank_",
+      "citations": [
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s76076",
+          "quote": "'Adjusted Profit After Tax (PAT)' means PAT of the financial year for which the dividend is proposed to be paid minus 50 per cent of Net NPA as on March 31 of the financial year for which the dividend is to be paid."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s12627",
+          "quote": "Adjusted PAT, i.e., (C) = (A) - 50% of (B): Rs13,750 crore."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_108",
+      "question": "An individual investment adviser currently has 287 clients. Over the next month, 18 new clients are onboarded. How many total clients does the adviser now have, and by how many clients does this exceed the regulatory threshold that triggers mandatory transition to non-individual status?",
+      "answer": "As of 2020-01-01, the individual investment adviser starts with 287 clients and adds 18 new clients: 287 + 18 = 305 total clients. The regulatory threshold that triggers mandatory transition to non-individual status is exceeding 300 clients. 305 - 30",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s91121",
+          "quote": "Regulation 13(e): individuals registered as investment advisers whose number of clients exceed three hundred at any point of time or the fee collected during the financial year exceeds three crore rupees, whichever is earlier shall \u2014 (i) immediately intimate the Administration and Supervisory Body and initiate the process of transition from individual to non-individual investment adviser; and (ii) apply for grant of in-principle approval for registration as non-individual investment adviser within 3 months from the date on which the threshold is reached."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "question": "Do the original and 2018-amended versions of Regulation 9(f) define the same permissible scope of rating activities for a credit rating agency?",
+      "answer": "No, the original and 2018-amended versions of Regulation 9(f) do not define the same permissible scope of rating activities. The original Regulation 9(f) restricts the activity to \"the rating of securities offered by way of public or rights issue\" wi",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s43786",
+          "quote": "Regulation 9(f) (pre-Second Amendment 2018): a credit rating agency shall not carry out any activity other than the rating of securities offered by way of public or rights issue. Provided that nothing in these regulations shall prohibit a credit rating agency from engaging in any other activity in so far as it may be required by a financial sector regulator."
+        },
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s43786",
+          "quote": "Regulation 9(f) (as substituted w.e.f. 11-09-2018): a credit rating agency shall not carry out any activity other than the rating of securities that are listed or proposed to be listed on a stock exchange recognized by the Board. Nothing contained in these regulations shall preclude a credit rating agency from carrying out any other activity as may be specified by the Board or carrying out rating of financial instruments under the purview of any other financial sector regulator or authority as may be specified by the Board."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_069",
+      "question": "Do the original and 2018-amended versions of Regulation 9(f) define the same permissible scope of rating activities for a credit rating agency?",
+      "answer": "No, the original and 2018-amended versions of Regulation 9(f) do not define the same permissible scope of rating activities. The original Regulation 9(f) restricts the activity to \"the rating of securities offered by way of public or rights issue\" wi",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s43786",
+          "quote": "Regulation 9(f) (pre-Second Amendment 2018): a credit rating agency shall not carry out any activity other than the rating of securities offered by way of public or rights issue. Provided that nothing in these regulations shall prohibit a credit rating agency from engaging in any other activity in so far as it may be required by a financial sector regulator."
+        },
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s43786",
+          "quote": "Regulation 9(f) (as substituted w.e.f. 11-09-2018): a credit rating agency shall not carry out any activity other than the rating of securities that are listed or proposed to be listed on a stock exchange recognized by the Board. Nothing contained in these regulations shall preclude a credit rating agency from carrying out any other activity as may be specified by the Board or carrying out rating of financial instruments under the purview of any other financial sector regulator or authority as may be specified by the Board."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_TMP_007",
+      "question": "Before 7 September 2021, which SEBI regulations were cross-referenced in SEBI LODR Regulations 2015 for the definition of 'non-convertible debt securities'?",
+      "answer": "Before 7 September 2021, 'non-convertible debt securities' in SEBI LODR Regulations was cross-referenced to the SEBI (Issue and Listing of Debt Securities) Regulations, 2008.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2015_securities_and_exchange_board_of_india_listing_obligati_067",
+          "section": "SEBI_2015_securities_and_exchange_board_of_india_listing_obligati_067#s56975",
+          "quote": "Before substitution, clause (t) defined non-convertible debt securities as 'debt securities' as defined under the SEBI (Issue and Listing of Debt Securities) Regulations, 2008."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "internal-004",
+      "question": "What is the permitted range for a hardship plan term?",
+      "answer": "The permitted range for a hardship plan term is between one and six months, as stated in HARBOUR_internal_servicing_policy#s00004 (\"the term requested is between one and six months\"). A term longer than six months must be escalated (HARBOUR_internal_",
+      "citations": [
+        {
+          "doc_id": "HARBOUR_internal_servicing_policy",
+          "section": "HARBOUR_internal_servicing_policy#s00004",
+          "quote": "the term requested is between **one and six months**."
+        },
+        {
+          "doc_id": "HARBOUR_internal_servicing_policy",
+          "section": "HARBOUR_internal_servicing_policy#s00004",
+          "quote": "A term longer than six months, a second concurrent plan, or a loan younger than six months must be escalated."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "question": "Under SEBI Settlement Proceedings Regulations 2018, what is the total maximum number of calendar days from the date of service of a show cause notice within which a settlement application can be filed (including the initial sixty-day window and the additional delayed period)?",
+      "answer": "Under SEBI Settlement Proceedings Regulations 2018, an initial sixty-day window is allowed from the date of service of the notice to show cause (SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s60150). A delayed application is p",
+      "citations": [
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s60150",
+          "quote": "An application in respect of any specified proceeding pending before the Board shall not be considered if it is made after sixty days from the date of service of the notice to show cause."
+        },
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s60150",
+          "quote": "No such delayed application shall be considered if the application is filed after one hundred and twenty calendar days from the expiry of the sixty-day period."
+        },
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s90304",
+          "quote": "Provided that no such delayed application shall be considered if the application is filed after one hundred and twenty calendar days from the expiry of the period specified in sub-regulation (1) or after the first hearing, whichever is earlier."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_007",
+      "question": "Under SEBI Settlement Proceedings Regulations 2018, what is the total maximum number of calendar days from the date of service of a show cause notice within which a settlement application can be filed (including the initial sixty-day window and the additional delayed period)?",
+      "answer": "Under SEBI Settlement Proceedings Regulations 2018, an initial sixty-day window is allowed from the date of service of the notice to show cause (SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s60150). A delayed application is p",
+      "citations": [
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s60150",
+          "quote": "An application in respect of any specified proceeding pending before the Board shall not be considered if it is made after sixty days from the date of service of the notice to show cause."
+        },
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s60150",
+          "quote": "No such delayed application shall be considered if the application is filed after one hundred and twenty calendar days from the expiry of the sixty-day period."
+        },
+        {
+          "doc_id": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064",
+          "section": "SEBI_2018_securities_and_exchange_board_of_india_settlement_proce_064#s90304",
+          "quote": "Provided that no such delayed application shall be considered if the application is filed after one hundred and twenty calendar days from the expiry of the period specified in sub-regulation (1) or after the first hearing, whichever is earlier."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_119",
+      "question": "An AIF Manager plans to launch a new scheme on October 15, 2025. By what date must the placement memorandum be filed with SEBI under SEBI AIF Regulations, 2012?",
+      "answer": "Under Regulation 12(2), the placement memorandum must be filed with the Board through a merchant banker at least thirty days prior to the launch of the scheme. For a scheme launching on October 15, 2025 (October 15, 2025 - 30 days = September 15, 202",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s71882",
+          "quote": "Such placement memorandum shall be filed with the Board through a merchant banker atleast thirty days prior to launch of scheme along with the fees as specified in the Second Schedule: Provided that payment of scheme fees shall not apply in case of launch of first scheme by the Alternative Investment Fund."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_033",
+      "question": "Under SEBI (InvIT) Regulations 2014, if an entity associated with the InvIT has a gross turnover of ten crore rupees, what is the maximum permissible pecuniary relationship an independent director candidate may have with it \u00e2\u20ac\u201d applying the two per cent cap or the fifty lakh rupee cap?",
+      "answer": "Under the SEBI (InvIT) Regulations 2014, the pecuniary relationship shall \"not exceed two percent of its gross turnover or total income or fifty lakh rupees or such higher amount as may be specified from time to time, whichever is lower\". Given a gro",
+      "citations": [
+        {
+          "doc_id": "SEBI_2014_securities_and_exchange_board_of_india_infrastructure_i_091",
+          "section": "SEBI_2014_securities_and_exchange_board_of_india_infrastructure_i_091#s03392",
+          "quote": "the aggregate of which in relation to points (A) to (D) shall not exceed two percent of its gross turnover or total income or fifty lakh rupees or such higher amount as may be specified from time to time, whichever is lower."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_010",
+      "question": "Under SEBI LODR Regulations 2015, if a listed entity holds its first board meeting on 1 April of a financial year, by what latest date must the second board meeting be held?",
+      "answer": "According to Securities and exchange board of india listing obligati (in force since 2015-01-01): \"The SEBI (LODR) Regulations, 2015 were published in the Official Gazette on 2nd September 2015, and shall come into force on the ninetieth day from the",
+      "citations": [
+        {
+          "doc_id": "SEBI_2015_securities_and_exchange_board_of_india_listing_obligati_067",
+          "section": "SEBI_2015_securities_and_exchange_board_of_india_listing_obligati_067#s05455",
+          "quote": "The SEBI (LODR) Regulations, 2015 were published in the Official Gazette on 2nd September 2015, and shall come into force on the ninetieth day from the date of their publication: Provided that the provisions of sub-regulation (4) of regulation 23 and regulation 31A shall come into force on the date of notification of these regulations. The definition of 'mainstream media' was inserted by the SEBI (LODR) (Second Amendment) Regulations, 2023 w.e.f. 15.7.2023."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "question": "Does the original definition of 'large value fund for accredited investors' and the November 2025-amended definition impose the same minimum investment threshold per investor?",
+      "answer": "No, the original definition imposes a minimum investment of seventy crore rupees, whereas the November 2025-amended definition imposes a minimum investment of twenty-five crore rupees.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s79532",
+          "quote": "Regulation 2(1)(pa) (before November 2025 amendment): 'large value fund for accredited investors' means an Alternative Investment Fund or scheme of an Alternative Investment Fund in which each investor (other than the Manager, Sponsor, employees or directors of the Alternative Investment Fund or employees or directors of the Manager) is an accredited investor and invests not less than seventy crore rupees."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s79532",
+          "quote": "Regulation 2(1)(pa) (as amended w.e.f. 19-11-2025): 'large value fund for accredited investors' means an Alternative Investment Fund or scheme of an Alternative Investment Fund in which each investor (other than the Manager, Sponsor, employees or directors of the Alternative Investment Fund or employees or directors of the Manager) is an accredited investor and invests not less than twenty-five crore rupees."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_062",
+      "question": "Does the original definition of 'large value fund for accredited investors' and the November 2025-amended definition impose the same minimum investment threshold per investor?",
+      "answer": "No, the original definition imposes a minimum investment of seventy crore rupees, whereas the November 2025-amended definition imposes a minimum investment of twenty-five crore rupees.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s79532",
+          "quote": "Regulation 2(1)(pa) (before November 2025 amendment): 'large value fund for accredited investors' means an Alternative Investment Fund or scheme of an Alternative Investment Fund in which each investor (other than the Manager, Sponsor, employees or directors of the Alternative Investment Fund or employees or directors of the Manager) is an accredited investor and invests not less than seventy crore rupees."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s79532",
+          "quote": "Regulation 2(1)(pa) (as amended w.e.f. 19-11-2025): 'large value fund for accredited investors' means an Alternative Investment Fund or scheme of an Alternative Investment Fund in which each investor (other than the Manager, Sponsor, employees or directors of the Alternative Investment Fund or employees or directors of the Manager) is an accredited investor and invests not less than twenty-five crore rupees."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_107",
+      "question": "An investment adviser provides investment advice to a client on November 15, 2023. Under SEBI IA Regulations, 2013, what is the earliest date on which the records related to this advice may lawfully be destroyed?",
+      "answer": "According to Securities and exchange board of india investment advis (in force since 2013-01-01): \"Regulation 21(1) (original, pre-2023): An investment adviser shall redress client grievances promptly. [As amended by SEBI (Facilitation of Grievance R",
+      "citations": [
+        {
+          "doc_id": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071",
+          "section": "SEBI_2013_securities_and_exchange_board_of_india_investment_advis_071#s61227",
+          "quote": "Regulation 21(1) (original, pre-2023): An investment adviser shall redress client grievances promptly. [As amended by SEBI (Facilitation of Grievance Redressal Mechanism) (Amendment) Regulations, 2023, w.e.f. 18-08-2023]: The Investment Adviser shall redress investor grievances promptly but not later than twenty-one calendar days from the date of receipt of the grievance and in such manner as may be specified by the Board."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_132",
+      "question": "An acquirer holds 28% voting rights in a listed company with 10 crore total shares outstanding. What is the maximum number of additional shares they can acquire in financial year 2024-25 without triggering a mandatory open offer under Regulation 3(2)?",
+      "answer": "As of the as-of date of 2020-01-01, under Regulation 3(2), an acquirer holding 28% (which is 25% or more but less than the maximum permissible non-public shareholding) cannot acquire within any financial year additional shares or voting rights entitl",
+      "citations": [
+        {
+          "doc_id": "SEBI_2011_securities_and_exchange_board_of_india_substantial_acqu_073",
+          "section": "SEBI_2011_securities_and_exchange_board_of_india_substantial_acqu_073#s52663",
+          "quote": "Regulation 3(2): No acquirer who together with persons acting in concert holds 25% or more but less than the maximum permissible non-public shareholding, shall acquire within any financial year additional shares or voting rights entitling them to exercise more than five per cent of the voting rights, unless an open offer is made."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_REG_167",
+      "question": "Who are the eligible categories of promoters for a credit rating agency under SEBI (CRA) Regulations, 1999?",
+      "answer": "According to Securities and exchange board of india credit rating ag (in force since 1999-01-01): \"Regulation 2(h) \u2014 definition of 'credit rating agency' (pre-2021): rating of securities offered by way of public or rights issue. [Amended by SEBI (CRA",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s41491",
+          "quote": "Regulation 2(h) \u2014 definition of 'credit rating agency' (pre-2021): rating of securities offered by way of public or rights issue. [Amended by SEBI (CRA) (Amendment) Regulations, 2021 w.e.f. 03-08-2021]: rating of securities that are listed or proposed to be listed on a stock exchange recognized by the Board."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "question": "What is the maximum number of investors permitted in a single scheme of an Alternative Investment Fund under SEBI AIF Regulations, 2012? Are accredited investors counted toward this limit?",
+      "answer": "As of 2020-01-01, no scheme of the Alternative Investment Fund shall have more than one thousand investors, and all investors including accredited investors were counted toward this limit.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s85569",
+          "quote": "Prior to this amendment, all investors including accredited investors were counted toward the 1,000 cap."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s51862",
+          "quote": "No scheme of the Alternative Investment Fund shall have more than one thousand investors."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_REG_156",
+      "question": "What is the maximum number of investors permitted in a single scheme of an Alternative Investment Fund under SEBI AIF Regulations, 2012? Are accredited investors counted toward this limit?",
+      "answer": "As of 2020-01-01, no scheme of the Alternative Investment Fund shall have more than one thousand investors, and all investors including accredited investors were counted toward this limit.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s85569",
+          "quote": "Prior to this amendment, all investors including accredited investors were counted toward the 1,000 cap."
+        },
+        {
+          "doc_id": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072",
+          "section": "SEBI_2012_securities_and_exchange_board_of_india_alternative_inve_072#s51862",
+          "quote": "No scheme of the Alternative Investment Fund shall have more than one thousand investors."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_REG_017",
+      "question": "Under SEBI Mutual Funds Regulations, what is the maximum exit load that an open-ended mutual fund scheme can charge investors?",
+      "answer": "Under SEBI (Mutual Funds) Regulations, as of 2031-01-01, the exit load of an open-ended mutual fund scheme shall not exceed three per cent of the applicable net asset value.",
+      "citations": [
+        {
+          "doc_id": "SEBI_2026_securities_and_exchange_board_of_india_mutual_funds_reg_050",
+          "section": "SEBI_2026_securities_and_exchange_board_of_india_mutual_funds_reg_050#s43617",
+          "quote": "The exit load of an open-ended mutual fund scheme shall not exceed three per cent of the applicable net asset value."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_039",
+      "question": "Under SEBI (FPI) Regulations 2019, if a designated depository participant application is received by SEBI on 1 March, additional information is called for on 10 March, and the applicant furnishes the information on 25 March, by what date must SEBI dispose of the application?",
+      "answer": "Under SEBI (FPI) Regulations 2019, SEBI shall dispose of the application \"not later than thirty days after receipt of application by the Board or, after all the information called for under regulation 12 has been furnished, whichever is later\" [SEBI_",
+      "citations": [
+        {
+          "doc_id": "SEBI_2019_securities_and_exchange_board_of_india_foreign_portfoli_060",
+          "section": "SEBI_2019_securities_and_exchange_board_of_india_foreign_portfoli_060#s55664",
+          "quote": "The Board shall dispose of the application for grant of approval as soon as possible but not later than thirty days after receipt of application by the Board or, after all the information called for under regulation 12 has been furnished, whichever is later."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "question": "In Illustration 3, a bank has PAT of Rs1,500 crore, Net NPA of Rs300 crore, Tier 1 ratio of 24.36%, and has already paid interim dividend of Rs500 crore. What is the maximum final dividend it may pay?",
+      "answer": "In Illustration 3, the maximum eligible dividend (G) is Rs1,125 crore, and the interim dividend paid (H) is Rs500 crore. The final dividend shall not be more than (G) - (H), which is Rs1,125 crore - Rs500 crore = Rs625 crore.",
+      "citations": [
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "Maximum Eligible Dividend (G = Lower of E or F): Rs1,125 crore."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "Interim dividend paid for FY 20X1-20X2 (H): Rs500 crore."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "As the bank has already paid interim dividend of Rs500 crore, the final dividend shall not be more than (G) - (H)."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "question": "In Illustration 3, a bank has PAT of Rs1,500 crore, Net NPA of Rs300 crore, Tier 1 ratio of 24.36%, and has already paid interim dividend of Rs500 crore. What is the maximum final dividend it may pay?",
+      "answer": "In Illustration 3, the maximum eligible dividend (G) is Rs1,125 crore, and the interim dividend paid (H) is Rs500 crore. The final dividend shall not be more than (G) - (H), which is Rs1,125 crore - Rs500 crore = Rs625 crore.",
+      "citations": [
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "Maximum Eligible Dividend (G = Lower of E or F): Rs1,125 crore."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "Interim dividend paid for FY 20X1-20X2 (H): Rs500 crore."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "As the bank has already paid interim dividend of Rs500 crore, the final dividend shall not be more than (G) - (H)."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_096",
+      "question": "In Illustration 3, a bank has PAT of Rs1,500 crore, Net NPA of Rs300 crore, Tier 1 ratio of 24.36%, and has already paid interim dividend of Rs500 crore. What is the maximum final dividend it may pay?",
+      "answer": "In Illustration 3, the maximum eligible dividend (G) is Rs1,125 crore, and the interim dividend paid (H) is Rs500 crore. The final dividend shall not be more than (G) - (H), which is Rs1,125 crore - Rs500 crore = Rs625 crore.",
+      "citations": [
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "Maximum Eligible Dividend (G = Lower of E or F): Rs1,125 crore."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "Interim dividend paid for FY 20X1-20X2 (H): Rs500 crore."
+        },
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s20443",
+          "quote": "As the bank has already paid interim dividend of Rs500 crore, the final dividend shall not be more than (G) - (H)."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_NUM_098",
+      "question": "Under the RBI SFB Dividend Directions, 2026, what are the permitted dividend percentages of Adjusted PAT for an SFB in Bucket B1 (Tier 1 ratio \u22647.5%) versus Bucket B10 (Tier 1 ratio >19.5%)?",
+      "answer": "According to RBI Reserve Ba reserve bank of india small finance banks prudential no (in force since 2020-01-01): \"Passage A:\nBucket B1: Tier 1 Capital Ratio as at the end of previous FY: Up to 7.5% \u2014 Dividend allowed as a % of adjusted PAT for the pe",
+      "citations": [
+        {
+          "doc_id": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099",
+          "section": "RBI_Reserve_Ba_reserve_bank_of_india_small_finance_banks_prudential_no_099#s26536",
+          "quote": "Passage A:\nBucket B1: Tier 1 Capital Ratio as at the end of previous FY: Up to 7.5% \u2014 Dividend allowed as a % of adjusted PAT for the period: 0."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "question": "Do the original and 2018-amended versions of Regulation 16(3) provide the same grounds for a credit rating agency to withdraw a rating of an outstanding security?",
+      "answer": "No, the original and 2018-amended versions do not provide the exact same grounds. The original version of Regulation 16(3) allows a credit rating agency to withdraw a rating only \"where the company whose security is rated is wound up or merged or ama",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s16304",
+          "quote": "Regulation 16(3) (pre-2018): A credit rating agency shall not withdraw a rating so long as the obligations under the security rated by it are outstanding, except where the company whose security is rated is wound up or merged or amalgamated with another company."
+        },
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s16304",
+          "quote": "Regulation 16(3) (as substituted w.e.f. 30-05-2018): A credit rating agency shall not withdraw a rating so long as the obligations under the security rated by it are outstanding, except where the company whose security is rated is wound up or merged or amalgamated with another company, or as may be specified by the Board from time to time."
+        }
+      ],
+      "verbatim": true
+    },
+    {
+      "id": "indiafinbench_CON_070",
+      "question": "Do the original and 2018-amended versions of Regulation 16(3) provide the same grounds for a credit rating agency to withdraw a rating of an outstanding security?",
+      "answer": "No, the original and 2018-amended versions do not provide the exact same grounds. The original version of Regulation 16(3) allows a credit rating agency to withdraw a rating only \"where the company whose security is rated is wound up or merged or ama",
+      "citations": [
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s16304",
+          "quote": "Regulation 16(3) (pre-2018): A credit rating agency shall not withdraw a rating so long as the obligations under the security rated by it are outstanding, except where the company whose security is rated is wound up or merged or amalgamated with another company."
+        },
+        {
+          "doc_id": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085",
+          "section": "SEBI_1999_securities_and_exchange_board_of_india_credit_rating_ag_085#s16304",
+          "quote": "Regulation 16(3) (as substituted w.e.f. 30-05-2018): A credit rating agency shall not withdraw a rating so long as the obligations under the security rated by it are outstanding, except where the company whose security is rated is wound up or merged or amalgamated with another company, or as may be specified by the Board from time to time."
+        }
+      ],
+      "verbatim": true
+    }
+  ],
+  "method_note": "Offline replay of complete v5 substitute-judge sidecar. Incorrect answers truncated at 400 characters; full outputs remain in raw answers artifact. Each unsupported entry identifies a failed citation verdict but contains all citations of its parent row, not an isolated bad-citation index. Cause labels are manual hypotheses, not official judgments.",
+  "cause_counts": {
+    "extractive_wrong_passage": 9,
+    "refusal_on_answerable": 2,
+    "incomplete_answer": 5,
+    "gold_as_of_tension": 2,
+    "wrong_threshold_interpretation": 1,
+    "judge_disagreement_answer_matches_gold": 1
+  }
+}

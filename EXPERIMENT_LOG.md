@@ -592,8 +592,8 @@ not the only difference.
 
 - v5 judged failure analysis (substitute judge, diagnostic): 20 incorrect,
   34 unsupported citations (24 rows). Buckets: extractive wrong-passage 9,
-  refusal-on-answerable 2, llm incomplete 4, temporal-gold conflict 2
-  (spec tension, kept), other 3.
+  refusal-on-answerable 2, llm incomplete 5, temporal-gold conflict 2
+  (spec tension, kept), threshold interpretation 1, judge disagreement 1.
 - Score-floor design rejected with evidence (no separation:
   correct 20.7-50.4 vs wrong 15.2-41.4); gold section present in top-6
   for 5/9 wrong extractive rows, chooser ceiling ~0.667.
@@ -604,3 +604,23 @@ not the only difference.
   IST), then a budget-2200 cost arm.
 - Deterministic gates green pre-judging: 67 tests OK; self-check schema
   1.0, verbatim 1.0, coverage 0.9832, composition 117/21/8.
+
+## 2026-11-23 freshness restart verification
+
+- Checked the live official problem statement and freshness contract. The
+  contract is a same-format CORPUS_DIR replacement and script restart, not
+  support for arbitrary raw document formats.
+- Ran only scripts/reproduce.sh against a brand-new single-document corpus
+  and absent index. /healthz returned 200 and /ask cited its unseen doc ID
+  with the 7-day rule. Changed the source at the same corpus path, updated
+  the checksum, restarted the same script: hash changed, embeddings rebuilt,
+  answer and quote changed to 9 days without stale 7-day text. Both fixture
+  versions validated cleanly. Evidence: results/raw/freshness_restart_2026-11-23.json.
+- Larger changed-copy test also rebuilt and served edited/new content;
+  unchanged restart reused the cache. Original working index restored.
+- No freshness-path code change was needed. BM25/IDF, roles and version maps
+  are reconstructed from supplied data. Refusal thresholds remain dev-tuned
+  constants; their unseen-corpus quality is not proven by this smoke test.
+- Setup requires pinned Python dependencies (network unless wheels provided).
+  Generic encoder weights ship; old index/results are not needed. Missing
+  gateway credentials select offline extraction, not our model-scored mode.

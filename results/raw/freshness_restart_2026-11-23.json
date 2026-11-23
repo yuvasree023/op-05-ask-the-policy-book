@@ -1,0 +1,71 @@
+{
+  "test": "fresh empty index, unseen one-doc corpus, same-path update and restart using only reproduce.sh",
+  "before": {
+    "days": 7,
+    "answer": {
+      "id": "unseen-question",
+      "status": "answered",
+      "answer": "According to Synthetic filing return deadline (in force since 2026-01-01): \"The synthetic filing return deadline is 7 days after the end of each month.\"",
+      "citations": [
+        {
+          "doc_id": "FRESH_NEW_RULE",
+          "section": "FRESH_NEW_RULE#s00000",
+          "quote": "The synthetic filing return deadline is 7 days after the end of each month."
+        }
+      ],
+      "confidence": 0.0328,
+      "cost_usd": 0.0,
+      "latency_ms": 2.9
+    },
+    "ingest": {
+      "corpus_dir": "/tmp/op05-freshness-nvtuj_4i/corpus",
+      "index_dir": "/tmp/op05-freshness-nvtuj_4i/index",
+      "corpus_hash": "6c490839e3641cec1e71bd0e944a11e4d951a179d78c51e1088e57b9df1fdde3",
+      "documents": 1,
+      "sections": 1,
+      "validation": [],
+      "embedding_model": "all-MiniLM-L6-v2 (quantized ONNX, Xenova export, vendored)",
+      "skipped": false,
+      "chunks": 1,
+      "sections_split": 0,
+      "embedding_dim": 384,
+      "embed_seconds": 0.074,
+      "index_seconds": 0.001,
+      "seconds": 0.076
+    }
+  },
+  "after": {
+    "days": 9,
+    "answer": {
+      "id": "unseen-question",
+      "status": "answered",
+      "answer": "According to Synthetic filing return deadline (in force since 2026-01-01): \"The synthetic filing return deadline is 9 days after the end of each month.\"",
+      "citations": [
+        {
+          "doc_id": "FRESH_NEW_RULE",
+          "section": "FRESH_NEW_RULE#s00000",
+          "quote": "The synthetic filing return deadline is 9 days after the end of each month."
+        }
+      ],
+      "confidence": 0.0328,
+      "cost_usd": 0.0,
+      "latency_ms": 3.9
+    },
+    "ingest": {
+      "corpus_dir": "/tmp/op05-freshness-nvtuj_4i/corpus",
+      "index_dir": "/tmp/op05-freshness-nvtuj_4i/index",
+      "corpus_hash": "c895ad81571013a51f9510866a733b74a7e8ced04104153936aa99ae89e39e5f",
+      "documents": 1,
+      "sections": 1,
+      "validation": [],
+      "embedding_model": "all-MiniLM-L6-v2 (quantized ONNX, Xenova export, vendored)",
+      "skipped": false,
+      "chunks": 1,
+      "sections_split": 0,
+      "embedding_dim": 384,
+      "embed_seconds": 0.087,
+      "index_seconds": 0.002,
+      "seconds": 0.089
+    }
+  }
+}

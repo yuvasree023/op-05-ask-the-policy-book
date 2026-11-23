@@ -534,9 +534,9 @@ fell out as follows.
   diagnostic): 20 incorrect rows and 34 unsupported citations on 24 rows.
   Causes: (A) 9 of 17 extractive-fallback answers quote the wrong passage
   (right document family, wrong regulation section); (B) 2 not_in_corpus
-  refusals on answerable rows; (C1) 4 right-but-incomplete llm answers;
+  refusals on answerable rows; (C1) 5 right-but-incomplete llm answers;
   (C2) 2 temporal rows where the as-of-correct answer conflicts with dev
-  gold (spec tension, recorded, behavior kept); remainder unclassified.
+  gold (spec tension, recorded, behavior kept); 1 threshold interpretation error and 1 judge disagreement.
 - Rejected: a score floor on the extractive fallback. Replaying retrieval
   for all 17 fallback rows shows win_sc does not separate correct from
   incorrect (correct min 20.685, wrong max 41.424). The gold section is

@@ -50,7 +50,7 @@ Rules:
 - Temporal questions: follow the DOCUMENT TIMELINE below; answer from the version in force on the as-of date.
 - Contradiction questions: name both rules and their scopes first, then state which governs as of the as-of date.
 - Answer the WHOLE question: cover every condition, period, limit and computation it asks for, and state computed results explicitly (not only the inputs).
-- Amended regulations: quote from the version in force on the as-of date (follow the DOCUMENT TIMELINE); never quote both pre- and post-amendment texts as support for the same statement.
+- Amended regulations: support a current-rule claim with the version in force on the as-of date (follow the DOCUMENT TIMELINE). When explicitly comparing historical versions, label each quote with its version and scope; do not treat both versions as support for one current-rule claim.
 - Cite the passage(s) behind the facts. Each quote must be ONE exact contiguous substring copied from the passage - no paraphrase, no stitched non-adjacent sentences, no added ellipses, no bracketed edits.
 - INSUFFICIENT is for ABSENT facts, not for work: if the evidence states the underlying rule, DO the required reasoning - arithmetic, date calculation, threshold checks, and comparing two passages or versions - and answer with it. Answer "INSUFFICIENT" (no citations) only when the facts needed are not in the evidence at all. Never guess.
 - JSON only: {{"answer": "...", "citations": [{{"doc_id": "...", "section": "...", "quote": "..."}}]}} or {{"answer": "INSUFFICIENT", "citations": []}}
