@@ -565,3 +565,25 @@ idle gaps plus at least one genuine hung HTTPS read; a supervisor with
 an mtime watchdog (kill+resume on >150s staleness) and keeping the box
 active restored full speed. Concurrency (4 parallel streams) made
 things worse, not better - single-stream only on this egress path.
+
+## 2026-11-23 (contd) - Cost variant v5b2600: generated, judged pass quota-blocked
+
+OP05_GEN_EV_CHAR_BUDGET=2600 (env only, current code incl. review-2 fixes):
+146/146 rows, composition unchanged (117 answered/21 np/8 nic), all
+deterministic gates green (schema 1.0, verbatim 1.0, refusals 1.0/1.0,
+0 role violations). Input tokens: 152,856 over 146 questions = 1047 per
+question - down 7% from v5's ~1127 but still ~4% over the 1005
+reference bar; prompt+timeline overhead beyond the evidence budget is
+the remainder. A further env-only drop to ~2200 chars is the obvious
+next lever. Artifacts: results/raw/answers_dev_llm_v5b2600_2026-11-23.jsonl
+(+ checkpoint, + .nojudge.json report).
+
+Judged pass (same low-effort substitute-judge config) reached 105/117
+correctness and 114/131 support verdicts, then the free-tier daily
+quota (500 RPD/project, both projects) exhausted mid-pass: HTTP 429,
+grader aborted loudly by design. Remaining ~35 verdicts resume from the
+content-keyed sidecar (judge_verdicts_v5b2600_loweffort_2026-11-23.jsonl,
+labeled PARTIAL) after the daily reset (~00:00 US Pacific = 13:30 IST).
+Caveat for the eventual comparison: v5 was generated on pre-review-2
+code, v5b2600 on post-review-2 code - the budget is the dominant but
+not the only difference.
