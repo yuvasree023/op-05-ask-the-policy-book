@@ -587,3 +587,20 @@ labeled PARTIAL) after the daily reset (~00:00 US Pacific = 13:30 IST).
 Caveat for the eventual comparison: v5 was generated on pre-review-2
 code, v5b2600 on post-review-2 code - the budget is the dominant but
 not the only difference.
+
+## 2026-11-23 v6 prep (offline failure analysis + fixes, no API spend)
+
+- v5 judged failure analysis (substitute judge, diagnostic): 20 incorrect,
+  34 unsupported citations (24 rows). Buckets: extractive wrong-passage 9,
+  refusal-on-answerable 2, llm incomplete 4, temporal-gold conflict 2
+  (spec tension, kept), other 3.
+- Score-floor design rejected with evidence (no separation:
+  correct 20.7-50.4 vs wrong 15.2-41.4); gold section present in top-6
+  for 5/9 wrong extractive rows, chooser ceiling ~0.667.
+- v6 = prompt completeness + in-force-version citation rules (llm.py
+  PROMPT) + OP05_GEN_INSUFFICIENT_RETRY=1 at run level, budget held at
+  3000 to isolate from the cost arm. Awaited: judged v6 vs v5 under the
+  same low-effort substitute judge after quota reset (2026-11-24 ~13:30
+  IST), then a budget-2200 cost arm.
+- Deterministic gates green pre-judging: 67 tests OK; self-check schema
+  1.0, verbatim 1.0, coverage 0.9832, composition 117/21/8.

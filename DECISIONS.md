@@ -527,3 +527,42 @@ fell out as follows.
 - All judged numbers here are substitute-judge diagnostics, never
   official scores; comparisons across judge configurations are invalid
   and the thinking-mode numbers are retained only as history.
+
+## 40. v6 failure-analysis fixes: prompt rules + INSUFFICIENT-retry arm (2026-11-23)
+
+- Offline failure analysis over the v5 judged pass (substitute judge,
+  diagnostic): 20 incorrect rows and 34 unsupported citations on 24 rows.
+  Causes: (A) 9 of 17 extractive-fallback answers quote the wrong passage
+  (right document family, wrong regulation section); (B) 2 not_in_corpus
+  refusals on answerable rows; (C1) 4 right-but-incomplete llm answers;
+  (C2) 2 temporal rows where the as-of-correct answer conflicts with dev
+  gold (spec tension, recorded, behavior kept); remainder unclassified.
+- Rejected: a score floor on the extractive fallback. Replaying retrieval
+  for all 17 fallback rows shows win_sc does not separate correct from
+  incorrect (correct min 20.685, wrong max 41.424). The gold section is
+  inside the top-6 candidate pool for 5 of 9 wrong rows - the deterministic
+  sentence chooser picks wrong among available candidates, and its measured
+  ceiling is ~0.667 gold-section choice, so no threshold fixes this class.
+- Fix 1 (shipped): two prompt rules in the base PROMPT - answer the WHOLE
+  question (every condition, period, limit, computation; state computed
+  results explicitly) and quote only the regulation version in force on the
+  as-of date, never both pre- and post-amendment texts for one statement.
+  Targets C1 completeness and the CON-slice dual-version citation pattern
+  behind the largest cluster of unsupported citations.
+- Fix 2 (armed, env-gated): run the v6 experiment with
+  OP05_GEN_INSUFFICIENT_RETRY=1. The extractive fallback answers 17 rows
+  at 8/17 correct while llm answers run ~91% correct; the retry gives
+  INSUFFICIENT rows a second llm attempt. The flag already exists
+  (DECISIONS 35), default OFF; v6 enables it at the environment level so
+  the code default only flips on judged evidence. Cost consequence:
+  ~14 extra calls, which pushes input tokens per question further over
+  the 1005 bar - the accuracy and cost levers conflict, so v6 is the
+  accuracy arm and a separate budget-2200 cost arm follows under its own
+  judged pass rather than stacking both changes in one run.
+- Confound label: v6 changes prompt text AND retry behaviour vs v5 with
+  the evidence budget held at the v5 value, so a regression cannot be
+  attributed per-change; the fallback plan isolates (v7 = retry only).
+- Gates: 67 unit tests pass; deterministic self-check unchanged
+  (schema 1.0, verbatim 1.0, coverage 0.9832, composition 117/21/8) -
+  the prompt rules touch only the llm path; offline extractive output is
+  byte-stable. Judged validation is queued for the post-quota-reset run.

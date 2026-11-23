@@ -5,6 +5,7 @@
     "judge_calls": 0,
     "judge_enabled": false,
     "judge_errors": 0,
+    "judge_key_fallback_used": false,
     "schema_valid_rate": 1.0,
     "answer_accuracy": null,
     "citation_verbatim_rate": 1.0,
@@ -2794,6 +2795,11 @@
       "support": null
     },
     {
+      "id": "indiafinbench_NUM_074",
+      "verbatim": true,
+      "support": null
+    },
+    {
       "id": "indiafinbench_REG_154",
       "verbatim": true,
       "support": null
@@ -2850,11 +2856,6 @@
     },
     {
       "id": "indiafinbench_REG_018",
-      "verbatim": true,
-      "support": null
-    },
-    {
-      "id": "indiafinbench_REG_120",
       "verbatim": true,
       "support": null
     },
