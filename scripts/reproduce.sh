@@ -52,6 +52,7 @@ else
     -r requirements.txt
 fi
 
+echo "[1/4] Python environment and dependencies ready"
 export CORPUS_DIR="${CORPUS_DIR:-./data/corpus}"
 export INDEX_DIR="${INDEX_DIR:-./.index}"
 
@@ -64,18 +65,24 @@ for a in "$@"; do
   esac
 done
 
+echo "[2/4] Ingesting corpus and building index ($CORPUS_DIR)"
 ./.venv/bin/python -m policybook.ingest "${ARGS[@]+"${ARGS[@]}"}"
 
 if [ "$SELFCHECK" = "1" ]; then
   QUESTIONS_FILE="${QUESTIONS_FILE:-./data/questions_dev.jsonl}"
   if [ "${RETRIEVAL_EVAL:-1}" != "0" ] && [ -f "$QUESTIONS_FILE" ]; then
+    echo "[3/4] Retrieval evaluation on dev questions"
     ./.venv/bin/python -m policybook.retrieve_eval --questions "$QUESTIONS_FILE"
   fi
   JUDGE_ARGS=()
   if [ "${JUDGE:-0}" = "1" ]; then JUDGE_ARGS+=(--judge); fi
+  echo "[4/4] Answering dev questions and grading"
   ./.venv/bin/python -m policybook.answer_eval --questions "$QUESTIONS_FILE" "${JUDGE_ARGS[@]+"${JUDGE_ARGS[@]}"}"
+  ./.venv/bin/python scripts/print_scores.py results/grader_dev_report.json
+  echo "Answers: results/answers_dev.jsonl | Full report: results/grader_dev_report.json"
   exit 0
 fi
 
 export PORT="${PORT:-8000}"
+echo "[3/3] Starting service on port $PORT (GET /healthz, POST /ask)"
 exec ./.venv/bin/python -m policybook.service
