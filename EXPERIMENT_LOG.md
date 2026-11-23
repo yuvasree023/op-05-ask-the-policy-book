@@ -512,3 +512,31 @@ v3 and v4A runs. This is submission-evidence cleanup only: judged quality
 remains below the 0.88/0.82 bars, semantic role review, freshness pack,
 official judge, independent cost and concurrency-12 latency remain
 unverified, and LICENSE/private-reviewer/submission decisions remain held.
+
+## 2026-11-23 - v5 run and second outside review
+
+v5 generation (commit 93d701a): 146/146 dev rows, 100 model / 17
+extractive answered, 8 not_in_corpus, 21 not_permitted; 164,578 input /
+28,752 output tokens (list-price equivalent 0.1213 USD, actual cost 0 on
+free tier). Extractive-fallback share dropped from 34% (v2) to 14.5%.
+Input average ~1127 tokens/question exceeds the 1005 reference bar; an
+env-only variant (OP05_GEN_EV_CHAR_BUDGET=2600) is the planned cost
+lever, no code change. Artifacts: results/raw/answers_dev_llm_v5_2026-
+11-23.jsonl, checkpoint, and RUNSTATE.md under results/raw/v5_2026-11-
+23/ (commit 2ae0b63).
+
+Second outside review (19 claims, user-pasted): verified one by one
+against the code - 12 applied, 2 already fixed by v5, 4 deferred with
+documented reasons, 1 premise unverified (measured instead). Details and
+gate results in DECISIONS 38. Suite: 67 tests; deterministic dev gates
+unchanged.
+
+Judge comparability: earlier judged numbers (v2 0.8403/0.7037, v4A
+0.8151/0.6475) came from a thinking-mode substitute judge at ~95s per
+verdict. The vendored grader now honors JUDGE_REASONING_EFFORT (payload
++ verdict-cache identity; grader.substitute-judge.patch regenerated).
+All judged passes going forward run low-effort (~2s per verdict, smoke-
+tested), and v2 and v4A are being re-judged under the identical config
+so v5 comparisons are apples-to-apples. Substitute judge remains
+diagnostic only, never an official score. Judged comparison to be
+appended when the three passes complete.

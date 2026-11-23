@@ -140,9 +140,15 @@ class Retriever:
         # the top k had the role filter not been applied? Scored on one
         # common scale over the union of allowed and role-denied (but
         # temporally eligible) chunks; the denied text never leaves this
-        # signal - only the boolean does.
+        # signal - only the boolean does. Superseded documents are excluded
+        # from the denied pool too: an outdated above-role rule tripping the
+        # signal would refuse questions whose CURRENT rules are fully
+        # answerable from allowed material (outside review 2026-11-23, pt 9).
+        superseded = {old for m in self.docs.values()
+                      if m["effective_date"] <= as_of for old in m["supersedes"]}
         blocked_idx = [i for i, m in enumerate(self.metas)
-                       if m["doc_id"] in above and m["effective_date"] <= as_of]
+                       if m["doc_id"] in above and m["doc_id"] not in superseded
+                       and m["effective_date"] <= as_of]
         blocked = False
         if blocked_idx:
             fused_all = _fuse(allowed_idx + blocked_idx, vec, lex)

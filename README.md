@@ -78,12 +78,15 @@ environment:
   `X-Generator` response header, per-row generator field in batch outputs.
 
 On the live `/ask` path the model call is one bounded attempt under a
-whole-request deadline; on timeout, stall or provider 503 the service
-returns `503 + Retry-After`. It never silently falls back to the
-extractive composer: a failed answer is a visible failure, not hidden
-degradation. For development and scoring runs, an optional second key
-(`LLM_API_KEY_FALLBACK`) fails over on a daily-quota 429 - same model,
-same endpoint, key-level only, and the switch is recorded per run.
+whole-request deadline (default 8s, `OP05_LIVE_TIMEOUT_SEC`; the p95 <=
+10.8s reference budget leaves ~8s for the model call); on timeout, stall
+or provider 503 the service returns `503 + Retry-After`. It never
+silently falls back to the extractive composer: a failed answer is a
+visible failure, not hidden degradation. For development and scoring
+runs, an optional second key (`LLM_API_KEY_FALLBACK`) fails over on a
+daily-quota 429 - same model, same endpoint, key-level only, and the
+switch is recorded per run and remembered process-wide so later calls do
+not re-probe an exhausted key.
 
 **Citation verification.** Every quote must be a verbatim substring of the
 cited passage after normalization. Failures retry generation once, then

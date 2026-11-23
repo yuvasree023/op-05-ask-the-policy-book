@@ -304,7 +304,7 @@ class LLMTests2(unittest.TestCase):
         finally:
             srv.shutdown()
         self.assertIn("in force 2023-01-01", seen["prompt"])
-        self.assertIn("later version in force 2024-01-01", seen["prompt"])
+        self.assertIn("later version takes effect 2024-01-01", seen["prompt"])
 
 
 class DeadEndpointTests(unittest.TestCase):
@@ -381,6 +381,6 @@ class TimelineTests(unittest.TestCase):
         self.assertIn("DOCUMENT TIMELINE:", prompt)
         self.assertIn("- D: in force 2023-01-01", prompt)
         self.assertIn("supersedes OLD_D", prompt)
-        self.assertIn("later version in force 2024-01-01", prompt)
+        self.assertIn("later version takes effect 2024-01-01", prompt)
         self.assertIn("As-of date: 2023-06-01", prompt)
         self.assertIn("ONE exact contiguous substring", prompt)

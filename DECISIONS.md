@@ -449,3 +449,65 @@ No dependency or behavior change; the pinned set is unchanged.
 - Three offline HTTP-fixture tests cover 12 concurrent requests, provenance
   headers, gold exclusion, stop-on-503 and no-overwrite. Suite 59 passed.
   These test the harness, not live-model service latency or quota.
+
+## 37. v5 evidence-pack widening and temporal prompt scaffolding (2026-11-23)
+
+- The model pool widens from top-8 to top-12 retrieval hits (both call
+  sites); retrieval k=12 with the blocked-evidence signal pinned at
+  signal_k=10 so the dev-tuned refusal signal does not move with the
+  evidence pool. The extractive path keeps the original top-6.
+  Motivation: the v4A failure analysis showed gold passages ranked 9-10
+  excluded from the candidate pool.
+- Prompt rewrite: exact-figure preservation, temporal reasoning from the
+  explicit DOCUMENT TIMELINE block (one line per packed document with
+  in-force dates and supersession edges, then the as-of selection rule),
+  contradiction handling, and a single-contiguous-quote citation rule.
+- Character budget 2600 -> 3000 default (OP05_GEN_EV_CHAR_BUDGET);
+  measured v5 input average ~1127 tokens/question, OVER the 1005
+  reference bar - cost treatment tracked separately, env-only variants
+  (e.g. 2600) remain available without code change.
+- answer_eval gains OP05_EVAL_RESUME for content-keyed resumable runs.
+
+## 38. Outside-review correctness fixes (2026-11-23)
+
+Second external review of the codebase (19 claims, user-pasted). Each
+claim was verified against the code before acting; two claims were
+already fixed by the v5 work, one premise was mostly false, and the rest
+fell out as follows.
+
+- Applied: the quote-window expansion condition was dead code (it
+  demanded non-whitespace in a gap that is boundary whitespace by
+  construction, so every extractive quote was a single sentence), and its
+  size cap used the stale window end; sentence splitting no longer breaks
+  after abbreviations (Rs. / No. / Sec. / w.e.f. ...), which had produced
+  digit-only fragments that score for numeric questions without carrying
+  the rule; evidence packing dedupes by section; the blocked-evidence
+  pool excludes superseded above-role documents (an outdated restricted
+  rule must not trip refusals); the deterministic supersession note never
+  names a document above the requester's role (title-only disclosure is
+  still a role leak); prompt headers say "later version takes effect"
+  instead of the misleading "later version in force"; a proven fallback
+  key is remembered process-wide instead of re-probing the exhausted
+  primary on every question; answers OPENING with INSUFFICIENT are
+  treated as abstention, not emitted; the live-path model call gets the
+  documented ~8s deadline (OP05_LIVE_TIMEOUT_SEC) instead of the 90s
+  eval default; cost reporting defaults to the pinned list prices
+  (0.30/2.50 per 1M) so a run missing the env vars never reports zero,
+  while cost_complete still requires explicit prices; the confidence
+  field is documented as a retrieval fusion score, not a probability.
+- Verified already done by v5: top-12 widening (claim 4) and per-document
+  supersession metadata in the prompt (claim 6).
+- Deferred with reasons: relative/adaptive refusal thresholds (claim 11,
+  would invalidate dev-tuned absolute thresholds without a re-tune);
+  paraphrasing on role-guard trips (claim 18, safe-side refusal
+  preferred); BM25 tokenization of comma-separated numerals (claim 17,
+  changes dev-tuned BM25 scores and needs a full threshold re-tune -
+  revisit only with a measured proposal); the claim-10 blocked-signal
+  composition premise rests on an unverified "expected" split - measured
+  instead on the dev gate: all 21 not_permitted rows keep the blocked
+  signal after these fixes.
+- Gates: 67 unit tests pass; deterministic dev composition unchanged
+  (117 answered / 21 not_permitted / 8 not_in_corpus); all 21 blocked
+  signals preserved; all 15 comparable deterministic grader metrics
+  identical pre/post; the 73 changed answer texts are the now-live
+  multi-sentence contiguous quotes, all still verbatim-verified.

@@ -33,6 +33,7 @@ Design constraints carried from the challenge contract:
 from __future__ import annotations
 
 import json
+import re
 from contextvars import ContextVar
 from contextlib import contextmanager
 import os
@@ -86,6 +87,10 @@ class QuotaExceeded(Exception):
 
 
 last_error = None  # legacy single-thread debug view; never use for decisions
+# Process-wide key preference: set after a fallback-key call succeeds, so
+# later questions in the same process skip the exhausted primary. Holds no
+# request data; per-request metering stays ContextVar-isolated.
+_preferred_key = None
 _error = ContextVar("generation_error", default=None)
 _meter = ContextVar("generation_meter", default=None)
 
@@ -286,7 +291,10 @@ def _evidence_block(h, meta):
     if m.get("effective_date"):
         head += f" | in force {m['effective_date']}"
         if m.get("later_version"):
-            head += f"; later version in force {m.get('later_date')}"
+            # "takes effect", not "in force": the later version is NOT yet in
+            # force on the as-of date, and wording that implies it is invites
+            # the model to answer from it (outside review 2026-11-23, point 7).
+            head += f"; later version takes effect {m.get('later_date')}"
     head += "]"
     return f"{head}\n{h.text}"
 
@@ -328,13 +336,20 @@ def pack_evidence(hits, meta, char_budget=None, min_passages=3, return_hits=Fals
     if char_budget is None:
         char_budget = int(os.environ.get("OP05_GEN_EV_CHAR_BUDGET", "3000"))
     blocks, used, hits_used = [], 0, []
+    seen_sections = set()
     for i, h in enumerate(hits):
+        if h.section in seen_sections:
+            # One passage per section: a split section's second chunk adds
+            # characters but rarely new evidence, and squeezes a distinct
+            # section out of the budget (outside review 2026-11-23, point 5).
+            continue
         b = _evidence_block(h, meta)
         if blocks and used + len(b) > char_budget and len(blocks) >= min_passages:
             break
         blocks.append(b)
         used += len(b)
         hits_used.append(h)
+        seen_sections.add(h.section)
     if return_hits:
         return blocks, hits_used
     return blocks
@@ -356,12 +371,13 @@ def generate(question, as_of, hits, verify_quote, model=None,
     TransientUnavailable (timeout/stall/provider 503) raises instead of
     degrading into a silent extractive fallback.
     """
-    global last_error
+    global last_error, _preferred_key
     _set_error(None)
     model = (model or os.environ.get("OP05_GEN_MODEL")
              or os.environ.get("LLM_MODEL", ""))
     base_url = base_url or os.environ.get("LLM_BASE_URL", "")
-    api_key = api_key if api_key is not None else os.environ.get("LLM_API_KEY", "")
+    api_key = api_key if api_key is not None else (
+        _preferred_key or os.environ.get("LLM_API_KEY", ""))
     fallback_key = os.environ.get("LLM_API_KEY_FALLBACK", "")
     if not base_url:
         _set_error("not configured")
@@ -374,21 +390,31 @@ def generate(question, as_of, hits, verify_quote, model=None,
                                           timeline=timeline, evidence=evidence)}]
     usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0,
              "adaptations": []}
+    # Live path: one bounded attempt inside the ~8s model-call budget
+    # (DECISIONS: p95 <= 10.8s end-to-end bar leaves ~8s for the call);
+    # eval keeps the generous default. Override with OP05_LIVE_TIMEOUT_SEC.
+    timeout = (float(os.environ.get("OP05_LIVE_TIMEOUT_SEC", "8"))
+               if one_attempt else 90)
     for attempt in (1, 2):
         try:
             data, adaptations = _chat(base_url, api_key, model, messages,
-                                      one_attempt=one_attempt)
+                                      timeout=timeout, one_attempt=one_attempt)
         except QuotaExceeded:
             # Key-level failover: the second key serves the SAME model and
             # endpoint, so a converted call is identical evidence - only the
-            # quota project changes. The switch is recorded in usage and
-            # persists for the rest of the run. With no fallback configured,
-            # or when the fallback also 429s, the quota signal stays loud.
+            # quota project changes. The switch is recorded in usage and, once
+            # a fallback call succeeds, remembered process-wide (_preferred_key)
+            # so later questions stop burning a doomed request on the exhausted
+            # primary first (outside review 2026-11-23, point 12; the primary
+            # is retried on the next process start, after daily quota reset).
+            # With no fallback configured, or when the fallback also 429s, the
+            # quota signal stays loud.
             if fallback_key and api_key != fallback_key:
                 api_key = fallback_key
                 usage["key_fallback_used"] = True
                 data, adaptations = _chat(base_url, api_key, model, messages,
-                                          one_attempt=one_attempt)
+                                          timeout=timeout, one_attempt=one_attempt)
+                _preferred_key = fallback_key
             else:
                 raise  # quota signals must stay loud; caller decides
         except TransientUnavailable:
@@ -414,7 +440,13 @@ def generate(question, as_of, hits, verify_quote, model=None,
         if not isinstance(answer, str) or not answer.strip():
             _set_error("empty answer")
             return None
-        if answer.strip().upper() == "INSUFFICIENT":
+        if re.match(r"INSUFFICIENT(\W|$)", answer.strip()):
+            # Any answer OPENING with INSUFFICIENT is the model signalling
+            # abstention (the prompt asks for the bare token, but the model
+            # sometimes appends an explanation). Emitting the tail as an
+            # answer would pass schema checks while saying nothing
+            # (outside review 2026-11-23, point 13). Case-sensitive on
+            # purpose: prose answers do not open with the all-caps token.
             _set_error("model said INSUFFICIENT")
             return None
         cits, dropped = [], 0

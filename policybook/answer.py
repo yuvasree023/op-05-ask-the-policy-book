@@ -70,12 +70,24 @@ ROLE_OVERLAP_N = 12
 # --- sentence segmentation: offset spans into the ORIGINAL text, so every
 # --- segment is by construction an exact substring of the source bytes ------
 _BOUNDARY = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"'(\[])|\n\s*\n|\n(?=#)")
+# Abbreviations whose trailing period must NOT split a sentence: a fragment
+# like "10 crore of exposure..." scores on digits for numeric questions
+# without carrying the rule (outside review 2026-11-23, point 3).
+_ABBREV = {"rs", "no", "sec", "art", "cl", "approx", "etc", "e.g", "i.e",
+           "dr", "mr", "mrs", "ms", "vs", "w.e.f", "st", "fig", "reg", "regs"}
 
 
 def _segments(text: str):
     spans, start = [], 0
     for m in _BOUNDARY.finditer(text):
         end = m.start()
+        if "\n" not in m.group(0):
+            # period-class boundary: skip when the preceding word is an
+            # abbreviation ("Rs. 10 crore" is one sentence, not two).
+            head = text[start:end].rstrip()
+            word = head[head.rfind(" ") + 1:].rstrip(".!?").lower() if head else ""
+            if word in _ABBREV:
+                continue
         if text[start:end].strip():
             spans.append((start, end))
         start = m.end()
@@ -119,7 +131,7 @@ class AnswerResult:
     status: str                 # answered | not_in_corpus | not_permitted
     answer: str
     citations: list
-    confidence: float = 0.0
+    confidence: float = 0.0  # top retrieval fusion score in [0,1], NOT a calibrated probability (the grader only schema-checks the range)
     cost_usd: float = 0.0
     latency_ms: float = 0.0
     generator: str = "extractive"
@@ -175,9 +187,14 @@ class Answerer:
         self.gen_model = (os.environ.get("OP05_GEN_MODEL")
                           or os.environ.get("LLM_MODEL", ""))
         # Pinned list prices (USD per 1M tokens) for cost reporting; free-tier
-        # usage still counts at list price per FREE_CREDITS.md.
-        self._price_in = float(os.environ.get("OP05_PRICE_IN_PER_M", "0") or 0)
-        self._price_out = float(os.environ.get("OP05_PRICE_OUT_PER_M", "0") or 0)
+        # usage still counts at list price per FREE_CREDITS.md. Defaults are
+        # the pinned generator snapshot's published list prices so a run that
+        # forgets the env vars never silently reports $0 for model rows
+        # (outside review 2026-11-23, point 16); cost_complete still requires
+        # the prices to be set EXPLICITLY for the run's accounting to be
+        # claimed complete.
+        self._price_in = float(os.environ.get("OP05_PRICE_IN_PER_M", "0.30") or 0)
+        self._price_out = float(os.environ.get("OP05_PRICE_OUT_PER_M", "2.50") or 0)
         # Normalized passage texts keyed by passage id, for citation
         # verification (grader checks the quote against the cited passage).
         self._passage_norm = {s.passage_id: norm(s.text) for s in self.corpus.sections}
@@ -210,14 +227,18 @@ class Answerer:
             if not scored or scored[0][0] <= 0:
                 continue
             # expand the best sentence into a contiguous window within the
-            # same passage, bounded by MAX_QUOTE_CHARS
+            # same passage, bounded by MAX_QUOTE_CHARS. The gap between
+            # segments is boundary whitespace by construction, so expansion
+            # requires it to be whitespace-only (the pre-2026-11-23 condition
+            # demanded non-whitespace and was dead code - every extractive
+            # quote was a single sentence).
             best_sc, bs, be = scored[0]
             order = sorted((s, e) for _, s, e in scored[:3])
             s0, e0 = bs, be
             for s, e in order:
-                if e <= s0 and h.text[e:s0].strip() and be - s <= MAX_QUOTE_CHARS:
+                if e <= s0 and not h.text[e:s0].strip() and e0 - s <= MAX_QUOTE_CHARS:
                     s0 = s
-                elif s >= be and h.text[be:s].strip() and e - s0 <= MAX_QUOTE_CHARS:
+                elif s >= be and not h.text[be:s].strip() and e - s0 <= MAX_QUOTE_CHARS:
                     e0 = e
             quote = h.text[s0:e0].strip()
             win_sc = best_sc + 0.25 * sum(sc for sc, s, e in scored
@@ -249,16 +270,25 @@ class Answerer:
         return best, second
 
     # -- composition ---------------------------------------------------------
-    def _compose(self, question, as_of, best, second):
+    def _compose(self, question, as_of, best, second, role):
         sc, doc_id, section, quote, _ = best
         meta = self.corpus.docs[doc_id]
         parts = [f'According to {meta.title} (in force since '
                  f'{meta.effective_date}): "{quote}"']
         citations = [Citation(doc_id=doc_id, section=section, quote=quote)]
+        req_rank = ROLE_RANK[role]
         for new_doc, new_eff in self._superseded_by.get(doc_id, []):
             if new_eff > as_of:
-                parts.append(f"Note: a later version ({self.corpus.docs[new_doc].title}) "
-                             f"takes effect {new_eff}, after the as-of date.")
+                # Never name a superseding document the requester may not see:
+                # its title alone is a reference to restricted material
+                # (deterministic checks miss short names; semantic review does
+                # not). Say THAT a later amendment exists, nothing more.
+                if ROLE_RANK[self.corpus.docs[new_doc].role] <= req_rank:
+                    parts.append(f"Note: a later version ({self.corpus.docs[new_doc].title}) "
+                                 f"takes effect {new_eff}, after the as-of date.")
+                else:
+                    parts.append(f"Note: a later amendment takes effect {new_eff}, "
+                                 "after the as-of date.")
         if second is not None:
             sc2, doc2, sec2, quote2, _ = second
             m2 = self.corpus.docs[doc2]
@@ -446,7 +476,7 @@ class Answerer:
             return finish(AnswerResult(id=qid, status="not_in_corpus",
                                        answer=NOT_IN_CORPUS_TEXT, citations=[]))
         best, second = picked
-        text, citations = self._compose(question, as_of, best, second)
+        text, citations = self._compose(question, as_of, best, second, role)
         conf = min(1.0, max(0.0, hits[0].score))
         return finish(AnswerResult(id=qid, status="answered", answer=text,
                                    citations=citations, confidence=conf))
