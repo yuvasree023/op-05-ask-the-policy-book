@@ -654,3 +654,8 @@ Judge: gemini-3.5-flash-lite, low effort (diagnostic, not the official gpt-4.1-m
 
 Findings: Groq is best on accuracy, Gemini v5b2600 best on support (0.8047); no run meets accuracy >= 0.88 and support >= 0.82 together. On Groq, 41 of 138 LLM citations fail support, mostly multi-part answers where one cited quote states only part of the answer. v8 changes (answer-sentences-must-be-quoted prompt rule; retry also on citation/parse/HTTP-400 failures) did not improve both accuracy and support over the v5/v6 Gemini baselines, so both were reverted. The Groq v8 run stopped at 49 rows when the free 200K tokens/day cap was reached (partial evidence only).
 Kept: User-Agent header for Groq, bare section-id normalisation, OP05_GEN_EXTRA_JSON hook (default off, needed to disable thinking on NIM), per-row fallback_reason, larger-pack retry on INSUFFICIENT (env-gated, default off).
+
+## v9nim (2026-11-24) - generator nvidia/nemotron-3.5-lightning-30b-a3b, thinking off, QUOTE_EXPAND+RETRY_BROAD+REASONING flags on
+Substitute judge gemini-3.5-flash-lite low effort (diagnostic). accuracy 0.7311, support 0.6257, verbatim 1.0, coverage 0.9832, judge_errors 0.
+vs v7nim (same generator, flags off): accuracy 0.6723 -> 0.7311, support 0.6258 -> 0.6257 (flat). Extractive: 25 no-verifiable-citation, 1 INSUFFICIENT. Below bars; support did not improve, so flags stay default-off.
+v9gemini attempt: parked after Gemini 503s (12 rows kept).

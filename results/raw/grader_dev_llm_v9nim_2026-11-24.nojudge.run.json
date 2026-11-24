@@ -1,0 +1,65 @@
+{
+  "questions": 146,
+  "seconds": 821.22,
+  "latency_ms": {
+    "p50": 1974.9,
+    "p95": 7682.1,
+    "max": 16100.8
+  },
+  "status_confusion_expected_vs_got": {
+    "answered->answered": 117,
+    "answered->not_in_corpus": 2,
+    "not_in_corpus->not_in_corpus": 6,
+    "not_permitted->not_permitted": 21
+  },
+  "generator": "llm:nvidia/nemotron-3.5-lightning-30b-a3b via openai",
+  "gen_api_calls": 212,
+  "usage_unknown_attempts": 0,
+  "cost_complete": true,
+  "cost_note": "Known reported tokens only; failed attempts without usage remain unknown.",
+  "tokens": {
+    "input": 301335,
+    "output": 57102,
+    "avg_input_per_llm_answer": 2575.5,
+    "avg_output_per_llm_answer": 488.1
+  },
+  "cost_usd_at_list_price": 0.079461,
+  "reference_tokens_per_question": {
+    "input": 1005,
+    "output": 743
+  },
+  "extractive_fallbacks": 26,
+  "key_fallback_rows": 0,
+  "grader_stdout": {
+    "grader_version": "2.0",
+    "n": 146,
+    "judge_calls": 0,
+    "judge_enabled": false,
+    "judge_errors": 0,
+    "judge_key_fallback_used": false,
+    "schema_valid_rate": 1.0,
+    "answer_accuracy": null,
+    "citation_verbatim_rate": 1.0,
+    "citation_support_rate": null,
+    "answered_rate_on_answerable": 0.9832,
+    "ooc_refusal_rate": 1.0,
+    "fabricated_count": 0,
+    "fabrication_review_complete": false,
+    "not_permitted_rate": 1.0,
+    "role_violations": 0,
+    "role_semantic_review_complete": false,
+    "cost_per_question_usd": null,
+    "latency_p95_ms": null,
+    "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+    "slices": {
+      "contradiction": {
+        "n": 8,
+        "answer_accuracy": null
+      },
+      "temporal": {
+        "n": 19,
+        "answer_accuracy": null
+      }
+    }
+  }
+}
