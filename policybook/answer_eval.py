@@ -65,6 +65,8 @@ def main(argv=None) -> int:
             row["generator"] = res.generator
             row["extractive_fallback"] = (ans.gen_backend != "extractive"
                                           and not res.generator.startswith("llm:"))
+            if row["extractive_fallback"]:
+                row["fallback_reason"] = res.debug.get("gen_fallback_reason")
             rows.append(row)
             cost_total += res.cost_usd
             meter = res.debug.get("generation_meter", {})

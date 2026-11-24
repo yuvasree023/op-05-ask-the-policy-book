@@ -1,0 +1,60 @@
+{"id": "indiafinbench_NUM_012", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_111", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "ooc-009", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "indiafinbench_NUM_131", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_NUM_136", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "ooc-014", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "ooc-006", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "indiafinbench_CON_072", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_TMP_013", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_104", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_106", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_127", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_118", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "ooc-010", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "indiafinbench_TMP_047", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "ooc-011", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "indiafinbench_NUM_077", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_NUM_135", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_CON_052", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_NUM_087", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_NUM_085", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_197", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "indiafinbench_CON_077", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_TMP_004", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_194", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "internal-006", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_TMP_086", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "ooc-000", "generator": "extractive", "reason": null, "status": "not_in_corpus"}
+{"id": "internal-008", "generator": "extractive", "reason": null, "status": "not_permitted"}
+{"id": "indiafinbench_REG_098", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_169", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_CON_061", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_CON_059", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_REG_184", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_REG_176", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_NUM_113", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_REG_177", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_NUM_124", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_TMP_064", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_006", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_REG_023", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_TMP_071", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_NUM_007", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_NUM_074", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_151", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_007", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_TMP_029", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_097", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_138", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_NUM_010", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_TMP_069", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_CON_062", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_NUM_107", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_167", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_TMP_077", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_TMP_049", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_TMP_066", "generator": "extractive", "reason": "model said INSUFFICIENT", "status": "answered"}
+{"id": "indiafinbench_REG_070", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_CON_070", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}
+{"id": "indiafinbench_TMP_078", "generator": "llm:gemini-3.5-flash-lite", "reason": null, "status": "answered"}

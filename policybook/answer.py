@@ -448,12 +448,28 @@ class Answerer:
             if (out is None
                     and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
                     and llm.get_last_error() == "model said INSUFFICIENT"):
-                out = llm.generate(question, as_of, r.hits[:12], self._verify_quote,
-                                   meta=self._gen_meta(as_of),
-                                   one_attempt=self.live)
+                # Larger-pack retry (2026-11-24): the INSUFFICIENT retry used the
+                # same pack and mostly abstained again. Retry once with a bigger
+                # char budget (OP05_GEN_RETRY_EV_CHAR_BUDGET) - only rows that
+                # would otherwise fall back pay the extra input tokens.
+                _rb = os.environ.get("OP05_GEN_RETRY_EV_CHAR_BUDGET")
+                _prev = os.environ.get("OP05_GEN_EV_CHAR_BUDGET")
+                if _rb:
+                    os.environ["OP05_GEN_EV_CHAR_BUDGET"] = _rb
+                try:
+                    out = llm.generate(question, as_of, r.hits[:12], self._verify_quote,
+                                       meta=self._gen_meta(as_of),
+                                       one_attempt=self.live)
+                finally:
+                    if _rb:
+                        if _prev is None:
+                            os.environ.pop("OP05_GEN_EV_CHAR_BUDGET", None)
+                        else:
+                            os.environ["OP05_GEN_EV_CHAR_BUDGET"] = _prev
                 if out is not None:
                     text, cit_dicts, usage = out
-                    usage = {**usage, "insufficient_retry_used": True}
+                    usage = {**usage, "insufficient_retry_used": True,
+                             "retry_pack_budget": _rb}
                     cost = (usage["input_tokens"] * self._price_in
                             + usage["output_tokens"] * self._price_out) / 1e6
                     res = AnswerResult(

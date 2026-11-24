@@ -157,7 +157,9 @@ def _post_impl(base_url, api_key, payload, timeout=90):
     req = urllib.request.Request(
         f"{base_url.rstrip('/')}/chat/completions", data=body,
         headers={"Content-Type": "application/json",
-                 "Authorization": f"Bearer {api_key}"})
+                 "Authorization": f"Bearer {api_key}",
+                 # Some providers (Cloudflare-fronted) reject urllib's default UA.
+                 "User-Agent": "policybook/1.0"})
     started = time.monotonic()
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -259,6 +261,9 @@ def _chat(base_url, api_key, model, messages, timeout=90, one_attempt=False):
     # output budget is measured on usage, so ask for low effort when the
     # provider supports it (adapted away on a 400).
     payload["reasoning_effort"] = os.environ.get("OP05_GEN_REASONING", "low")
+    _extra = os.environ.get("OP05_GEN_EXTRA_JSON")
+    if _extra:
+        payload.update(json.loads(_extra))
     if json_mode:
         payload["response_format"] = {"type": "json_object"}
     adaptations = []
@@ -453,6 +458,12 @@ def generate(question, as_of, hits, verify_quote, model=None,
             return None
         cits, dropped = [], 0
         for c in obj.get("citations") or []:
+            # Some models return the bare section suffix ("s57383") instead of
+            # the "<doc_id>#s57383" id the evidence shows; normalise it.
+            if (isinstance(c, dict) and isinstance(c.get("doc_id"), str)
+                    and isinstance(c.get("section"), str)
+                    and "#" not in c["section"]):
+                c = {**c, "section": f"{c['doc_id']}#{c['section']}"}
             if (isinstance(c, dict)
                     and all(isinstance(c.get(k), str) for k in ("doc_id", "section", "quote"))
                     and verify_quote(c["doc_id"], c["section"], c["quote"])):
