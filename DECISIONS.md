@@ -570,3 +570,6 @@ fell out as follows.
 - v6 (prompt rules + 2200 pack + insufficient-retry) judged 0.7815 / 0.7638:
   worse than v5b2600 (0.8151 / 0.8047). Not adopted as the best config. Keep
   v5b2600 settings as the reference until a bisect isolates which change hurt.
+
+## 2026-11-24: quote expansion for multi-part answers (prepared, not yet judged)
+Groq v7 analysis: 41 of 138 LLM citations fail support, mostly where one quote states only part of a multi-part answer. Added OP05_QUOTE_EXPAND=1 (default off): each cited quote is widened inside the same passage to adjacent sentences that state more of the answer's content words (max 700 chars, contiguous, re-verified; original kept on any doubt). Offline check on v7groq answers, no model calls: 69 of 138 quotes widen, covering 36 of the 41 previously failing ones; all stay verbatim. Effect on judged support is unmeasured: it needs one judged pass, scheduled after the Groq daily token cap refills. Keep only if accuracy and support both improve over v7groq (0.857 / 0.708).

@@ -198,6 +198,7 @@ class Answerer:
         # Normalized passage texts keyed by passage id, for citation
         # verification (grader checks the quote against the cited passage).
         self._passage_norm = {s.passage_id: norm(s.text) for s in self.corpus.sections}
+        self._passage_raw = {s.passage_id: s.text for s in self.corpus.sections}
 
     # -- evidence scoring ----------------------------------------------------
     def _sent_score(self, q_toks, sent, want_num):
@@ -321,6 +322,61 @@ class Answerer:
         nq = norm(quote)
         return bool(nq) and nq in self._passage_norm.get(section, "\x00")
 
+    _STOP = frozenset("the a an and or of to in on for by with as is are was were be been that this "
+                      "these those it its from at not no any all under which who whom what when where "
+                      "shall may must can will than then also such other their there".split())
+
+    def _content_tokens(self, text):
+        return {t for t in re.findall(r"[a-z0-9][a-z0-9.%/-]*", norm(text))
+                if t not in self._STOP and (len(t) >= 4 or any(c.isdigit() for c in t))}
+
+    def _expand_citations(self, answer, citations, max_chars=700):
+        """General citation hygiene (OP05_QUOTE_EXPAND=1): a cited quote that
+        states only part of a multi-part answer is widened, within the SAME
+        passage, to the contiguous neighbouring sentences that state more of
+        the answer's content words. The result is a contiguous substring of
+        the passage, re-verified with the grader-compatible check; on any
+        doubt the original quote is kept. Deterministic, no model call."""
+        ans_toks = self._content_tokens(answer)
+        out = []
+        for c in citations:
+            raw = self._passage_raw.get(c.section)
+            new = c
+            if raw and ans_toks:
+                segs = _segments(raw)
+                nq = norm(c.quote)
+                idx = [i for i, (a0, a1) in enumerate(segs)
+                       if norm(raw[a0:a1]) and (norm(raw[a0:a1]) in nq or nq in norm(raw[a0:a1])
+                                                or (norm(raw[a0:a1]).split()[:6] and " ".join(norm(raw[a0:a1]).split()[:6]) in nq))]
+                if idx:
+                    lo, hi = min(idx), max(idx)
+                    covered = self._content_tokens(raw[segs[lo][0]:segs[hi][1]]) & ans_toks
+                    while True:
+                        best = None
+                        for ni in (lo - 1, hi + 1):
+                            if ni < 0 or ni >= len(segs):
+                                continue
+                            nlo, nhi = min(lo, ni), max(hi, ni)
+                            if segs[nhi][1] - segs[nlo][0] > max_chars:
+                                continue
+                            gain = (self._content_tokens(raw[segs[ni][0]:segs[ni][1]]) & ans_toks) - covered
+                            if len(gain) >= 2 and (best is None or len(gain) > len(best[1])):
+                                best = (ni, gain)
+                        if best is None:
+                            break
+                        lo, hi = min(lo, best[0]), max(hi, best[0])
+                        covered |= best[1]
+                    q = raw[segs[lo][0]:segs[hi][1]].strip()
+                    if q and norm(q) != nq and nq in norm(q) and self._verify_quote(c.doc_id, c.section, q):
+                        new = Citation(doc_id=c.doc_id, section=c.section, quote=q)
+            out.append(new)
+        return out
+
+    def _maybe_expand(self, answer, citations):
+        if os.environ.get("OP05_QUOTE_EXPAND") == "1":
+            return self._expand_citations(answer, citations)
+        return citations
+
     def _gen_meta(self, as_of):
         """Per-document prompt metadata: title, in-force date, and any later
         version taking effect after the as-of date."""
@@ -429,7 +485,7 @@ class Answerer:
                         + usage["output_tokens"] * self._price_out) / 1e6
                 res = AnswerResult(
                     id=qid, status="answered", answer=text,
-                    citations=[Citation(**c) for c in cit_dicts],
+                    citations=self._maybe_expand(text, [Citation(**c) for c in cit_dicts]),
                     confidence=min(1.0, max(0.0, hits[0].score)),
                     cost_usd=round(cost, 8),
                     generator=f"llm:{self.gen_model or 'gateway-default'}")
@@ -474,7 +530,7 @@ class Answerer:
                             + usage["output_tokens"] * self._price_out) / 1e6
                     res = AnswerResult(
                         id=qid, status="answered", answer=text,
-                        citations=[Citation(**c) for c in cit_dicts],
+                        citations=self._maybe_expand(text, [Citation(**c) for c in cit_dicts]),
                         confidence=min(1.0, max(0.0, hits[0].score)),
                         cost_usd=round(cost, 8),
                         generator=f"llm:{self.gen_model or 'gateway-default'}")
