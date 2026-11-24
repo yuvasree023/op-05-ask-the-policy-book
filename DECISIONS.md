@@ -573,3 +573,8 @@ fell out as follows.
 
 ## 2026-11-24: quote expansion for multi-part answers (prepared, not yet judged)
 Groq v7 analysis: 41 of 138 LLM citations fail support, mostly where one quote states only part of a multi-part answer. Added OP05_QUOTE_EXPAND=1 (default off): each cited quote is widened inside the same passage to adjacent sentences that state more of the answer's content words (max 700 chars, contiguous, re-verified; original kept on any doubt). Offline check on v7groq answers, no model calls: 69 of 138 quotes widen, covering 36 of the 41 previously failing ones; all stay verbatim. Effect on judged support is unmeasured: it needs one judged pass, scheduled after the Groq daily token cap refills. Keep only if accuracy and support both improve over v7groq (0.857 / 0.708).
+
+## 2026-11-24: two more experimental flags (off by default, unvalidated)
+- OP05_GEN_RETRY_BROAD=1: the larger-pack retry also fires on citation-verification, parse and provider-400 failures (default: INSUFFICIENT only). Bundled with a prompt change in the Gemini v8 round, so its own effect was never isolated.
+- OP05_GEN_REASONING_NUM=<effort>: higher reasoning effort only for questions that ask for a number, amount or date calculation (question-shape regex, no per-question rules).
+Defaults stay as validated (v5b2600-style behaviour); a flag becomes default-on only after a judged run shows accuracy and support both improving. Plan: re-run only the previously failing rows with all three flags (OP05_QUOTE_EXPAND, OP05_GEN_RETRY_BROAD, OP05_GEN_REASONING_NUM) on Groq once its daily token cap refills, then one full judged pass.

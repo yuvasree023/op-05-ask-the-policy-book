@@ -372,6 +372,46 @@ class Answerer:
             out.append(new)
         return out
 
+    _BROAD_RETRY = ("model said INSUFFICIENT", "no verifiable citations",
+                    "unparseable response", "RuntimeError: HTTP 400")
+
+    @staticmethod
+    def _retry_reason_ok(err):
+        """Larger-pack retry trigger. Default: INSUFFICIENT only (validated
+        behaviour). OP05_GEN_RETRY_BROAD=1 (experimental, off) also retries
+        citation-verification, parse and provider-400 failures."""
+        err = err or ""
+        if os.environ.get("OP05_GEN_RETRY_BROAD") == "1":
+            return err.startswith(Answerer._BROAD_RETRY)
+        return err == "model said INSUFFICIENT"
+
+    _DATE_INTENT = re.compile(r"\b(date|when|deadline|days?|months?|years?|period|expir\w*|"
+                              r"before|after|prior|within|as of|effective)\b", re.I)
+
+    def _effort_for(self, question):
+        """OP05_GEN_REASONING_NUM=<effort> (experimental, off): use a higher
+        reasoning effort only for questions that ask for a number, amount or
+        date calculation. General question-shape rule."""
+        eff = os.environ.get("OP05_GEN_REASONING_NUM")
+        if eff and (_NUM_INTENT.search(question) or self._DATE_INTENT.search(question)):
+            return eff
+        return None
+
+    def _gen(self, llm, question, as_of, hits):
+        eff = self._effort_for(question)
+        prev = os.environ.get("OP05_GEN_REASONING")
+        if eff:
+            os.environ["OP05_GEN_REASONING"] = eff
+        try:
+            return llm.generate(question, as_of, hits, self._verify_quote,
+                                meta=self._gen_meta(as_of), one_attempt=self.live)
+        finally:
+            if eff:
+                if prev is None:
+                    os.environ.pop("OP05_GEN_REASONING", None)
+                else:
+                    os.environ["OP05_GEN_REASONING"] = prev
+
     def _maybe_expand(self, answer, citations):
         if os.environ.get("OP05_QUOTE_EXPAND") == "1":
             return self._expand_citations(answer, citations)
@@ -464,9 +504,7 @@ class Answerer:
         if self.gen_backend == "openai":
             from . import llm
             try:
-                out = llm.generate(question, as_of, r.hits[:12], self._verify_quote,
-                                   meta=self._gen_meta(as_of),
-                                   one_attempt=self.live)
+                out = self._gen(llm, question, as_of, r.hits[:12])
             except llm.TransientUnavailable:
                 if self.live:
                     raise  # the service answers 503 + Retry-After
@@ -503,7 +541,7 @@ class Answerer:
             # retried answer exactly like a first attempt.
             if (out is None
                     and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
-                    and llm.get_last_error() == "model said INSUFFICIENT"):
+                    and self._retry_reason_ok(llm.get_last_error())):
                 # Larger-pack retry (2026-11-24): the INSUFFICIENT retry used the
                 # same pack and mostly abstained again. Retry once with a bigger
                 # char budget (OP05_GEN_RETRY_EV_CHAR_BUDGET) - only rows that
@@ -513,9 +551,7 @@ class Answerer:
                 if _rb:
                     os.environ["OP05_GEN_EV_CHAR_BUDGET"] = _rb
                 try:
-                    out = llm.generate(question, as_of, r.hits[:12], self._verify_quote,
-                                       meta=self._gen_meta(as_of),
-                                       one_attempt=self.live)
+                    out = self._gen(llm, question, as_of, r.hits[:12])
                 finally:
                     if _rb:
                         if _prev is None:

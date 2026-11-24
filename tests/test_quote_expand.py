@@ -30,3 +30,27 @@ class QuoteExpandTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FlagDefaultsTest(unittest.TestCase):
+    def test_retry_default_is_insufficient_only(self):
+        os.environ.pop("OP05_GEN_RETRY_BROAD", None)
+        self.assertTrue(Answerer._retry_reason_ok("model said INSUFFICIENT"))
+        self.assertFalse(Answerer._retry_reason_ok("no verifiable citations after retry"))
+        os.environ["OP05_GEN_RETRY_BROAD"] = "1"
+        try:
+            self.assertTrue(Answerer._retry_reason_ok("no verifiable citations after retry"))
+        finally:
+            os.environ.pop("OP05_GEN_RETRY_BROAD", None)
+
+    def test_effort_flag_off_and_on(self):
+        a = QuoteExpandTest.a if hasattr(QuoteExpandTest, "a") else None
+        os.environ.pop("OP05_GEN_REASONING_NUM", None)
+        a = Answerer(str(R / ".index"), str(R / "models" / "all-MiniLM-L6-v2"), str(R / "data" / "corpus"))
+        self.assertIsNone(a._effort_for("How many days within the deadline?"))
+        os.environ["OP05_GEN_REASONING_NUM"] = "medium"
+        try:
+            self.assertEqual(a._effort_for("How many days within the deadline?"), "medium")
+            self.assertIsNone(a._effort_for("Who regulates mutual funds"))
+        finally:
+            os.environ.pop("OP05_GEN_REASONING_NUM", None)
