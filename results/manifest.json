@@ -344,7 +344,467 @@
           "sha256": "9ba4120ee51dd93d43971f5631303b43dd4aefc9910b4a8763486603f53d556b"
         }
       }
+    },
+    {
+      "run_id": "dev-llm-v5-2026-11-23",
+      "model": "gemini-3.5-flash-lite; gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-23",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 0,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8319,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.7405,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 1.0
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.8421
+          }
+        },
+        "judge_verdicts_reused": 254,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v5_2026-11-23_loweffort_2026-11-23.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v5_2026-11-23.jsonl": {
+          "path": "results/raw/answers_dev_llm_v5_2026-11-23.jsonl",
+          "sha256": "62498e9320fd0daeac6a2a6aec4871800972296205b1fdc3c46e526e0df60bae"
+        },
+        "grader_dev_llm_v5_2026-11-23_loweffort_2026-11-23.report.json": {
+          "path": "results/raw/grader_dev_llm_v5_2026-11-23_loweffort_2026-11-23.report.json",
+          "sha256": "88ad61030b2e4c1ac84182173a8834378898787b87ef47554a40673b2591cdc2"
+        },
+        "judge_verdicts_v5_2026-11-23_loweffort_2026-11-23.jsonl": {
+          "path": "results/raw/judge_verdicts_v5_2026-11-23_loweffort_2026-11-23.jsonl",
+          "sha256": "b3cf034a4507218b4a14a5eb888358bc8b83cbb8e620d7d94d7d6b50359cdae9"
+        }
+      }
+    },
+    {
+      "run_id": "dev-llm-v5b2600-2026-11-23",
+      "model": "gemini-3.5-flash-lite; gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-23",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 5,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8151,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.8047,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 1.0
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.8947
+          }
+        },
+        "judge_verdicts_reused": 246,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v5b2600_loweffort_2026-11-23.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v5b2600_2026-11-23.jsonl": {
+          "path": "results/raw/answers_dev_llm_v5b2600_2026-11-23.jsonl",
+          "sha256": "17bfa93c6c7ad667a7a564a0bac6e8a5e3adf03381bd04bd7b4dea5f7b8b33bb"
+        },
+        "grader_dev_llm_v5b2600_loweffort_2026-11-23.report.json": {
+          "path": "results/raw/grader_dev_llm_v5b2600_loweffort_2026-11-23.report.json",
+          "sha256": "ebbe64cd8c948ebd560498f106e672c92217010e11fd3e033a630c93486852df"
+        },
+        "judge_verdicts_v5b2600_loweffort_2026-11-23.jsonl": {
+          "path": "results/raw/judge_verdicts_v5b2600_loweffort_2026-11-23.jsonl",
+          "sha256": "277d9035af2882a256317fbd4c4edacf72bea680416876cbc58c471ffbbf2f34"
+        }
+      },
+      "tokens": {
+        "generation_input": 152856,
+        "generation_output": 27425
+      }
+    },
+    {
+      "run_id": "dev-llm-v6-2026-11-23",
+      "model": "gemini-3.5-flash-lite; gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-23",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 2,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.7815,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.7638,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 0.75
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.9474
+          }
+        },
+        "judge_verdicts_reused": 248,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v6_loweffort_2026-11-23.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v6_2026-11-23.jsonl": {
+          "path": "results/raw/answers_dev_llm_v6_2026-11-23.jsonl",
+          "sha256": "9b09be116a22d1ee7248a4827f0bfea8614a9b99293685b6d27bdea07ea6610e"
+        },
+        "grader_dev_llm_v6_loweffort_2026-11-23.report.json": {
+          "path": "results/raw/grader_dev_llm_v6_loweffort_2026-11-23.report.json",
+          "sha256": "6802a760bfd4328841ef1944498efe45f0ca0933d1fdd4288f9ab3a419d24459"
+        },
+        "judge_verdicts_v6_loweffort_2026-11-23.jsonl": {
+          "path": "results/raw/judge_verdicts_v6_loweffort_2026-11-23.jsonl",
+          "sha256": "0fac69995d0a6ec09676160e5902732e8358b1b63fdbfae5d24c796ae1f26f3a"
+        }
+      },
+      "tokens": {
+        "generation_input": 163307,
+        "generation_output": 24864
+      }
+    },
+    {
+      "run_id": "dev-llm-v7groq-2026-11-24",
+      "model": "groq openai/gpt-oss-120b (~120B parameters: OUTSIDE the budget class; diagnostic only, not a submittable generator); gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-24",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 267,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8571,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.7083,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 1.0
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.8947
+          }
+        },
+        "judge_verdicts_reused": 0,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v7groq_loweffort_2026-11-24.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v7groq_2026-11-24.jsonl": {
+          "path": "results/raw/answers_dev_llm_v7groq_2026-11-24.jsonl",
+          "sha256": "df2d8155144f741d94a72b9fce5f4027021f31df4c7951ccb139ca8642470014"
+        },
+        "grader_dev_llm_v7groq_loweffort_2026-11-24.report.json": {
+          "path": "results/raw/grader_dev_llm_v7groq_loweffort_2026-11-24.report.json",
+          "sha256": "89381cf70a9ff7aa6cfaa4c2f738973f2e4aca7713c99c51b393e8ae075af006"
+        },
+        "judge_verdicts_v7groq_loweffort_2026-11-24.jsonl": {
+          "path": "results/raw/judge_verdicts_v7groq_loweffort_2026-11-24.jsonl",
+          "sha256": "7f3442aad8577ce1a4097d1b63bf0c197b0b324f25d80db09043148c2e7e799c"
+        }
+      },
+      "tokens": {
+        "generation_input": 160426,
+        "generation_output": 33028
+      }
+    },
+    {
+      "run_id": "dev-llm-v7nim-2026-11-24",
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b (thinking off); gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-24",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 286,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": true,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.6723,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.6258,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 0.875
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.7368
+          }
+        },
+        "judge_verdicts_reused": 0,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v7nim_loweffort_2026-11-24.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v7nim_2026-11-24.jsonl": {
+          "path": "results/raw/answers_dev_llm_v7nim_2026-11-24.jsonl",
+          "sha256": "71bea5c45b898b6adf4dcc047e75580c8f1366c558024af60e55a4ea7f468ba1"
+        },
+        "grader_dev_llm_v7nim_loweffort_2026-11-24.report.json": {
+          "path": "results/raw/grader_dev_llm_v7nim_loweffort_2026-11-24.report.json",
+          "sha256": "86f2fba54224f9ba57c747bc6936750a1f5ccf4e53b138809ba2c3ca4c72f974"
+        },
+        "judge_verdicts_v7nim_loweffort_2026-11-24.jsonl": {
+          "path": "results/raw/judge_verdicts_v7nim_loweffort_2026-11-24.jsonl",
+          "sha256": "8dd986e7a27c2f180982c10b4605def736b181478e49278e98fd00d1e14df3f5"
+        }
+      },
+      "tokens": {
+        "generation_input": 214464,
+        "generation_output": 44433
+      }
+    },
+    {
+      "run_id": "dev-llm-v8gemini-2026-11-24",
+      "model": "gemini-3.5-flash-lite (prompt rule + broad retry; reverted); gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed; reverted",
+      "timestamp": "2026-11-24",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 257,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": true,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8151,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.7164,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 0.75
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.7895
+          }
+        },
+        "judge_verdicts_reused": 0,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v8gemini_loweffort_2026-11-24.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v8gemini_2026-11-24.jsonl": {
+          "path": "results/raw/answers_dev_llm_v8gemini_2026-11-24.jsonl",
+          "sha256": "142513409502858cb36b221529e599879c75e7cde452c0966c5e11c2c043b8e3"
+        },
+        "grader_dev_llm_v8gemini_loweffort_2026-11-24.report.json": {
+          "path": "results/raw/grader_dev_llm_v8gemini_loweffort_2026-11-24.report.json",
+          "sha256": "a78e66cd03be95ce8df94a2853432832d2bb7030f465ab99c6c9473067bc2ad8"
+        },
+        "judge_verdicts_v8gemini_loweffort_2026-11-24.jsonl": {
+          "path": "results/raw/judge_verdicts_v8gemini_loweffort_2026-11-24.jsonl",
+          "sha256": "b4578d83df150d2cdc6d9ebf0c061af6bcce6dfc5aba68659232c220a2478952"
+        }
+      },
+      "tokens": {
+        "generation_input": 194502,
+        "generation_output": 29077
+      }
+    },
+    {
+      "run_id": "dev-llm-v9nim-2026-11-24",
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b (thinking off), quote-expand + broad retry + numeric effort; gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-24",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 5,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": true,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.7311,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.6257,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 0.875
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.5263
+          }
+        },
+        "judge_verdicts_reused": 289,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v9nim_loweffort_2026-11-24.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v9nim_2026-11-24.jsonl": {
+          "path": "results/raw/answers_dev_llm_v9nim_2026-11-24.jsonl",
+          "sha256": "01cc33d721b37c3d74fae856c7fe204b198b7fe911199e0ee1ee12ba1f138778"
+        },
+        "grader_dev_llm_v9nim_loweffort_2026-11-24.report.json": {
+          "path": "results/raw/grader_dev_llm_v9nim_loweffort_2026-11-24.report.json",
+          "sha256": "ed171d16dce643da7c23230c59359b9e1a8b5f463be04c73bad21923e1bf34a6"
+        },
+        "judge_verdicts_v9nim_loweffort_2026-11-24.jsonl": {
+          "path": "results/raw/judge_verdicts_v9nim_loweffort_2026-11-24.jsonl",
+          "sha256": "324b8198440e1dfb4e8903beacaee10caffcff293ca56e8335411d9861c033b7"
+        }
+      },
+      "tokens": {
+        "generation_input": 301335,
+        "generation_output": 57102
+      }
+    },
+    {
+      "run_id": "dev-llm-v9groq-2026-11-25",
+      "model": "groq openai/gpt-oss-120b (~120B parameters: OUTSIDE the budget class; diagnostic only, not a submittable generator), quote-expand + broad retry + numeric effort; gemini-3.5-flash-lite substitute judge (diagnostic only, not the official gpt-4.1-mini-2025-04-14 judge)",
+      "status": "completed",
+      "timestamp": "2026-11-25",
+      "metrics": {
+        "grader_version": "2.0",
+        "n": 146,
+        "judge_calls": 256,
+        "judge_enabled": true,
+        "judge_errors": 0,
+        "judge_key_fallback_used": false,
+        "schema_valid_rate": 1.0,
+        "answer_accuracy": 0.8824,
+        "citation_verbatim_rate": 1.0,
+        "citation_support_rate": 0.8472,
+        "answered_rate_on_answerable": 0.9832,
+        "ooc_refusal_rate": 1.0,
+        "fabricated_count": 0,
+        "fabrication_review_complete": true,
+        "not_permitted_rate": 1.0,
+        "role_violations": 0,
+        "role_semantic_review_complete": false,
+        "cost_per_question_usd": null,
+        "latency_p95_ms": null,
+        "measurement_note": "Cost, latency, semantic role leakage and freshness need independent runtime/reviewer evidence.",
+        "slices": {
+          "contradiction": {
+            "n": 8,
+            "answer_accuracy": 1.0
+          },
+          "temporal": {
+            "n": 19,
+            "answer_accuracy": 0.8421
+          }
+        },
+        "judge_verdicts_reused": 11,
+        "judge_verdicts_path": "results/raw/judge_verdicts_v9groq_loweffort_2026-11-25.jsonl"
+      },
+      "raw": {
+        "answers_dev_llm_v9groq_2026-11-25.jsonl": {
+          "path": "results/raw/answers_dev_llm_v9groq_2026-11-25.jsonl",
+          "sha256": "89a5cd81c25e7a18c49c12e6471b95bd6499126725716395e13b2c41925e1476"
+        },
+        "grader_dev_llm_v9groq_loweffort_2026-11-25.report.json": {
+          "path": "results/raw/grader_dev_llm_v9groq_loweffort_2026-11-25.report.json",
+          "sha256": "9e23acfed4b70f0787cd380053afe9f2f79f128106cd7719daae201b200f4172"
+        },
+        "judge_verdicts_v9groq_loweffort_2026-11-25.jsonl": {
+          "path": "results/raw/judge_verdicts_v9groq_loweffort_2026-11-25.jsonl",
+          "sha256": "bbf21b6a1a2fa46f052c5317439fe09e8e5ba91acd8e088ded877e7406d42f68"
+        }
+      },
+      "tokens": {
+        "generation_input": 168793,
+        "generation_output": 57448
+      }
     }
   ],
-  "note": "Raw outputs for every run live in results/raw/ with SHA-256 below; canonical working copies stay in results/. Judged generator scores are substitute-judge diagnostics only. v3/v4A postdate the best v2 numbers and did not justify activation."
+  "note": "Raw outputs for every run live in results/raw/ with SHA-256 below; canonical working copies stay in results/. Judged generator scores are substitute-judge diagnostics only. v3/v4A postdate the best v2 numbers and did not justify activation. Runs v5-v9 added 2026-11-25; their generators (Groq gpt-oss-120b) are outside the budget class where noted and are diagnostic only."
 }
