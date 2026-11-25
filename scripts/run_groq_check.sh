@@ -11,10 +11,10 @@ set -a; . ./.env; set +a
 TAG=$MODE-$(date +%Y%m%d-%H%M)
 OUT=results/raw/answers_dev_llm_groq_$TAG.jsonl
 ./.venv/bin/python -m policybook.ingest > /dev/null
+unset OP05_GEN_EV_CHAR_BUDGET  # budget comes from code defaults: 2200 (base) or 1700 (trim)
 EXTRA=""; [ "$MODE" = "trim" ] && EXTRA="OP05_TRIM_INPUT=1"
 env $EXTRA LLM_BASE_URL=https://api.groq.com/openai/v1 LLM_API_KEY="$GROQ_API_KEY" OP05_GEN_BACKEND=openai OP05_GEN_STRICT=1 \
-  OP05_GEN_MODEL=openai/gpt-oss-120b OP05_GEN_DELAY_SEC=14 OP05_GEN_EV_CHAR_BUDGET=${OP05_GEN_EV_CHAR_BUDGET:-2200} \
-  OP05_GEN_INSUFFICIENT_RETRY=1 OP05_GEN_RETRY_EV_CHAR_BUDGET=3500 OP05_EVAL_RESUME=1 \
+  OP05_GEN_MODEL=openai/gpt-oss-120b OP05_GEN_DELAY_SEC=14 OP05_EVAL_RESUME=1 \
   OP05_PRICE_IN_PER_M=0.15 OP05_PRICE_OUT_PER_M=0.60 \
   ./.venv/bin/python -u -m policybook.answer_eval --questions data/questions_dev.jsonl --out "$OUT" \
   --report results/raw/grader_groq_$TAG.nojudge.json || { echo "generation stopped (rerun the same command to resume; if it says quota, wait for the daily reset)"; exit 1; }

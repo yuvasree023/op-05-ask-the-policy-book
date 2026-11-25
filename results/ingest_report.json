@@ -6,11 +6,8 @@
   "sections": 391,
   "validation": [],
   "embedding_model": "all-MiniLM-L6-v2 (quantized ONNX, Xenova export, vendored)",
-  "skipped": false,
+  "skipped": true,
+  "reason": "corpus unchanged",
   "chunks": 396,
-  "sections_split": 5,
-  "embedding_dim": 384,
-  "embed_seconds": 7.731,
-  "index_seconds": 0.024,
-  "seconds": 7.761
+  "seconds": 0.007
 }

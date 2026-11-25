@@ -94,7 +94,8 @@ class FlagTests(unittest.TestCase):
         sent = SeqStub.payloads[0]["messages"][0]["content"]
         self.assertIn("Date-asking", sent)
 
-    def test_insufficient_no_retry_by_default(self):
+    def test_insufficient_no_retry_when_disabled(self):
+        os.environ["OP05_GEN_INSUFFICIENT_RETRY"] = "0"  # default ON since 2026-11-25
         SeqStub.queue = [INSUFFICIENT, VALID]
         res = self._answer()
         self.assertFalse(res.generator.startswith("llm:"))

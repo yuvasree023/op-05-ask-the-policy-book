@@ -39,17 +39,17 @@ fi
 PY_VER="$(./.venv/bin/python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')"
 case "$PY_VER" in
   3.10|3.11|3.12|3.13) ;;
-  *) echo "reproduce.sh: Python $PY_VER is not supported." >&2
-     echo "The pinned dependencies publish prebuilt packages for Python 3.10-3.13 only." >&2
-     echo "Install a supported version and re-run, e.g.: PYTHON=python3.13 $0 $*" >&2
-     exit 1 ;;
+  *) echo "reproduce.sh: Python $PY_VER is newer than the pinned set supports;" >&2
+     echo "using requirements-newer-python.txt (minimum versions) instead." >&2
+     REQ_FILE=requirements-newer-python.txt ;;
 esac
+REQ_FILE="${REQ_FILE:-requirements.txt}"
 if [ -d vendor/wheels ]; then
   ./.venv/bin/pip install -q --no-cache-dir --disable-pip-version-check \
-    --no-index --find-links vendor/wheels -r requirements.txt
+    --no-index --find-links vendor/wheels -r "$REQ_FILE"
 else
   ./.venv/bin/pip install -q --no-cache-dir --disable-pip-version-check \
-    -r requirements.txt
+    -r "$REQ_FILE"
 fi
 
 echo "[1/4] Python environment and dependencies ready"

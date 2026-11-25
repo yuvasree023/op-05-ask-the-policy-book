@@ -540,13 +540,13 @@ class Answerer:
             # Verification, the role guard and fabrication accounting gate the
             # retried answer exactly like a first attempt.
             if (out is None
-                    and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY") == "1"
+                    and os.environ.get("OP05_GEN_INSUFFICIENT_RETRY", "1") == "1"
                     and self._retry_reason_ok(llm.get_last_error())):
                 # Larger-pack retry (2026-11-24): the INSUFFICIENT retry used the
                 # same pack and mostly abstained again. Retry once with a bigger
                 # char budget (OP05_GEN_RETRY_EV_CHAR_BUDGET) - only rows that
                 # would otherwise fall back pay the extra input tokens.
-                _rb = os.environ.get("OP05_GEN_RETRY_EV_CHAR_BUDGET")
+                _rb = os.environ.get("OP05_GEN_RETRY_EV_CHAR_BUDGET", "3500")
                 _prev = os.environ.get("OP05_GEN_EV_CHAR_BUDGET")
                 if _rb:
                     os.environ["OP05_GEN_EV_CHAR_BUDGET"] = _rb
