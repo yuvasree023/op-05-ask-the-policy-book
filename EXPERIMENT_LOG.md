@@ -659,3 +659,11 @@ Kept: User-Agent header for Groq, bare section-id normalisation, OP05_GEN_EXTRA_
 Substitute judge gemini-3.5-flash-lite low effort (diagnostic). accuracy 0.7311, support 0.6257, verbatim 1.0, coverage 0.9832, judge_errors 0.
 vs v7nim (same generator, flags off): accuracy 0.6723 -> 0.7311, support 0.6258 -> 0.6257 (flat). Extractive: 25 no-verifiable-citation, 1 INSUFFICIENT. Below bars; support did not improve, so flags stay default-off.
 v9gemini attempt: parked after Gemini 503s (12 rows kept).
+
+## v9groq (2026-11-25) - generator groq openai/gpt-oss-120b, QUOTE_EXPAND + RETRY_BROAD + REASONING_NUM=medium all ON, one full 146-row run
+Substitute judge gemini-3.5-flash-lite low effort, single key (diagnostic only; official judge is gpt-4.1-mini). judge_errors 0, 256 judge calls.
+accuracy 0.8824 (bar 0.88), citation support 0.8472 (bar 0.82), verbatim 1.0 (bar 0.92), coverage 0.9832 (bar 0.87).
+Tokens: 168793 in / 57448 out over 146 questions = ~1156 in / ~393 out per question (bar 1005 / 743); ~1443 in per LLM-answered row. Input is over the bar.
+Extractive fallbacks: 3 (all INSUFFICIENT). vs v7groq (flags off): accuracy 0.8571 -> 0.8824, support 0.7083 -> 0.8472. Both improved.
+Caveat: three flags changed together, so the gain is not attributed to any one. Single run, substitute judge. Defaults not yet flipped.
+Notes: sandbox reset on 2026-11-25 lost the local clone and the unpushed v9gemini run (generation done, judge capped on single key); v9gemini is not reported.
