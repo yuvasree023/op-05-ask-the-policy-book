@@ -331,7 +331,7 @@ class Answerer:
                 if t not in self._STOP and (len(t) >= 4 or any(c.isdigit() for c in t))}
 
     def _expand_citations(self, answer, citations, max_chars=700):
-        """General citation hygiene (OP05_QUOTE_EXPAND=1): a cited quote that
+        """General citation hygiene (OP05_QUOTE_EXPAND, default ON since 2026-11-25; =0 disables): a cited quote that
         states only part of a multi-part answer is widened, within the SAME
         passage, to the contiguous neighbouring sentences that state more of
         the answer's content words. The result is a contiguous substring of
@@ -378,10 +378,10 @@ class Answerer:
     @staticmethod
     def _retry_reason_ok(err):
         """Larger-pack retry trigger. Default: INSUFFICIENT only (validated
-        behaviour). OP05_GEN_RETRY_BROAD=1 (experimental, off) also retries
+        behaviour). OP05_GEN_RETRY_BROAD (default ON since 2026-11-25; =0 disables) also retries
         citation-verification, parse and provider-400 failures."""
         err = err or ""
-        if os.environ.get("OP05_GEN_RETRY_BROAD") == "1":
+        if os.environ.get("OP05_GEN_RETRY_BROAD", "1") == "1":
             return err.startswith(Answerer._BROAD_RETRY)
         return err == "model said INSUFFICIENT"
 
@@ -389,11 +389,11 @@ class Answerer:
                               r"before|after|prior|within|as of|effective)\b", re.I)
 
     def _effort_for(self, question):
-        """OP05_GEN_REASONING_NUM=<effort> (experimental, off): use a higher
+        """OP05_GEN_REASONING_NUM=<effort> (default "medium" since 2026-11-25; =0 disables): use a higher
         reasoning effort only for questions that ask for a number, amount or
         date calculation. General question-shape rule."""
-        eff = os.environ.get("OP05_GEN_REASONING_NUM")
-        if eff and (_NUM_INTENT.search(question) or self._DATE_INTENT.search(question)):
+        eff = os.environ.get("OP05_GEN_REASONING_NUM", "medium")
+        if eff and eff != "0" and (_NUM_INTENT.search(question) or self._DATE_INTENT.search(question)):
             return eff
         return None
 
@@ -413,7 +413,7 @@ class Answerer:
                     os.environ["OP05_GEN_REASONING"] = prev
 
     def _maybe_expand(self, answer, citations):
-        if os.environ.get("OP05_QUOTE_EXPAND") == "1":
+        if os.environ.get("OP05_QUOTE_EXPAND", "1") == "1":
             return self._expand_citations(answer, citations)
         return citations
 

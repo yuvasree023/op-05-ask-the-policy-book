@@ -341,7 +341,11 @@ def pack_evidence(hits, meta, char_budget=None, min_passages=3, return_hits=Fals
     build prompt scaffolding (the document timeline) over exactly the shown
     documents."""
     if char_budget is None:
-        char_budget = int(os.environ.get("OP05_GEN_EV_CHAR_BUDGET", "3000"))
+        # OP05_TRIM_INPUT=1 (experimental, off): cap the evidence pack at 1700
+        # characters unless OP05_GEN_EV_CHAR_BUDGET names a budget explicitly
+        # (the larger-pack retry still sets one). General input-cost trim.
+        _dflt = "1700" if os.environ.get("OP05_TRIM_INPUT") == "1" else "3000"
+        char_budget = int(os.environ.get("OP05_GEN_EV_CHAR_BUDGET", _dflt))
     blocks, used, hits_used = [], 0, []
     seen_sections = set()
     for i, h in enumerate(hits):
