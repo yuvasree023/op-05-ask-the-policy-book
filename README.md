@@ -66,12 +66,24 @@ when one is already in the corpus.
 **Answer generation.** Two backends, selected explicitly or by
 environment:
 
-- **Model generator** (`policybook/llm.py`): a budget-class
-  OpenAI-compatible backend. It activates automatically when
+- **Model generator** (`policybook/llm.py`): an OpenAI-compatible
+  backend (any chat-completions endpoint). It activates automatically when
   reviewer-gateway credentials (`LLM_BASE_URL` + `LLM_API_KEY`) are
   present; `LLM_MODEL` is optional, and when omitted the request names no
   model so the gateway serves its default. `OP05_GEN_BACKEND` overrides
   selection explicitly.
+  *Model used and its class (disclosure).* Development runs that reach
+  the accuracy bar (judged 0.8824 accuracy / 0.8472 citation support,
+  v9groq) used Groq `openai/gpt-oss-120b`, an open-weight model of about
+  120B parameters. That is **outside** the MODELS.md budget class
+  (mini/nano/Flash/Haiku tier, or open weights up to about 35B). The
+  in-class fallback measured in this repo is `gemini-3.5-flash-lite`
+  (best judged 0.8319 accuracy / 0.8047 support in separate runs, below
+  the 0.88 bar). Reviewers run `reproduce.sh` with their own gateway
+  credentials, so the model that answers in their run is whatever their
+  gateway serves. All judged numbers here come from a substitute judge
+  and are diagnostic, not hidden-set scores. See DECISIONS.md.
+
 - **Extractive composer** (default, zero API tokens): quotes the strongest
   eligible evidence window verbatim with source attribution and effective
   dates. When it runs, that is visible everywhere: startup banner,
