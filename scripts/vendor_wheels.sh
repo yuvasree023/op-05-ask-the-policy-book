@@ -10,5 +10,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p vendor/wheels
-pip3 download --only-binary=:all: -r requirements.txt -d vendor/wheels
+# One wheelhouse for CPython 3.10-3.13 on x86_64 Linux (glibc >= 2.28), so the
+# install works offline whichever of those the review image has.
+for v in 310 311 312 313; do
+  pip3 download -q --only-binary=:all: --implementation cp --python-version "$v" \
+    --platform manylinux2014_x86_64 --platform manylinux_2_17_x86_64 \
+    --platform manylinux_2_28_x86_64 -r requirements.txt -d vendor/wheels
+done
 echo "wheelhouse ready: $(du -sh vendor/wheels | cut -f1), $(ls vendor/wheels | wc -l) wheels"
