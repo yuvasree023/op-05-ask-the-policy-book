@@ -29,6 +29,17 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+SELFCHECK=0
+ARGS=()
+for a in "$@"; do
+  case "$a" in
+    --selfcheck) SELFCHECK=1 ;;
+    *) ARGS+=("$a") ;;
+  esac
+done
+if [ "$SELFCHECK" = "1" ]; then TOTAL=4; else TOTAL=3; fi
+stage() { echo ""; echo "=== reproduce.sh: STAGE $1/$TOTAL - $2 ==="; }
+stage 1 "creating Python environment and installing dependencies"
 PYTHON="${PYTHON:-python3}"
 if [ ! -d .venv ]; then
   "$PYTHON" -m venv .venv
@@ -52,31 +63,24 @@ else
     -r "$REQ_FILE"
 fi
 
-echo "[1/4] Python environment and dependencies ready"
+echo "STAGE 1/$TOTAL done: environment and dependencies ready"
 export CORPUS_DIR="${CORPUS_DIR:-./data/corpus}"
 export INDEX_DIR="${INDEX_DIR:-./.index}"
 
-SELFCHECK=0
-ARGS=()
-for a in "$@"; do
-  case "$a" in
-    --selfcheck) SELFCHECK=1 ;;
-    *) ARGS+=("$a") ;;
-  esac
-done
 
-echo "[2/4] Ingesting corpus and building index ($CORPUS_DIR)"
+stage 2 "ingesting corpus and building index ($CORPUS_DIR)"
 ./.venv/bin/python -m policybook.ingest "${ARGS[@]+"${ARGS[@]}"}"
+echo "STAGE 2/$TOTAL done: index ready"
 
 if [ "$SELFCHECK" = "1" ]; then
   QUESTIONS_FILE="${QUESTIONS_FILE:-./data/questions_dev.jsonl}"
   if [ "${RETRIEVAL_EVAL:-1}" != "0" ] && [ -f "$QUESTIONS_FILE" ]; then
-    echo "[3/4] Retrieval evaluation on dev questions"
+    stage 3 "retrieval evaluation on dev questions"
     ./.venv/bin/python -m policybook.retrieve_eval --questions "$QUESTIONS_FILE"
   fi
   JUDGE_ARGS=()
   if [ "${JUDGE:-0}" = "1" ]; then JUDGE_ARGS+=(--judge); fi
-  echo "[4/4] Answering dev questions and grading"
+  stage 4 "answering dev questions and grading"
   ./.venv/bin/python -m policybook.answer_eval --questions "$QUESTIONS_FILE" "${JUDGE_ARGS[@]+"${JUDGE_ARGS[@]}"}"
   ./.venv/bin/python scripts/print_scores.py results/grader_dev_report.json
   echo "Answers: results/answers_dev.jsonl | Full report: results/grader_dev_report.json"
@@ -84,5 +88,5 @@ if [ "$SELFCHECK" = "1" ]; then
 fi
 
 export PORT="${PORT:-8000}"
-echo "[3/3] Starting service on port $PORT (GET /healthz, POST /ask)"
+stage 3 "starting service on port $PORT (GET /healthz, POST /ask); it stays running until stopped"
 exec ./.venv/bin/python -m policybook.service
